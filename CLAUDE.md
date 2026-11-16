@@ -2,14 +2,19 @@
 
 Skills de la casa: versión sin publicar
 
-{Una o dos oraciones: qué es el proyecto y para qué negocio.}
+Landing de una sola página para presentar y vender SENDA, un sistema de
+gestión académica para escuelas secundarias, a las escuelas de Olavarría que
+reciben la invitación a su presentación pública.
 
 ## Proyecto
 
-- **Cliente:** {negocio, rubro y ciudad}
-- **Paquete:** {paquete contratado}
-- **Stack:** {stack}, registrado en `.ai/adrs/ADR-P-001-stack.md`
-- **Acción objetivo:** {qué tiene que hacer el visitante}
+- **Cliente:** equipo de SENDA, producto propio; Olavarría, Provincia de
+  Buenos Aires. La marca es SENDA: nada de Respawn en la landing.
+- **Paquete:** no aplica; es una landing page de una sola página
+- **Stack:** Astro y CSS plano, en Cloudflare Pages, registrado en
+  `.ai/adrs/ADR-P-001-stack.md`
+- **Acción objetivo:** escribirle al equipo para ver SENDA en su escuela
+  (canal pendiente)
 - **Concepto:** {una línea; el detalle está en `.ai/decisiones.md`}
 
 ## Skills que aplican
@@ -20,8 +25,7 @@ Skills de la casa: versión sin publicar
 | `respawn-kickoff`  | Relevar al cliente, encuadrar el paquete y fijar el alcance     |
 | `respawn-design`   | Diseñar o criticar pantallas y escribir textos                  |
 | `respawn-web`      | Accesibilidad, rendimiento, SEO y links de contacto             |
-| `respawn-sistemas` | {Solo si el proyecto lleva backend: panel, tienda o sistema}    |
-| `review-respawn`   | Auditar antes de entregar                                       |
+| `review-respawn`   | Auditar antes de entregar (todavía no existe en la casa)        |
 
 Las skills de `.claude/skills/` son una copia de la casa: no se editan acá.
 
@@ -51,8 +55,15 @@ Las skills de `.claude/skills/` son una copia de la casa: no se editan acá.
 - Nunca inventar precios, reseñas, cifras, clientes ni testimonios. Lo que
   falta queda como `[FALTA: …]`.
 - Sin commit ni subida de cambios sin pedido del usuario.
+- El trabajo que se delega va a Codex con `codex-dispatch`, no a subagentes
+  de Claude. Si Codex no responde, preguntar antes de usar otro.
+- Las capturas de pantalla salen de SENDA levantado en local
+  (`/home/marto/proyectos/senda`) con los datos de los seeders. Ese
+  repositorio no se modifica.
+- Al terminar el proyecto se borran `.ai/`, `.claude/skills/` y este
+  `CLAUDE.md`: la landing no lleva nada de Respawn.
 
 ## Comandos
 
-{Comandos del proyecto: instalar, levantar en local, compilar, probar y
-publicar.}
+{Se completan al crear el proyecto Astro: instalar, levantar en local,
+compilar y publicar.}

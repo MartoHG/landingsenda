@@ -1,0 +1,101 @@
+---
+/*
+ * Una parada de la senda: el claro de la montaña y su panel con la
+ * información de SENDA.
+ *
+ * Modo quieto (por defecto, sin JS o con menos movimiento): la sección se ve
+ * con su propio recorte de la montaña de fondo y el panel clavado en el claro.
+ * Modo cámara (html.con-camara): el fondo propio se oculta, la cámara muestra
+ * la montaña y src/scripts/camara.ts enfoca el panel al llegar.
+ *
+ * Contrato con src/scripts/camara.ts:
+ * - [data-parada]: id del claro en src/data/montana.json.
+ * - [data-lado]: left, right, center o bottom.
+ * - .parada__panel: el panel que se enfoca.
+ */
+import { Picture } from 'astro:assets';
+import type { Parada } from '../data/paradas';
+import montana from '../data/montana.json';
+
+interface Props {
+  parada: Parada;
+  nivel: 1 | 2;
+}
+
+const { parada, nivel } = Astro.props;
+const claro = montana.claros.find((c) => c.id === parada.id);
+if (!claro) throw new Error(`No hay claro para la parada ${parada.id}`);
+
+const fondos = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/montana/parada-*.jpg',
+  { eager: true },
+);
+const fondo = fondos[`../assets/montana/${claro.recorte.archivo}`].default;
+
+const capturas = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/capturas/*.{png,jpg,jpeg,webp}',
+  { eager: true },
+);
+const captura = parada.captura;
+const imagenCaptura = captura?.archivo
+  ? capturas[`../assets/capturas/${captura.archivo}`]?.default
+  : undefined;
+
+const Titulo = nivel === 1 ? 'h1' : 'h2';
+const esFalta = (texto: string) => texto.startsWith('[FALTA');
+---
+
+<section
+  class="parada"
+  id={`parada-${parada.id}`}
+  data-parada={parada.id}
+  data-lado={parada.lado}
+  aria-labelledby={`titulo-${parada.id}`}
+>
+  <div class="parada__fondo" aria-hidden="true">
+    <Picture
+      src={fondo}
+      formats={['avif', 'webp']}
+      widths={[768, 1152, 1536, 2304]}
+      sizes="100vw"
+      alt=""
+      loading={nivel === 1 ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+  </div>
+
+  <div class="parada__panel">
+    <Titulo
+      id={`titulo-${parada.id}`}
+      class:list={['parada__titulo', { falta: esFalta(parada.titulo) }]}
+    >
+      {parada.titulo}
+    </Titulo>
+    {
+      parada.parrafos.map((texto) => (
+        <p class:list={['parada__texto', { falta: esFalta(texto) }]}>{texto}</p>
+      ))
+    }
+    <slot />
+    {
+      captura &&
+        (imagenCaptura ? (
+          <figure class="parada__captura">
+            <Picture
+              src={imagenCaptura}
+              formats={['avif', 'webp']}
+              widths={[480, 720, 960]}
+              sizes="(min-width: 48rem) 30rem, 92vw"
+              alt={captura.alt}
+              loading={nivel === 1 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+          </figure>
+        ) : (
+          <p class="parada__captura parada__captura--falta falta">
+            [FALTA: {captura.falta}]
+          </p>
+        ))
+    }
+  </div>
+</section>

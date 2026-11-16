@@ -1,0 +1,309 @@
+{
+  "imagen": "montana-completa.png",
+  "coordenadas": "pixeles del PNG final, origen superior izquierdo",
+  "metodo_revision": "Inspección independiente de los 19 candidatos mediante recortes del PNG final sin redimensionar, con 80–120 px de contexto, enviados en memoria para visualización. Además se abrieron con view_image los interiores claro-05/06, costuras 4–5/5–6 y preview de 400 px. Los recortes de candidatos se visualizaron en láminas JPEG de calidad 85/90, sin cambiar dimensiones ni escribir imágenes auxiliares.",
+  "candidatos": [
+    {
+      "id": 1,
+      "coords": [
+        851,
+        650,
+        1232,
+        650
+      ],
+      "length_px": 382,
+      "clasificacion": "relieve irregular",
+      "observacion": "Transición entre afloramientos de cumbre y hierba; las rocas forman entrantes y salientes a distintas alturas, sin borde horizontal continuo.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 2,
+      "coords": [
+        1265,
+        698,
+        1535,
+        698
+      ],
+      "length_px": 271,
+      "clasificacion": "relieve irregular",
+      "observacion": "Roca y prado sobre ladera oblicua. El detector cruza varios salientes de roca; el límite real desciende hacia la derecha.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 3,
+      "coords": [
+        946,
+        1401,
+        946,
+        1657
+      ],
+      "length_px": 257,
+      "clasificacion": "relieve irregular",
+      "observacion": "Fracturas y pequeñas placas de roca distribuidas en diagonal; no aparece un borde vertical que siga x=946 durante toda la longitud.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 4,
+      "coords": [
+        130,
+        1490,
+        130,
+        1869
+      ],
+      "length_px": 380,
+      "clasificacion": "relieve irregular",
+      "observacion": "Grandes placas inclinadas con grietas naturales, orientadas diagonalmente. El contraste forma parte de la pared rocosa, sin corte vertical.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 5,
+      "coords": [
+        698,
+        1510,
+        958,
+        1510
+      ],
+      "length_px": 261,
+      "clasificacion": "senda curva",
+      "observacion": "La senda atraviesa el recorte de izquierda a derecha y gira hacia abajo. La respuesta horizontal corresponde al tramo de la curva y a rocas próximas.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 6,
+      "coords": [
+        1249,
+        1686,
+        1535,
+        1686
+      ],
+      "length_px": 287,
+      "clasificacion": "relieve irregular",
+      "observacion": "Mosaico de roca fracturada, sombra y lenguas de hierba. No hay una discontinuidad horizontal recta a y=1686.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 7,
+      "coords": [
+        1102,
+        2637,
+        1102,
+        2987
+      ],
+      "length_px": 351,
+      "clasificacion": "senda curva",
+      "observacion": "Cambio de dirección suave en S de la senda. Los dos bordes se desplazan lateralmente; no forman un límite vertical fijo.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 8,
+      "coords": [
+        142,
+        3322,
+        575,
+        3322
+      ],
+      "length_px": 434,
+      "clasificacion": "relieve irregular",
+      "observacion": "Grupo de afloramientos a distintas alturas y separación irregular. El borde inferior de roca y hierba ondula, sin una línea recta continua de 434 px.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 9,
+      "coords": [
+        190,
+        3993,
+        190,
+        4263
+      ],
+      "length_px": 271,
+      "clasificacion": "senda curva",
+      "observacion": "Borde de sendero en una S alargada; la senda cambia de x claramente entre el principio y el final del recorte.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 10,
+      "coords": [
+        146,
+        3999,
+        146,
+        4279
+      ],
+      "length_px": 281,
+      "clasificacion": "senda curva",
+      "observacion": "Segundo lado de la misma S; respuesta duplicada al contraste de tierra con hierba. No es una división rectilínea del terreno.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 11,
+      "coords": [
+        18,
+        4546,
+        311,
+        4546
+      ],
+      "length_px": 294,
+      "clasificacion": "relieve irregular",
+      "observacion": "Matorral bajo y pequeñas rocas en cresta suave; el gradiente atraviesa objetos separados y relieve irregular.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 12,
+      "coords": [
+        1298,
+        5025,
+        1298,
+        5282
+      ],
+      "length_px": 258,
+      "clasificacion": "senda curva",
+      "observacion": "La senda gira junto al bosque. La curvatura y la variación de ancho visibles descartan una frontera vertical recta.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 13,
+      "coords": [
+        1254,
+        5038,
+        1254,
+        5289
+      ],
+      "length_px": 252,
+      "clasificacion": "senda curva",
+      "observacion": "Otro flanco del mismo sendero curvo en el bosque; árboles y arbustos interrumpen cualquier alineación aparente.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 14,
+      "coords": [
+        1098,
+        5832,
+        1098,
+        6091
+      ],
+      "length_px": 260,
+      "clasificacion": "senda curva",
+      "observacion": "La continuidad 04–05 sigue una curva amplia hacia la izquierda. Los bordes cambian de x; sin salto ni banda vertical.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 15,
+      "coords": [
+        776,
+        5934,
+        1029,
+        5934
+      ],
+      "length_px": 254,
+      "clasificacion": "relieve irregular",
+      "observacion": "Dosel de árboles de tamaños variados y suelo con matorral. El contorno del bosque entra y sale, sin borde horizontal que coincida con el candidato.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 16,
+      "coords": [
+        56,
+        6882,
+        308,
+        6882
+      ],
+      "length_px": 253,
+      "clasificacion": "relieve irregular",
+      "observacion": "Copas y arbustos dispersos a distintas alturas junto a la senda; la sombra produce el gradiente medio. No hay seto ni fila recta.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 17,
+      "coords": [
+        511,
+        7018,
+        824,
+        7018
+      ],
+      "length_px": 314,
+      "clasificacion": "relieve irregular",
+      "observacion": "Islas de árboles separadas y de tamaños distintos sobre la pendiente. El gradiente atraviesa sombras y huecos; no constituye banda forestal horizontal.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 18,
+      "coords": [
+        142,
+        7265,
+        142,
+        7566
+      ],
+      "length_px": 302,
+      "clasificacion": "senda curva",
+      "observacion": "Senda en S continua descendiendo hacia el valle; cambia de x de manera visible. No corresponde a límite recto de prado.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    },
+    {
+      "id": 19,
+      "coords": [
+        164,
+        8274,
+        456,
+        8274
+      ],
+      "length_px": 293,
+      "clasificacion": "relieve irregular",
+      "observacion": "Árboles aislados, matorral y sombra sobre hierba ondulada. El borde real es discontinuo y orgánico, sin corte horizontal de 293 px.",
+      "resultado": "aprobado",
+      "borde_recto_real": false
+    }
+  ],
+  "resumen": {
+    "total": 19,
+    "bordes_rectos_reales_que_fallan": 0,
+    "resultado": "aprobado"
+  },
+  "otras_revisiones": [
+    {
+      "zona": "costura 4–5, y=5810",
+      "resultado": "aprobado",
+      "observacion": "Sendero continuo, bosque con copas individuales y exposición compatible a ambos lados; no observé costura horizontal ni borde duro."
+    },
+    {
+      "zona": "costura 5–6, y=7090",
+      "resultado": "aprobado",
+      "observacion": "Transición gradual de pendiente y prado, con islas de árboles; sin seto transversal ni salto tonal visible. La senda del lado izquierdo sigue continua."
+    },
+    {
+      "zona": "interior claro 05",
+      "resultado": "aprobado",
+      "observacion": "Hierba de contraste bajo con grano desigual. No observé patrones de puntos blancos repetidos ni un bloque clonado evidente."
+    },
+    {
+      "zona": "interior claro 06",
+      "resultado": "aprobado",
+      "observacion": "Hierba con pequeñas ondulaciones y detalle uniforme de bajo contraste. No se aprecia repetición exacta, motas blancas recurrentes ni grandes arrastres pictóricos."
+    },
+    {
+      "zona": "composición reducida 400 px",
+      "resultado": "aprobado",
+      "observacion": "05 ocupa la derecha y 06 forma un prado inferior amplio. Los márgenes del bosque meandran y el arroyo se mantiene en el lado derecho. No observé rectángulos agrícolas, fila de árboles ni banda horizontal transversal."
+    }
+  ],
+  "dudas_y_limites": [
+    "El grano de hierba conserva cierta suavidad a 100%; la inspección no equivale a detalle óptico nativo ni demuestra ausencia absoluta de toda textura sintética. No vi grandes manchas de pincel o arrastres pictóricos que justifiquen rechazar los interiores.",
+    "La clasificación se refiere a los 19 candidatos del detector calibrado y a las zonas adicionales indicadas; no es una garantía matemática de que cualquier algoritmo encuentre cero líneas."
+  ]
+}

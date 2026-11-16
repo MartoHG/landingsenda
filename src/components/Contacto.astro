@@ -1,0 +1,29 @@
+---
+/*
+ * Acción principal: escribirle al equipo para ver SENDA en la escuela.
+ * Mientras el canal no esté definido, muestra el pendiente visible.
+ */
+import { contacto } from '../data/paradas';
+
+interface Props {
+  variante: 'principal' | 'pie';
+}
+
+const { variante } = Astro.props;
+---
+
+<div class:list={['contacto', `contacto--${variante}`]}>
+  {
+    variante === 'principal' ? (
+      <a class="boton" href={contacto.href}>
+        {contacto.rotulo}
+      </a>
+    ) : contacto.disponible ? (
+      <a class="boton boton--claro" href={contacto.href}>
+        {contacto.rotulo}
+      </a>
+    ) : (
+      <p class="falta">[FALTA: {contacto.falta}]</p>
+    )
+  }
+</div>

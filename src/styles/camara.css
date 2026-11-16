@@ -1,0 +1,214 @@
+/* El modo quieto conserva sus estilos hasta que el motor está listo. */
+html.con-camara .recorrido {
+  position: relative;
+  overflow-anchor: none;
+}
+
+html.con-camara .camara {
+  display: block;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  margin-bottom: -100vh;
+  margin-bottom: -100svh;
+  overflow: hidden;
+  contain: layout paint;
+  background: var(--color-fondo);
+  pointer-events: none;
+}
+
+html.con-camara [data-montana] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--ancho-montana);
+  height: var(--alto-montana);
+  max-width: none;
+  background: var(--color-verde-oscuro);
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+html.con-camara [data-montana] picture,
+html.con-camara [data-montana] [data-tramo] {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* La altura viene de las coordenadas, incluso con imágenes al doble. */
+html.con-camara [data-montana] [data-tramo] {
+  position: relative;
+  z-index: 1;
+  height: var(--alto-tramo);
+}
+
+html.con-camara [data-montana] picture {
+  position: relative;
+  height: var(--alto-tramo);
+  /* Foto ya decodificada mientras llega el tramo de mayor resolución. */
+  background-image: var(--vista-previa);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+html.con-camara .parada {
+  display: block;
+  height: var(--alto-parada);
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+html.con-camara .parada + .parada {
+  margin-top: 0;
+}
+
+html.con-camara .parada__fondo {
+  display: none;
+}
+
+/* El anclaje prolonga el sticky durante la salida, sin alargar la sección. */
+html.con-camara .parada__anclaje {
+  position: absolute;
+  top: var(--inicio-panel);
+  right: 0;
+  bottom: calc(-1 * var(--cola-panel));
+  left: 0;
+  pointer-events: none;
+}
+
+html.con-camara .parada__panel {
+  position: sticky;
+  top: var(--tope-panel);
+  width: calc(100% - 2 * var(--margen-lateral));
+  max-height: 45vh;
+  max-height: 45svh;
+  margin: 0 var(--margen-lateral);
+  padding: var(--esp-5);
+  gap: var(--esp-3);
+  overflow: auto;
+  font-size: var(--texto-s);
+  opacity: var(--enfoque, 1);
+  transform: translate3d(0, calc((1 - var(--enfoque, 1)) * 18px), 0);
+  pointer-events: none;
+  scrollbar-color: var(--color-verde) var(--color-panel);
+  scrollbar-width: thin;
+}
+
+html.con-camara .parada--enfocada .parada__panel {
+  pointer-events: auto;
+}
+
+html.con-camara .parada__titulo,
+html.con-camara h1.parada__titulo {
+  font-size: var(--texto-xl);
+}
+
+html.con-camara .parada__captura {
+  max-height: 9rem;
+  overflow: hidden;
+}
+
+html.con-camara .parada__captura img {
+  width: 100%;
+  max-height: 9rem;
+  object-fit: contain;
+  object-position: top;
+}
+
+html.con-camara .parada__captura--falta {
+  min-height: 0;
+}
+
+/* Una pantalla final permite leer el contacto antes de llegar al pie. */
+html.con-camara .recorrido::after {
+  content: '';
+  display: block;
+  height: 100vh;
+  height: 100svh;
+  pointer-events: none;
+}
+
+html.con-camara .camara__cajas {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  overflow: visible;
+  pointer-events: none;
+}
+
+html.con-camara .camara__caja {
+  fill: none;
+  stroke: #ffcf33;
+  stroke-width: 3px;
+  vector-effect: non-scaling-stroke;
+}
+
+html.con-camara .camara__caja--segura {
+  stroke: #00f5dc;
+  stroke-dasharray: 8 5;
+}
+
+html.con-camara .camara__senda {
+  fill: none;
+  stroke: #ff304a;
+  stroke-width: 3px;
+  vector-effect: non-scaling-stroke;
+}
+
+html.con-camara .camara__lectura {
+  position: fixed;
+  right: var(--esp-4);
+  bottom: var(--esp-4);
+  z-index: 40;
+  max-width: calc(100% - 2 * var(--esp-4));
+  padding: var(--esp-2) var(--esp-3);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  background: var(--color-panel);
+  color: var(--color-texto);
+  font-size: var(--texto-xs);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+html.con-camara .camara__digito {
+  display: inline-block;
+  width: 0.7em;
+  height: 1.3em;
+  overflow: hidden;
+  vertical-align: text-bottom;
+}
+
+html.con-camara .camara__numeros,
+html.con-camara .camara__numeros span {
+  display: block;
+  height: 1.3em;
+  line-height: 1.3;
+}
+
+@media (min-width: 48rem) {
+  html.con-camara .parada__panel {
+    width: min(calc(100% - 2 * var(--margen-lateral)), 23rem);
+    max-height: min(calc(100vh - var(--esp-9)), var(--alto-panel-disponible));
+    max-height: min(calc(100svh - var(--esp-9)), var(--alto-panel-disponible));
+  }
+
+  html.con-camara .parada[data-lado='right'] .parada__panel {
+    margin-left: auto;
+  }
+
+  html.con-camara .parada[data-lado='bottom'] .parada__panel,
+  html.con-camara .parada[data-lado='center'] .parada__panel {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}

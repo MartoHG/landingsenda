@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Montana from '../components/Montana.astro';
+import Parada from '../components/Parada.astro';
+import Contacto from '../components/Contacto.astro';
+import { paradas } from '../data/paradas';
+import logo from '../assets/marca/logo.svg';
+---
+
+<Base>
+  <a class="saltar" href="#parada-01">Saltar al contenido</a>
+  <header class="encabezado">
+    <a class="encabezado__marca" href="#parada-01" aria-label="SENDA, inicio">
+      <Image src={logo} alt="" class="encabezado__logo" />
+    </a>
+    <a class="encabezado__enlace" href="#parada-06">Contacto</a>
+  </header>
+
+  <main class="recorrido" data-recorrido>
+    <Montana />
+    {
+      paradas.map((parada, i) => (
+        <Parada parada={parada} nivel={i === 0 ? 1 : 2}>
+          {parada.id === '01' && <Contacto variante="principal" />}
+          {parada.id === '06' && <Contacto variante="pie" />}
+        </Parada>
+      ))
+    }
+  </main>
+
+  <footer class="pie">
+    <p>SENDA · Olavarría, Provincia de Buenos Aires</p>
+  </footer>
+</Base>
+
+<script>
+  import '../scripts/camara';
+</script>

@@ -1,0 +1,160 @@
+{
+  "image": "montana-completa.png",
+  "width": 1536,
+  "height": 8450,
+  "coordinate_origin": "top-left",
+  "units": "pixels",
+  "bbox_note": "Cajas aproximadas del contorno natural irregular. Usar panel_safe_bbox para evitar el sendero y los bordes. Las cajas exteriores no son mascaras ni rectangulos enteramente libres de textura.",
+  "clearings": [
+    {
+      "id": "01",
+      "segment": "01-cumbre",
+      "side": "right",
+      "bbox": {
+        "x": 780,
+        "y": 720,
+        "width": 730,
+        "height": 1060
+      },
+      "panel_safe_bbox": {
+        "x": 880,
+        "y": 840,
+        "width": 600,
+        "height": 740
+      },
+      "detail_crop_bbox": {
+        "x": 880,
+        "y": 920,
+        "width": 600,
+        "height": 400
+      },
+      "detail_mean_hsv_saturation": 109.29879166666667,
+      "detail_mean_hsv_brightness": 99.4439125
+    },
+    {
+      "id": "02",
+      "segment": "02-alto",
+      "side": "left",
+      "bbox": {
+        "x": 0,
+        "y": 2081,
+        "width": 760,
+        "height": 1080
+      },
+      "panel_safe_bbox": {
+        "x": 40,
+        "y": 2241,
+        "width": 620,
+        "height": 800
+      },
+      "detail_crop_bbox": {
+        "x": 60,
+        "y": 2381,
+        "width": 600,
+        "height": 400
+      },
+      "detail_mean_hsv_saturation": 121.36775416666667,
+      "detail_mean_hsv_brightness": 100.81266666666667
+    },
+    {
+      "id": "03",
+      "segment": "03-medio",
+      "side": "right",
+      "bbox": {
+        "x": 780,
+        "y": 3361,
+        "width": 756,
+        "height": 1080
+      },
+      "panel_safe_bbox": {
+        "x": 840,
+        "y": 3521,
+        "width": 640,
+        "height": 800
+      },
+      "detail_crop_bbox": {
+        "x": 850,
+        "y": 3711,
+        "width": 600,
+        "height": 400
+      },
+      "detail_mean_hsv_saturation": 120.26274583333333,
+      "detail_mean_hsv_brightness": 97.31206666666667
+    },
+    {
+      "id": "04",
+      "segment": "04-bosque",
+      "side": "left",
+      "bbox": {
+        "x": 20,
+        "y": 4642,
+        "width": 750,
+        "height": 1080
+      },
+      "panel_safe_bbox": {
+        "x": 100,
+        "y": 4842,
+        "width": 620,
+        "height": 720
+      },
+      "detail_crop_bbox": {
+        "x": 110,
+        "y": 4992,
+        "width": 600,
+        "height": 400
+      },
+      "detail_mean_hsv_saturation": 124.44594583333334,
+      "detail_mean_hsv_brightness": 94.8156125
+    },
+    {
+      "id": "05",
+      "segment": "05-bajo",
+      "side": "right",
+      "bbox": {
+        "x": 800,
+        "y": 5922,
+        "width": 710,
+        "height": 1100
+      },
+      "panel_safe_bbox": {
+        "x": 840,
+        "y": 6242,
+        "width": 620,
+        "height": 650
+      },
+      "detail_crop_bbox": {
+        "x": 850,
+        "y": 6322,
+        "width": 600,
+        "height": 400
+      },
+      "detail_mean_hsv_saturation": 138.92429583333333,
+      "detail_mean_hsv_brightness": 92.45812916666667
+    },
+    {
+      "id": "06",
+      "segment": "06-valle",
+      "side": "bottom",
+      "bbox": {
+        "x": 300,
+        "y": 7202,
+        "width": 1070,
+        "height": 1230
+      },
+      "panel_safe_bbox": {
+        "x": 420,
+        "y": 7432,
+        "width": 880,
+        "height": 920
+      },
+      "detail_crop_bbox": {
+        "x": 600,
+        "y": 7702,
+        "width": 600,
+        "height": 400
+      },
+      "detail_mean_hsv_saturation": 139.30939166666667,
+      "detail_mean_hsv_brightness": 95.56043333333334
+    }
+  ]
+}

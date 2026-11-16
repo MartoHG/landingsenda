@@ -1,0 +1,71 @@
+/*
+ * Tokens de diseño de la landing de SENDA.
+ * Se declaran una sola vez acá y el resto del código los usa por nombre.
+ * Origen de cada decisión: .ai/decisiones.md.
+ */
+
+:root {
+  /* Paleta: tokens de SENDA y verde del isotipo */
+  --color-fondo: #f6f7f5;
+  --color-panel: #f6f7f5;
+  --color-verde: #1a6b3a;
+  --color-verde-hover: #155a30;
+  --color-verde-oscuro: #1a3d2b;
+  --color-verde-claro: #d5f1d6;
+  --color-texto: #1e2b24;
+  --color-texto-suave: #4a5a51;
+  --color-borde: #c9d3cc;
+  --color-texto-sobre-oscuro: #eef4ef;
+  --color-texto-sobre-oscuro-suave: #c0e2c1;
+  --color-foco: #1a6b3a;
+  --color-falta: #8a4b00;
+  --color-falta-fondo: #fff4e0;
+
+  /* Tipografía: las fuentes de SENDA */
+  --fuente-titulos: 'DM Sans', system-ui, sans-serif;
+  --fuente-texto: 'IBM Plex Sans', system-ui, sans-serif;
+
+  /* Escala tipográfica (razón ~1,25) */
+  --texto-xs: 0.875rem;
+  --texto-s: 1rem;
+  --texto-m: 1.125rem;
+  --texto-l: 1.375rem;
+  --texto-xl: 1.75rem;
+  --texto-2xl: 2.25rem;
+  --texto-3xl: clamp(2.25rem, 1.6rem + 2.6vw, 3.25rem);
+
+  --interlineado-titulo: 1.15;
+  --interlineado-texto: 1.6;
+  --peso-titulo: 700;
+  --peso-texto: 400;
+  --peso-destacado: 600;
+
+  /* Espaciado: escala 4, 8, 12, 16, 24, 32, 48, 64, 96 */
+  --esp-1: 4px;
+  --esp-2: 8px;
+  --esp-3: 12px;
+  --esp-4: 16px;
+  --esp-5: 24px;
+  --esp-6: 32px;
+  --esp-7: 48px;
+  --esp-8: 64px;
+  --esp-9: 96px;
+
+  /* Radio único */
+  --radio: 8px;
+
+  /* Medidas de lectura */
+  --ancho-lectura: 38rem;
+  --ancho-panel: 32rem;
+  --margen-lateral: var(--esp-4);
+
+  /* Movimiento: respuestas de interfaz */
+  --duracion-respuesta: 150ms;
+  --curva-salida: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --margen-lateral: var(--esp-6);
+  }
+}

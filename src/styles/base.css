@@ -1,0 +1,303 @@
+/*
+ * Estilos base y modo quieto de la landing.
+ * El modo quieto es el que se ve sin JS o con menos movimiento: cada parada
+ * con su recorte de la montaña y el panel clavado en el claro.
+ * El modo cámara vive en camara.css, siempre bajo html.con-camara.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente-texto);
+  font-size: var(--texto-m);
+  font-weight: var(--peso-texto);
+  line-height: var(--interlineado-texto);
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+p,
+figure {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--fuente-titulos);
+  font-weight: var(--peso-titulo);
+  line-height: var(--interlineado-titulo);
+  color: var(--color-verde-oscuro);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--color-verde);
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-foco);
+  outline-offset: 3px;
+}
+
+/* Pendientes visibles: nunca se publican sin reemplazar */
+.falta {
+  background: var(--color-falta-fondo);
+  color: var(--color-falta);
+  border: 1px dashed var(--color-falta);
+  border-radius: var(--radio);
+  padding: var(--esp-2) var(--esp-3);
+  font-family: var(--fuente-texto);
+  font-size: var(--texto-s);
+  font-weight: var(--peso-destacado);
+}
+
+/* Saltar al contenido */
+.saltar {
+  position: absolute;
+  left: var(--esp-4);
+  top: var(--esp-4);
+  z-index: 30;
+  padding: var(--esp-2) var(--esp-4);
+  background: var(--color-panel);
+  border-radius: var(--radio);
+  transform: translateY(-200%);
+}
+
+.saltar:focus {
+  transform: none;
+}
+
+/* Encabezado */
+.encabezado {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-4);
+  padding: var(--esp-4) var(--margen-lateral);
+}
+
+.encabezado__marca {
+  background: var(--color-panel);
+  padding: var(--esp-2) var(--esp-3);
+  border-radius: var(--radio);
+}
+
+.encabezado__logo {
+  width: 6.5rem;
+  height: auto;
+}
+
+.encabezado__enlace {
+  font-weight: var(--peso-destacado);
+  font-size: var(--texto-s);
+  color: var(--color-verde-oscuro);
+  background: var(--color-panel);
+  padding: var(--esp-2) var(--esp-4);
+  border-radius: var(--radio);
+  text-decoration: none;
+}
+
+.encabezado__enlace:hover {
+  text-decoration: underline;
+}
+
+/* Botón */
+.boton {
+  display: inline-block;
+  padding: var(--esp-3) var(--esp-5);
+  border-radius: var(--radio);
+  background: var(--color-verde);
+  color: #fff;
+  font-weight: var(--peso-destacado);
+  font-size: var(--texto-s);
+  text-decoration: none;
+  transition: background-color var(--duracion-respuesta) var(--curva-salida);
+}
+
+.boton:hover {
+  background: var(--color-verde-hover);
+}
+
+.boton--claro {
+  background: var(--color-verde-claro);
+  color: var(--color-verde-oscuro);
+}
+
+/* La montaña completa solo se ve en modo cámara */
+.camara {
+  display: none;
+}
+
+/* Parada en modo quieto */
+.parada {
+  position: relative;
+  isolation: isolate;
+}
+
+.parada__fondo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.parada__fondo picture,
+.parada__fondo img {
+  width: 100%;
+  height: 100%;
+}
+
+.parada__fondo img {
+  object-fit: cover;
+}
+
+.parada[data-lado='left'] .parada__fondo img {
+  object-position: 15% 50%;
+}
+
+.parada[data-lado='right'] .parada__fondo img {
+  object-position: 85% 50%;
+}
+
+/* La cumbre muestra el cielo y la cima arriba */
+.parada[data-parada='01'] .parada__fondo img {
+  object-position: 60% 0;
+}
+
+.parada__panel {
+  position: relative;
+  display: grid;
+  gap: var(--esp-4);
+  margin: calc(-1 * var(--esp-8)) var(--margen-lateral) 0;
+  padding: var(--esp-5);
+  background: var(--color-panel);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+}
+
+.parada__titulo {
+  font-size: var(--texto-xl);
+}
+
+h1.parada__titulo {
+  font-size: var(--texto-xl);
+}
+
+.parada__texto {
+  max-width: var(--ancho-lectura);
+}
+
+.parada__captura img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+}
+
+.parada__captura--falta {
+  min-height: 8rem;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.parada + .parada {
+  margin-top: var(--esp-8);
+}
+
+/* El pie de la montaña: contacto sobre verde oscuro */
+.parada[data-parada='06'] .parada__panel {
+  background: var(--color-verde-oscuro);
+  border-color: var(--color-verde-oscuro);
+  color: var(--color-texto-sobre-oscuro);
+}
+
+.parada[data-parada='06'] .parada__titulo {
+  color: var(--color-texto-sobre-oscuro);
+}
+
+.pie {
+  padding: var(--esp-7) var(--margen-lateral);
+  font-size: var(--texto-xs);
+  color: var(--color-texto-suave);
+  text-align: center;
+}
+
+/* Escritorio: el panel se clava en el claro, al costado que corresponde */
+@media (min-width: 48rem) {
+  .parada {
+    min-height: 100svh;
+    display: grid;
+    align-items: center;
+    padding: var(--esp-9) var(--margen-lateral);
+  }
+
+  .parada + .parada {
+    margin-top: 0;
+  }
+
+  .parada__fondo {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    aspect-ratio: auto;
+  }
+
+  .parada__panel {
+    width: min(100%, var(--ancho-panel));
+    margin: 0;
+    padding: var(--esp-6);
+  }
+
+  .parada[data-lado='right'] .parada__panel {
+    justify-self: end;
+  }
+
+  .parada[data-lado='left'] .parada__panel {
+    justify-self: start;
+  }
+
+  .parada[data-lado='center'] .parada__panel,
+  .parada[data-lado='bottom'] .parada__panel {
+    justify-self: center;
+  }
+
+  .parada__titulo {
+    font-size: var(--texto-xl);
+  }
+
+  h1.parada__titulo {
+    font-size: var(--texto-2xl);
+  }
+
+  /* La cumbre es la portada: panel más ancho para que el título entre en tres renglones */
+  .parada[data-parada='01'] .parada__panel {
+    width: min(100%, 36rem);
+  }
+}

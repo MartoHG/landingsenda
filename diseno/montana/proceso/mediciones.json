@@ -1,0 +1,1595 @@
+{
+  "tamano": [
+    1536,
+    8450
+  ],
+  "montaje": {
+    "tamano": [
+      1536,
+      8450
+    ],
+    "feather_reparacion_px": 70,
+    "recorte_margenes_generador": [
+      0,
+      42,
+      2172,
+      680
+    ],
+    "uniones": [
+      1968,
+      3249,
+      4529,
+      5810,
+      7090
+    ],
+    "continuaciones": [
+      {
+        "segmento": "05-bajo",
+        "inicio": 5122,
+        "feather": [
+          5730,
+          5890
+        ],
+        "union": 5810,
+        "nativo": [
+          1086,
+          1448
+        ],
+        "desplazamiento": 0
+      },
+      {
+        "segmento": "06-valle",
+        "inicio": 6402,
+        "feather": [
+          7010,
+          7170
+        ],
+        "union": 7090,
+        "nativo": [
+          1086,
+          1448
+        ],
+        "desplazamiento": 0
+      }
+    ]
+  },
+  "uniones": [
+    {
+      "y": 1968,
+      "adjacent_row_MAD": 8.123698234558105,
+      "MAD40": 25.513427734375,
+      "mean_RGB_above40": [
+        88.40050506591797,
+        89.27381134033203,
+        66.67784881591797
+      ],
+      "mean_RGB_below40": [
+        87.7364730834961,
+        89.71406555175781,
+        64.09246063232422
+      ]
+    },
+    {
+      "y": 3249,
+      "adjacent_row_MAD": 5.258029460906982,
+      "MAD40": 20.765153884887695,
+      "mean_RGB_above40": [
+        90.75340270996094,
+        93.30393981933594,
+        62.05440902709961
+      ],
+      "mean_RGB_below40": [
+        92.0240249633789,
+        93.84573364257812,
+        65.301025390625
+      ]
+    },
+    {
+      "y": 4529,
+      "adjacent_row_MAD": 4.732855796813965,
+      "MAD40": 15.892963409423828,
+      "mean_RGB_above40": [
+        89.0672836303711,
+        92.90740203857422,
+        53.00904846191406
+      ],
+      "mean_RGB_below40": [
+        82.33352661132812,
+        87.19776916503906,
+        48.38289260864258
+      ]
+    },
+    {
+      "y": 5810,
+      "adjacent_row_MAD": 4.044270992279053,
+      "MAD40": 15.18557357788086,
+      "mean_RGB_above40": [
+        53.538021087646484,
+        61.589664459228516,
+        33.15262222290039
+      ],
+      "mean_RGB_below40": [
+        53.95740509033203,
+        62.27783203125,
+        32.924705505371094
+      ]
+    },
+    {
+      "y": 7090,
+      "adjacent_row_MAD": 2.616753578186035,
+      "MAD40": 11.705533981323242,
+      "mean_RGB_above40": [
+        75.3357925415039,
+        83.29210662841797,
+        40.07270431518555
+      ],
+      "mean_RGB_below40": [
+        77.0750503540039,
+        85.65309143066406,
+        40.73955154418945
+      ]
+    }
+  ],
+  "conservacion": {
+    "same_size_as_v2": true,
+    "changed_pixels": 4309075,
+    "changed_outside_authorized_regions": 0,
+    "unchanged_outside_authorized_regions": true,
+    "frozen_v2_files_checked": 64,
+    "frozen_v2_mismatches": [],
+    "segment_01-cumbre_byte_identical": false,
+    "segment_02-alto_byte_identical": false,
+    "segment_03-medio_byte_identical": true,
+    "segment_04-bosque_byte_identical": true
+  },
+  "v1_archivos_intactos": 38,
+  "rectas": {
+    "coordinate_origin": "top-left",
+    "minimum_length_exclusive_px": 250,
+    "method": "Canny/Hough multiescala y escaneo de diferencia de luminancia y desviación local de textura; ambos ejes. Relleno de huecos <=24 px, soporte >=75%. Consolidación de respuestas separadas <=36 px.",
+    "thresholds": {
+      "luminance_band_delta_px": 10,
+      "luminance_difference": 7,
+      "texture_band_delta_px": 20,
+      "texture_std_difference": 8,
+      "along_edge_average_px": 51
+    },
+    "candidates": [
+      {
+        "method": "gradient_scan",
+        "feature": "local_texture_std",
+        "axis": "horizontal",
+        "coords": [
+          851,
+          650,
+          1232,
+          650
+        ],
+        "length_px": 382,
+        "support_fraction": 0.9528795811518325,
+        "mean_band_difference": 12.050244331359863,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "local_texture_std",
+        "axis": "horizontal",
+        "coords": [
+          1265,
+          698,
+          1535,
+          698
+        ],
+        "length_px": 271,
+        "support_fraction": 0.9040590405904059,
+        "mean_band_difference": 10.352255821228027,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          946,
+          1401,
+          946,
+          1657
+        ],
+        "length_px": 257,
+        "support_fraction": 0.9299610894941635,
+        "mean_band_difference": 11.722661972045898,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          130,
+          1490,
+          130,
+          1869
+        ],
+        "length_px": 380,
+        "support_fraction": 0.9526315789473684,
+        "mean_band_difference": 20.442995071411133,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          698,
+          1510,
+          958,
+          1510
+        ],
+        "length_px": 261,
+        "support_fraction": 0.9195402298850575,
+        "mean_band_difference": 12.29061508178711,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          1249,
+          1686,
+          1535,
+          1686
+        ],
+        "length_px": 287,
+        "support_fraction": 0.9059233449477352,
+        "mean_band_difference": 11.983488082885742,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          1102,
+          2637,
+          1102,
+          2987
+        ],
+        "length_px": 351,
+        "support_fraction": 0.9458689458689459,
+        "mean_band_difference": 14.948141098022461,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "local_texture_std",
+        "axis": "horizontal",
+        "coords": [
+          142,
+          3322,
+          575,
+          3322
+        ],
+        "length_px": 434,
+        "support_fraction": 0.8870967741935484,
+        "mean_band_difference": 11.704717636108398,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          190,
+          3993,
+          190,
+          4263
+        ],
+        "length_px": 271,
+        "support_fraction": 1.0,
+        "mean_band_difference": 16.15154457092285,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          146,
+          3999,
+          146,
+          4279
+        ],
+        "length_px": 281,
+        "support_fraction": 0.9572953736654805,
+        "mean_band_difference": 18.326278686523438,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          18,
+          4546,
+          311,
+          4546
+        ],
+        "length_px": 294,
+        "support_fraction": 0.9727891156462585,
+        "mean_band_difference": 12.286310195922852,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          1298,
+          5025,
+          1298,
+          5282
+        ],
+        "length_px": 258,
+        "support_fraction": 1.0,
+        "mean_band_difference": 18.19029426574707,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          1254,
+          5038,
+          1254,
+          5289
+        ],
+        "length_px": 252,
+        "support_fraction": 1.0,
+        "mean_band_difference": 14.168703079223633,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          1098,
+          5832,
+          1098,
+          6091
+        ],
+        "length_px": 260,
+        "support_fraction": 0.9346153846153846,
+        "mean_band_difference": 14.507810592651367,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          776,
+          5934,
+          1029,
+          5934
+        ],
+        "length_px": 254,
+        "support_fraction": 1.0,
+        "mean_band_difference": 14.116476058959961,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          56,
+          6882,
+          308,
+          6882
+        ],
+        "length_px": 253,
+        "support_fraction": 1.0,
+        "mean_band_difference": 14.378454208374023,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          511,
+          7018,
+          824,
+          7018
+        ],
+        "length_px": 314,
+        "support_fraction": 1.0,
+        "mean_band_difference": 12.923809051513672,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          142,
+          7265,
+          142,
+          7566
+        ],
+        "length_px": 302,
+        "support_fraction": 1.0,
+        "mean_band_difference": 18.271154403686523,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          164,
+          8274,
+          456,
+          8274
+        ],
+        "length_px": 293,
+        "support_fraction": 1.0,
+        "mean_band_difference": 11.268841743469238,
+        "sign": 1
+      }
+    ],
+    "raw_gradient_candidates": [
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          698,
+          1510,
+          958,
+          1510
+        ],
+        "length_px": 261,
+        "support_fraction": 0.9195402298850575,
+        "mean_band_difference": 12.29061508178711,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          1261,
+          1674,
+          1535,
+          1674
+        ],
+        "length_px": 275,
+        "support_fraction": 0.9418181818181818,
+        "mean_band_difference": 12.251689910888672,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          1261,
+          1678,
+          1535,
+          1678
+        ],
+        "length_px": 275,
+        "support_fraction": 1.0,
+        "mean_band_difference": 13.206714630126953,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          1256,
+          1682,
+          1535,
+          1682
+        ],
+        "length_px": 280,
+        "support_fraction": 0.9535714285714286,
+        "mean_band_difference": 13.065302848815918,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          1249,
+          1686,
+          1535,
+          1686
+        ],
+        "length_px": 287,
+        "support_fraction": 0.9059233449477352,
+        "mean_band_difference": 11.983488082885742,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          18,
+          4546,
+          311,
+          4546
+        ],
+        "length_px": 294,
+        "support_fraction": 0.9727891156462585,
+        "mean_band_difference": 12.286310195922852,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          36,
+          4550,
+          317,
+          4550
+        ],
+        "length_px": 282,
+        "support_fraction": 0.9290780141843972,
+        "mean_band_difference": 11.664045333862305,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          776,
+          5934,
+          1029,
+          5934
+        ],
+        "length_px": 254,
+        "support_fraction": 1.0,
+        "mean_band_difference": 14.116476058959961,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          56,
+          6882,
+          308,
+          6882
+        ],
+        "length_px": 253,
+        "support_fraction": 1.0,
+        "mean_band_difference": 14.378454208374023,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          523,
+          7014,
+          820,
+          7014
+        ],
+        "length_px": 298,
+        "support_fraction": 1.0,
+        "mean_band_difference": 12.886817932128906,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          511,
+          7018,
+          824,
+          7018
+        ],
+        "length_px": 314,
+        "support_fraction": 1.0,
+        "mean_band_difference": 12.923809051513672,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          164,
+          8274,
+          456,
+          8274
+        ],
+        "length_px": 293,
+        "support_fraction": 1.0,
+        "mean_band_difference": 11.268841743469238,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          182,
+          8278,
+          455,
+          8278
+        ],
+        "length_px": 274,
+        "support_fraction": 1.0,
+        "mean_band_difference": 11.978255271911621,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "horizontal",
+        "coords": [
+          194,
+          8282,
+          449,
+          8282
+        ],
+        "length_px": 256,
+        "support_fraction": 1.0,
+        "mean_band_difference": 11.533098220825195,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "local_texture_std",
+        "axis": "horizontal",
+        "coords": [
+          851,
+          650,
+          1232,
+          650
+        ],
+        "length_px": 382,
+        "support_fraction": 0.9528795811518325,
+        "mean_band_difference": 12.050244331359863,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "local_texture_std",
+        "axis": "horizontal",
+        "coords": [
+          973,
+          654,
+          1243,
+          654
+        ],
+        "length_px": 271,
+        "support_fraction": 1.0,
+        "mean_band_difference": 14.132367134094238,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "local_texture_std",
+        "axis": "horizontal",
+        "coords": [
+          983,
+          658,
+          1255,
+          658
+        ],
+        "length_px": 273,
+        "support_fraction": 1.0,
+        "mean_band_difference": 14.042398452758789,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "local_texture_std",
+        "axis": "horizontal",
+        "coords": [
+          993,
+          662,
+          1270,
+          662
+        ],
+        "length_px": 278,
+        "support_fraction": 1.0,
+        "mean_band_difference": 12.864988327026367,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "local_texture_std",
+        "axis": "horizontal",
+        "coords": [
+          1004,
+          666,
+          1278,
+          666
+        ],
+        "length_px": 275,
+        "support_fraction": 0.96,
+        "mean_band_difference": 11.072549819946289,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "local_texture_std",
+        "axis": "horizontal",
+        "coords": [
+          1265,
+          698,
+          1535,
+          698
+        ],
+        "length_px": 271,
+        "support_fraction": 0.9040590405904059,
+        "mean_band_difference": 10.352255821228027,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "local_texture_std",
+        "axis": "horizontal",
+        "coords": [
+          329,
+          3318,
+          580,
+          3318
+        ],
+        "length_px": 252,
+        "support_fraction": 0.9801587301587301,
+        "mean_band_difference": 12.850247383117676,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "local_texture_std",
+        "axis": "horizontal",
+        "coords": [
+          142,
+          3322,
+          575,
+          3322
+        ],
+        "length_px": 434,
+        "support_fraction": 0.8870967741935484,
+        "mean_band_difference": 11.704717636108398,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "local_texture_std",
+        "axis": "horizontal",
+        "coords": [
+          216,
+          3326,
+          564,
+          3326
+        ],
+        "length_px": 349,
+        "support_fraction": 0.8767908309455588,
+        "mean_band_difference": 12.082696914672852,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "local_texture_std",
+        "axis": "horizontal",
+        "coords": [
+          221,
+          3330,
+          482,
+          3330
+        ],
+        "length_px": 262,
+        "support_fraction": 0.9923664122137404,
+        "mean_band_difference": 12.519205093383789,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          130,
+          1490,
+          130,
+          1869
+        ],
+        "length_px": 380,
+        "support_fraction": 0.9526315789473684,
+        "mean_band_difference": 20.442995071411133,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          134,
+          1589,
+          134,
+          1867
+        ],
+        "length_px": 279,
+        "support_fraction": 0.921146953405018,
+        "mean_band_difference": 19.71523094177246,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          134,
+          7273,
+          134,
+          7569
+        ],
+        "length_px": 297,
+        "support_fraction": 0.9259259259259259,
+        "mean_band_difference": 13.272781372070312,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          138,
+          7268,
+          138,
+          7568
+        ],
+        "length_px": 301,
+        "support_fraction": 1.0,
+        "mean_band_difference": 16.373506546020508,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          142,
+          7265,
+          142,
+          7566
+        ],
+        "length_px": 302,
+        "support_fraction": 1.0,
+        "mean_band_difference": 18.271154403686523,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          146,
+          3999,
+          146,
+          4279
+        ],
+        "length_px": 281,
+        "support_fraction": 0.9572953736654805,
+        "mean_band_difference": 18.326278686523438,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          146,
+          7264,
+          146,
+          7564
+        ],
+        "length_px": 301,
+        "support_fraction": 1.0,
+        "mean_band_difference": 17.5999755859375,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          150,
+          4003,
+          150,
+          4281
+        ],
+        "length_px": 279,
+        "support_fraction": 1.0,
+        "mean_band_difference": 19.048669815063477,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          154,
+          4008,
+          154,
+          4281
+        ],
+        "length_px": 274,
+        "support_fraction": 1.0,
+        "mean_band_difference": 17.761751174926758,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          182,
+          3987,
+          182,
+          4250
+        ],
+        "length_px": 264,
+        "support_fraction": 1.0,
+        "mean_band_difference": 17.939014434814453,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          186,
+          3990,
+          186,
+          4255
+        ],
+        "length_px": 266,
+        "support_fraction": 1.0,
+        "mean_band_difference": 17.52309226989746,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          190,
+          3993,
+          190,
+          4263
+        ],
+        "length_px": 271,
+        "support_fraction": 1.0,
+        "mean_band_difference": 16.15154457092285,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          946,
+          1401,
+          946,
+          1657
+        ],
+        "length_px": 257,
+        "support_fraction": 0.9299610894941635,
+        "mean_band_difference": 11.722661972045898,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          1098,
+          5832,
+          1098,
+          6091
+        ],
+        "length_px": 260,
+        "support_fraction": 0.9346153846153846,
+        "mean_band_difference": 14.507810592651367,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          1102,
+          2637,
+          1102,
+          2987
+        ],
+        "length_px": 351,
+        "support_fraction": 0.9458689458689459,
+        "mean_band_difference": 14.948141098022461,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          1254,
+          5038,
+          1254,
+          5289
+        ],
+        "length_px": 252,
+        "support_fraction": 1.0,
+        "mean_band_difference": 14.168703079223633,
+        "sign": 1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          1298,
+          5025,
+          1298,
+          5282
+        ],
+        "length_px": 258,
+        "support_fraction": 1.0,
+        "mean_band_difference": 18.19029426574707,
+        "sign": -1
+      },
+      {
+        "method": "gradient_scan",
+        "feature": "luminance",
+        "axis": "vertical",
+        "coords": [
+          1302,
+          5028,
+          1302,
+          5280
+        ],
+        "length_px": 253,
+        "support_fraction": 1.0,
+        "mean_band_difference": 19.644189834594727,
+        "sign": -1
+      }
+    ],
+    "raw_hough_candidates": [],
+    "status": "REQUIERE_REVISION_VISUAL",
+    "limitation": "No existe garantía matemática de detectar todo borde perceptual. Bordes curvos, sendero y relieve pueden dar falsos positivos; clasificar visualmente cada candidato."
+  },
+  "clasificacion_visual": {
+    "imagen": "montana-completa.png",
+    "coordenadas": "pixeles del PNG final, origen superior izquierdo",
+    "metodo_revision": "Inspección independiente de los 19 candidatos mediante recortes del PNG final sin redimensionar, con 80–120 px de contexto, enviados en memoria para visualización. Además se abrieron con view_image los interiores claro-05/06, costuras 4–5/5–6 y preview de 400 px. Los recortes de candidatos se visualizaron en láminas JPEG de calidad 85/90, sin cambiar dimensiones ni escribir imágenes auxiliares.",
+    "candidatos": [
+      {
+        "id": 1,
+        "coords": [
+          851,
+          650,
+          1232,
+          650
+        ],
+        "length_px": 382,
+        "clasificacion": "relieve irregular",
+        "observacion": "Transición entre afloramientos de cumbre y hierba; las rocas forman entrantes y salientes a distintas alturas, sin borde horizontal continuo.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 2,
+        "coords": [
+          1265,
+          698,
+          1535,
+          698
+        ],
+        "length_px": 271,
+        "clasificacion": "relieve irregular",
+        "observacion": "Roca y prado sobre ladera oblicua. El detector cruza varios salientes de roca; el límite real desciende hacia la derecha.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 3,
+        "coords": [
+          946,
+          1401,
+          946,
+          1657
+        ],
+        "length_px": 257,
+        "clasificacion": "relieve irregular",
+        "observacion": "Fracturas y pequeñas placas de roca distribuidas en diagonal; no aparece un borde vertical que siga x=946 durante toda la longitud.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 4,
+        "coords": [
+          130,
+          1490,
+          130,
+          1869
+        ],
+        "length_px": 380,
+        "clasificacion": "relieve irregular",
+        "observacion": "Grandes placas inclinadas con grietas naturales, orientadas diagonalmente. El contraste forma parte de la pared rocosa, sin corte vertical.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 5,
+        "coords": [
+          698,
+          1510,
+          958,
+          1510
+        ],
+        "length_px": 261,
+        "clasificacion": "senda curva",
+        "observacion": "La senda atraviesa el recorte de izquierda a derecha y gira hacia abajo. La respuesta horizontal corresponde al tramo de la curva y a rocas próximas.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 6,
+        "coords": [
+          1249,
+          1686,
+          1535,
+          1686
+        ],
+        "length_px": 287,
+        "clasificacion": "relieve irregular",
+        "observacion": "Mosaico de roca fracturada, sombra y lenguas de hierba. No hay una discontinuidad horizontal recta a y=1686.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 7,
+        "coords": [
+          1102,
+          2637,
+          1102,
+          2987
+        ],
+        "length_px": 351,
+        "clasificacion": "senda curva",
+        "observacion": "Cambio de dirección suave en S de la senda. Los dos bordes se desplazan lateralmente; no forman un límite vertical fijo.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 8,
+        "coords": [
+          142,
+          3322,
+          575,
+          3322
+        ],
+        "length_px": 434,
+        "clasificacion": "relieve irregular",
+        "observacion": "Grupo de afloramientos a distintas alturas y separación irregular. El borde inferior de roca y hierba ondula, sin una línea recta continua de 434 px.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 9,
+        "coords": [
+          190,
+          3993,
+          190,
+          4263
+        ],
+        "length_px": 271,
+        "clasificacion": "senda curva",
+        "observacion": "Borde de sendero en una S alargada; la senda cambia de x claramente entre el principio y el final del recorte.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 10,
+        "coords": [
+          146,
+          3999,
+          146,
+          4279
+        ],
+        "length_px": 281,
+        "clasificacion": "senda curva",
+        "observacion": "Segundo lado de la misma S; respuesta duplicada al contraste de tierra con hierba. No es una división rectilínea del terreno.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 11,
+        "coords": [
+          18,
+          4546,
+          311,
+          4546
+        ],
+        "length_px": 294,
+        "clasificacion": "relieve irregular",
+        "observacion": "Matorral bajo y pequeñas rocas en cresta suave; el gradiente atraviesa objetos separados y relieve irregular.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 12,
+        "coords": [
+          1298,
+          5025,
+          1298,
+          5282
+        ],
+        "length_px": 258,
+        "clasificacion": "senda curva",
+        "observacion": "La senda gira junto al bosque. La curvatura y la variación de ancho visibles descartan una frontera vertical recta.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 13,
+        "coords": [
+          1254,
+          5038,
+          1254,
+          5289
+        ],
+        "length_px": 252,
+        "clasificacion": "senda curva",
+        "observacion": "Otro flanco del mismo sendero curvo en el bosque; árboles y arbustos interrumpen cualquier alineación aparente.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 14,
+        "coords": [
+          1098,
+          5832,
+          1098,
+          6091
+        ],
+        "length_px": 260,
+        "clasificacion": "senda curva",
+        "observacion": "La continuidad 04–05 sigue una curva amplia hacia la izquierda. Los bordes cambian de x; sin salto ni banda vertical.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 15,
+        "coords": [
+          776,
+          5934,
+          1029,
+          5934
+        ],
+        "length_px": 254,
+        "clasificacion": "relieve irregular",
+        "observacion": "Dosel de árboles de tamaños variados y suelo con matorral. El contorno del bosque entra y sale, sin borde horizontal que coincida con el candidato.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 16,
+        "coords": [
+          56,
+          6882,
+          308,
+          6882
+        ],
+        "length_px": 253,
+        "clasificacion": "relieve irregular",
+        "observacion": "Copas y arbustos dispersos a distintas alturas junto a la senda; la sombra produce el gradiente medio. No hay seto ni fila recta.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 17,
+        "coords": [
+          511,
+          7018,
+          824,
+          7018
+        ],
+        "length_px": 314,
+        "clasificacion": "relieve irregular",
+        "observacion": "Islas de árboles separadas y de tamaños distintos sobre la pendiente. El gradiente atraviesa sombras y huecos; no constituye banda forestal horizontal.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 18,
+        "coords": [
+          142,
+          7265,
+          142,
+          7566
+        ],
+        "length_px": 302,
+        "clasificacion": "senda curva",
+        "observacion": "Senda en S continua descendiendo hacia el valle; cambia de x de manera visible. No corresponde a límite recto de prado.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      },
+      {
+        "id": 19,
+        "coords": [
+          164,
+          8274,
+          456,
+          8274
+        ],
+        "length_px": 293,
+        "clasificacion": "relieve irregular",
+        "observacion": "Árboles aislados, matorral y sombra sobre hierba ondulada. El borde real es discontinuo y orgánico, sin corte horizontal de 293 px.",
+        "resultado": "aprobado",
+        "borde_recto_real": false
+      }
+    ],
+    "resumen": {
+      "total": 19,
+      "bordes_rectos_reales_que_fallan": 0,
+      "resultado": "aprobado"
+    },
+    "otras_revisiones": [
+      {
+        "zona": "costura 4–5, y=5810",
+        "resultado": "aprobado",
+        "observacion": "Sendero continuo, bosque con copas individuales y exposición compatible a ambos lados; no observé costura horizontal ni borde duro."
+      },
+      {
+        "zona": "costura 5–6, y=7090",
+        "resultado": "aprobado",
+        "observacion": "Transición gradual de pendiente y prado, con islas de árboles; sin seto transversal ni salto tonal visible. La senda del lado izquierdo sigue continua."
+      },
+      {
+        "zona": "interior claro 05",
+        "resultado": "aprobado",
+        "observacion": "Hierba de contraste bajo con grano desigual. No observé patrones de puntos blancos repetidos ni un bloque clonado evidente."
+      },
+      {
+        "zona": "interior claro 06",
+        "resultado": "aprobado",
+        "observacion": "Hierba con pequeñas ondulaciones y detalle uniforme de bajo contraste. No se aprecia repetición exacta, motas blancas recurrentes ni grandes arrastres pictóricos."
+      },
+      {
+        "zona": "composición reducida 400 px",
+        "resultado": "aprobado",
+        "observacion": "05 ocupa la derecha y 06 forma un prado inferior amplio. Los márgenes del bosque meandran y el arroyo se mantiene en el lado derecho. No observé rectángulos agrícolas, fila de árboles ni banda horizontal transversal."
+      }
+    ],
+    "dudas_y_limites": [
+      "El grano de hierba conserva cierta suavidad a 100%; la inspección no equivale a detalle óptico nativo ni demuestra ausencia absoluta de toda textura sintética. No vi grandes manchas de pincel o arrastres pictóricos que justifiquen rechazar los interiores.",
+      "La clasificación se refiere a los 19 candidatos del detector calibrado y a las zonas adicionales indicadas; no es una garantía matemática de que cualquier algoritmo encuentre cero líneas."
+    ]
+  },
+  "texturas": {
+    "patch_size": 64,
+    "exact_duplicates": [],
+    "approximate_candidates": [],
+    "highest_distant_correlation": {
+      "a": [
+        128,
+        7490
+      ],
+      "b": [
+        256,
+        7874
+      ],
+      "correlation": 0.8582585453987122,
+      "centered_rms": 6.800599098205566
+    },
+    "note": "Solo rejilla sin desplazamiento; no demuestra ausencia de clones arbitrarios ni sustituye inspección."
+  },
+  "motas": {
+    "definition": "V>200,S<40 en HSV OpenCV, componentes de 2..80 px; solo candidato, no diagnóstico de repetición",
+    "count": 0,
+    "components": []
+  },
+  "senda": {
+    "metodo": "Anclas visuales cada 250 px, ayudadas por tono tierra en ventana local y corregidas visualmente. Coordenadas aproximadas, no segmentacion semantica. El tramo de roca de cumbre tiene mayor incertidumbre.",
+    "puntos": [
+      {
+        "y": 0,
+        "x": null,
+        "observacion": "cielo; senda aun no inicia"
+      },
+      {
+        "y": 250,
+        "x": null,
+        "observacion": "cielo; senda aun no inicia"
+      },
+      {
+        "y": 500,
+        "x": 700,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 750,
+        "x": 647,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 1000,
+        "x": 500,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 1250,
+        "x": 722,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 1500,
+        "x": 674,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 1750,
+        "x": 615,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 2000,
+        "x": 686,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 2250,
+        "x": 1073,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 2500,
+        "x": 1208,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 2750,
+        "x": 1067,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 3000,
+        "x": 1057,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 3250,
+        "x": 932,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 3500,
+        "x": 585,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 3750,
+        "x": 92,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 4000,
+        "x": 150,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 4250,
+        "x": 171,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 4500,
+        "x": 452,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 4750,
+        "x": 857,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 5000,
+        "x": 1237,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 5250,
+        "x": 1279,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 5500,
+        "x": 1076,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 5750,
+        "x": 1011,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 6000,
+        "x": 1094,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 6250,
+        "x": 740,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 6500,
+        "x": 366,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 6750,
+        "x": 357,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 7000,
+        "x": 322,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 7250,
+        "x": 189,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 7500,
+        "x": 160,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 7750,
+        "x": 255,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 8000,
+        "x": 342,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      },
+      {
+        "y": 8250,
+        "x": 601,
+        "observacion": "centro aproximado revisado visualmente; tolerancia 15 px (25 px en roca de cumbre)"
+      }
+    ],
+    "inicio_aproximado": {
+      "x": 805,
+      "y": 415
+    },
+    "fin_aproximado": {
+      "x": 650,
+      "y": 8310
+    }
+  }
+}
