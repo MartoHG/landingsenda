@@ -95,6 +95,7 @@ html.con-camara .parada__panel {
   font-size: var(--texto-s);
   background: var(--vidrio-claro);
   border-color: var(--vidrio-borde);
+  border-radius: var(--radio-cristal);
   box-shadow: var(--vidrio-sombra);
   -webkit-backdrop-filter: var(--vidrio-desenfoque);
   backdrop-filter: var(--vidrio-desenfoque);
@@ -144,74 +145,8 @@ html.con-camara .parada[data-parada='01'] .parada__captura img {
   max-height: min(16rem, 30svh);
 }
 
-/* El dato que baja: un chip de vidrio que la cámara lleva por la senda. */
-.dato {
-  display: none;
-}
-
-html.con-camara .dato {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 12;
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: center;
-  column-gap: var(--esp-3);
-  padding: var(--esp-2) var(--esp-3);
-  border: 1px solid var(--vidrio-borde);
-  border-radius: var(--radio);
-  background: var(--vidrio-claro);
-  box-shadow: var(--vidrio-sombra);
-  -webkit-backdrop-filter: var(--vidrio-desenfoque);
-  backdrop-filter: var(--vidrio-desenfoque);
-  color: var(--color-texto);
-  opacity: 0;
-  pointer-events: none;
-  will-change: transform, opacity;
-}
-
-html.con-camara .dato__etiqueta {
-  grid-column: 1;
-  font-size: var(--texto-xs);
-  font-weight: var(--peso-destacado);
-  color: var(--color-verde);
-}
-
-html.con-camara .dato__detalle {
-  grid-column: 1;
-  font-size: var(--texto-xs);
-  color: var(--color-texto-suave);
-  white-space: nowrap;
-}
-
-html.con-camara .dato__valor {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  font-family: var(--fuente-titulos);
-  font-size: var(--texto-xl);
-  font-weight: var(--peso-titulo);
-  line-height: 1;
-  color: var(--color-verde-oscuro);
-}
-
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  html.con-camara .dato {
-    background: var(--color-panel);
-  }
-}
-
 html.con-camara .parada__captura--falta {
   min-height: 0;
-}
-
-/* Una pantalla final permite leer el contacto antes de llegar al pie. */
-html.con-camara .recorrido::after {
-  content: '';
-  display: block;
-  height: 100vh;
-  height: 100svh;
-  pointer-events: none;
 }
 
 html.con-camara .camara__cajas {
@@ -376,4 +311,118 @@ html.con-camara .minimapa__posicion {
     margin-right: auto;
     margin-left: auto;
   }
+}
+
+
+/* Cristal y paisaje: misma superficie en los elementos que flotan. */
+.encabezado__marca, .encabezado__enlace, html.con-camara .minimapa, .hito, .cumbre__placa {
+  border: 1px solid var(--vidrio-borde);
+  border-radius: var(--radio-cristal);
+  background: var(--vidrio-claro);
+  box-shadow: var(--vidrio-sombra);
+  -webkit-backdrop-filter: var(--vidrio-desenfoque);
+  backdrop-filter: var(--vidrio-desenfoque);
+}
+
+.cumbre__identidad {
+  position: absolute;
+  z-index: 2;
+  top: 112px;
+  left: var(--margen-lateral);
+  width: min(68vw, 26rem);
+  color: var(--color-verde-oscuro);
+  pointer-events: none;
+}
+.cumbre__identidad img { width: 100%; height: auto; }
+.cumbre__placa { padding: var(--esp-6); }
+.cumbre__identidad p { margin-top: var(--esp-3); max-width: 24rem; font-size: var(--texto-s); }
+.cumbre__indicacion { display: none; }
+
+.hito {
+  position: relative;
+  margin: var(--esp-5) var(--margen-lateral) 0;
+  padding: var(--esp-5);
+  color: var(--color-verde-oscuro);
+}
+.hito__etiqueta { font-size: var(--texto-xs); font-weight: var(--peso-destacado); color: var(--color-verde); }
+.hito h3 { margin: var(--esp-2) 0; font-family: var(--fuente-titulos); font-size: var(--texto-l); line-height: 1.15; text-wrap: balance; }
+.hito p { font-size: var(--texto-s); line-height: 1.45; }
+html.con-camara .hito {
+  position: fixed;
+  z-index: 8;
+  top: 0;
+  left: 0;
+  width: min(72vw, 20rem);
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+html.con-camara .parada:last-child .parada__anclaje { bottom: 0; }
+html.con-camara .parada:last-child .parada__panel { opacity: 1; }
+
+@media (min-width: 48rem) {
+  .cumbre__identidad { top: 17svh; left: 5vw; width: min(35vw, 34rem); }
+  .cumbre__identidad p { margin-top: var(--esp-5); font-size: var(--texto-m); }
+  .cumbre__indicacion { display: flex; align-items: center; gap: var(--esp-4); margin-top: var(--esp-7); font-size: var(--texto-s); }
+  .cumbre__indicacion span { font-size: var(--texto-xl); }
+  html.con-camara .hito { width: clamp(16rem, 25vw, 21rem); padding: var(--esp-6); }
+  .hito { max-width: 26rem; }
+  .parada[data-lado='right'] > .hito { justify-self: start; }
+  .parada[data-lado='left'] > .hito { justify-self: end; }
+}
+
+@media (max-width: 47.999rem) {
+  html.con-camara .parada__panel { max-height: 72svh; padding: var(--esp-4); gap: var(--esp-3); }
+  html.con-camara .parada__titulo, html.con-camara h1.parada__titulo { font-size: 1.5rem; }
+  html.con-camara .parada__texto { font-size: var(--texto-s); line-height: 1.45; }
+  html.con-camara .parada[data-parada='01'] .parada__captura img { max-height: 16svh; }
+  html.con-camara .parada[data-parada='01'] .boton { font-size: var(--texto-xs); padding: var(--esp-3); }
+  .cumbre__identidad { top: 80px; width: 52vw; }
+  .cumbre__identidad p { font-size: var(--texto-xs); line-height: 1.35; max-width: 24ch; }
+  html.con-camara .hito { width: min(72vw, 20rem); }
+
+  .hito { border-radius: 24px; }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .encabezado__marca, .encabezado__enlace, html.con-camara .minimapa, .hito, .cumbre__placa { background: var(--color-panel); }
+}
+
+
+/* Carteles anclados al paisaje: el scroll mueve la cámara y los deja atrás. */
+html.con-camara .parada__panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0 !important;
+  max-height: none;
+  overflow: visible;
+  opacity: 1;
+  transform-origin: center;
+}
+html.con-camara .parada__captura img { max-height: min(24rem, 34svh); }
+.boton {
+  width: fit-content;
+  max-width: 100%;
+  justify-self: start;
+  border-radius: 999px;
+  padding: 12px 24px;
+  text-align: center;
+  line-height: 1.35;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 20%), 0 4px 14px rgb(26 61 43 / 12%);
+}
+@media (max-width: 47.999rem) {
+  html.con-camara .parada__captura img { max-height: 22svh; }
+  html.con-camara .parada[data-parada='01'] .parada__captura img { max-height: 14svh; }
+  html.con-camara .parada[data-parada='01'] .boton { padding: 12px 20px; }
+}
+
+
+.cumbre__identidad { width: min(35vw, 30rem); }
+.cumbre__identidad p { max-width: 22rem; }
+@media (max-width: 47.999rem) {
+  .cumbre__identidad { width: 65vw; }
+  .cumbre__placa { padding: var(--esp-4); }
+  html.con-camara .hito[data-lado-hito='right'] { display: none; }
 }

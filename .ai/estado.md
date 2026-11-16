@@ -1,32 +1,12 @@
 # Estado · landingsenda
 
-Este archivo se reescribe entero al cerrar cada sesión.
-
-- **Etapa:** Diseño
-- **Próximo paso:** proponer el concepto de la landing con `respawn-design` y
-  sacar las capturas de SENDA en local.
+- **Etapa:** Diseño, revisión visual en Codex (2026-11-16).
+- **Concepto:** Bajar la senda. Montaña continua, cámara con scroll y seis paradas.
+- **Cambios locales:** cristal translúcido redondeado; logo original en placa de vidrio en la cumbre, elegido por el usuario; mensajes a los lados de las cinco travesías; sin chip; contacto al final sin prado vacío. Cámara continua sin pausas ni fundidos; botones compactos. Se conservan el plano abierto al 27 % y la bajada recta 01→02.
+- **Próximo paso:** revisar la propuesta con el usuario en escritorio y celular; luego auditoría de entrega.
 
 ## Bloqueos
 
-- Canal de contacto sin definir: lo define el equipo. Sin él la landing no se
-  publica.
-- `sendaedu.com.ar` delegado a Cloudflare el 2026-11-15, pero la zona `com.ar`
-  todavía no lo publica: comprobar antes de conectar Pages. Si no llega, se
-  publica con la dirección de Cloudflare Pages.
-- Plazo: en línea el 2026-11-16, a más tardar el 2026-11-17.
-
-## Última sesión
-
-2026-11-15: inicialización con `respawn-init`, repositorio conectado a
-`MartoHG/landingsenda` y kickoff completo: brief, ADR-P-001 (Astro y CSS
-plano en Cloudflare Pages), `CLAUDE.md` y pendientes. Dominio agregado a
-Cloudflare (Free) y delegado en NIC Argentina.
-
-## Para la casa
-
-- El kickoff da por hecho un cliente de Respawn con paquete; un producto
-  propio sin paquete ni alcance para el cliente no está previsto ·
-  `respawn-kickoff` · sumar el caso «proyecto propio» al encuadre.
-- `review-respawn` figura en la plantilla del `CLAUDE.md` y en el kickoff,
-  pero no existe en la casa · `respawn-proyecto` · crearla o quitarla de la
-  plantilla.
+- Canal de contacto pendiente del equipo: el marcador sigue visible.
+- Confirmar el dominio propio antes de conectarlo. Ya hay una landing publicada en https://landingsenda.pages.dev/.
+- Estos cambios están en local, sin commit ni publicación solicitada.

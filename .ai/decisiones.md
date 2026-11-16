@@ -22,7 +22,7 @@ el patrón no va.
 | Patrón del catálogo | Dónde aparece | Cómo sale del concepto |
 | ------------------- | ------------- | ---------------------- |
 | F4 Fondo decorativo (línea que recorre la página) | La senda que baja de la cumbre al pie, uniendo las paradas | Es la senda del isotipo, con su misma forma en S: muestra que lo cargado arriba baja solo. En celular pasa a una línea vertical simple |
-| K4 Vidrio esmerilado | Paneles de las paradas y chip del dato que baja, en el modo cámara | Los paneles flotan sobre la montaña y la senda se tiene que seguir intuyendo detrás para no perder la bajada. En el modo quieto y sin soporte de desenfoque, el panel es sólido |
+| K4 Vidrio esmerilado | Paneles de las paradas, hitos laterales, encabezado y minimapa | Los paneles flotan sobre la montaña y la senda se tiene que seguir intuyendo detrás para no perder la bajada. En el modo quieto y sin soporte de desenfoque, el panel es sólido |
 
 ## Registro
 
@@ -47,5 +47,19 @@ contenido, alcance, técnica, negocio.
 | 2026-11-16 | imágenes | Paneles más grandes con la captura como protagonista, legible y sin miniatura | Las capturas son la prueba de que SENDA funciona; en miniatura no se leían |
 | 2026-11-16 | movimiento | Entre la cumbre y la parada 02 la cámara baja en línea recta; en el resto sigue la senda | Las horquillas de la cumbre hacían zigzaguear la cámara y se veía mal a más velocidad. Lo pidió el usuario |
 | 2026-11-16 | movimiento | A mitad de cada viaje la cámara se abre un 27 % respecto de las paradas que une | Se ve la senda entera y el próximo claro, en vez de una pantalla de pasto: elimina las zonas muertas |
-| 2026-11-16 | movimiento | Sin chip que baje por la senda; en su lugar, datos a los lados del camino durante cada viaje (en curso) | El usuario vio el chip y no le gustó; los datos al costado llenan el pasto vacío de las travesías |
+| 2026-11-16 | movimiento | Sin chip que baje por la senda; en su lugar, dos mensajes del brief a los lados del camino durante cada viaje | El usuario vio el chip y no le gustó; los datos al costado llenan el pasto vacío de las travesías |
 | 2026-11-15 | técnica | Sitio estático sin panel ni formulario | El contenido casi no cambia y lo actualiza el equipo desde el repositorio; ver ADR-P-001 |
+
+| 2026-11-16 | material | Cristal blanco translúcido, desenfoque de 24 px, borde luminoso y radio de 28 px; controles internos conservan 8 px | Referencia explícita del usuario: contraste entre naturaleza y cristal, con el paisaje visible detrás |
+| 2026-11-16 | contenido | Hitos laterales con información confirmada del brief durante las cinco travesías; sin métricas ficticias ni chip móvil | El usuario pidió aprovechar el espacio junto al camino durante toda la bajada |
+| 2026-11-16 | marca | Logo SENDA grande y descripción en el cielo de la cumbre | La portada necesitaba presencia de marca, según el usuario |
+| 2026-11-16 | movimiento | La pantalla final de la cámara queda dentro de la sección de contacto; se elimina el prado vacío posterior | El usuario pidió eliminar completamente las zonas muertas |
+
+| 2026-11-16 | movimiento | Los hitos quedan anclados a coordenadas del paisaje, con posición y escala proyectadas por la cámara; nunca siguen al visitante | Corrección explícita del usuario durante la prueba: deben quedar fijos a los costados |
+
+| 2026-11-16 | movimiento | Cámara continua incluso durante la lectura; paneles y hitos anclados al terreno y sin desaparición por progreso de scroll | El usuario rechazó avanzar el scroll sin movimiento y que los paneles se ocultaran |
+| 2026-11-16 | acción | Botón compacto redondeado «Ver SENDA en mi escuela», con ancho según contenido | El usuario rechazó el bloque verde ancho de la portada |
+
+| 2026-11-16 | marca | Logo SVG original de SENDA y descripción dentro de una placa con el mismo vidrio de las tarjetas; sin efectos sobre las letras | El usuario eligió explícitamente esta dirección después de rechazar el nombre sólido y el acabado de relieve sobre el cielo |
+| 2026-11-16 | adaptación | En celular, un hito anclado entre cada par de paneles, sin scroll interno; escritorio conserva dos hitos a los lados | Evita superposiciones y mantiene la lectura en una pantalla angosta |
+| 2026-11-16 | interacción | Desactivar selección, copia, corte, arrastre y menú contextual en la landing; sin bloquear la navegación con teclado | Pedido explícito del usuario. Disuade la copia directa; no impide capturas ni extracción de recursos públicos |

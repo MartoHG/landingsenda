@@ -28,7 +28,7 @@ export const paradas: Parada[] = [
     lado: 'right',
     titulo: 'Cada docente carga una sola vez. SENDA completa el resto.',
     parrafos: [
-      'Sistema de gestión académica para escuelas secundarias de la Provincia de Buenos Aires. La asistencia, el libro de temas y las calificaciones se cargan en el aula, y con eso se arman el RITE, la intensificación y el plan de acompañamiento.',
+      'Cargá la asistencia, los temas y las notas en el aula. SENDA arma el calificador, el RITE y el acompañamiento. Para secundarias de la Provincia de Buenos Aires.',
     ],
     captura: {
       archivo: '01-asistencia.png',
@@ -101,7 +101,7 @@ export const paradas: Parada[] = [
 /** Canal de contacto: pendiente del equipo (.ai/pendientes-cliente.md). */
 export const contacto = {
   disponible: false,
-  rotulo: 'Escribinos para verlo en tu escuela',
+  rotulo: 'Ver SENDA en mi escuela',
   href: '#parada-06',
   falta: 'canal de contacto: WhatsApp o mail, número o casilla',
 };

@@ -53,6 +53,7 @@
 
   /* Radio único */
   --radio: 8px;
+  --radio-cristal: 28px;
 
   /* Medidas de lectura */
   --ancho-lectura: 38rem;
@@ -60,11 +61,11 @@
   --ancho-panel-camara: 40rem;
 
   /* Vidrio: solo en el modo cámara, para seguir intuyendo la senda detrás */
-  --vidrio-claro: color-mix(in srgb, var(--color-panel) 76%, transparent);
-  --vidrio-oscuro: color-mix(in srgb, var(--color-verde-oscuro) 82%, transparent);
-  --vidrio-borde: color-mix(in srgb, var(--color-panel) 60%, transparent);
-  --vidrio-desenfoque: blur(16px) saturate(1.15);
-  --vidrio-sombra: 0 8px 32px color-mix(in srgb, var(--color-verde-oscuro) 22%, transparent);
+  --vidrio-claro: linear-gradient(135deg, rgb(255 255 255 / 58%), rgb(246 255 249 / 28%) 55%, rgb(255 255 255 / 42%));
+  --vidrio-oscuro: linear-gradient(135deg, rgb(26 61 43 / 68%), rgb(26 61 43 / 38%));
+  --vidrio-borde: rgb(255 255 255 / 78%);
+  --vidrio-desenfoque: blur(24px) saturate(1.25);
+  --vidrio-sombra: inset 0 1px 0 rgb(255 255 255 / 85%), inset 1px 0 0 rgb(255 255 255 / 35%), 0 16px 48px rgb(17 46 30 / 16%);
   --margen-lateral: var(--esp-4);
 
   /* Movimiento: respuestas de interfaz */

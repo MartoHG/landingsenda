@@ -15,6 +15,8 @@
 import { Picture } from 'astro:assets';
 import type { Parada } from '../data/paradas';
 import montana from '../data/montana.json';
+import { hitos } from '../data/hitos';
+import logo from '../assets/marca/logo.svg';
 
 interface Props {
   parada: Parada;
@@ -63,6 +65,15 @@ const esFalta = (texto: string) => texto.startsWith('[FALTA');
     />
   </div>
 
+  {nivel === 1 && (
+    <div class="cumbre__identidad" aria-label="SENDA, gestión académica">
+      <div class="cumbre__placa">
+        <img src={logo.src} alt="SENDA" width={logo.width} height={logo.height} draggable="false" />
+        <p>Gestión académica para escuelas secundarias</p>
+      </div>
+      <span class="cumbre__indicacion" aria-hidden="true">Seguí la senda <span>↓</span></span>
+    </div>
+  )}
   <div class="parada__panel">
     <Titulo
       id={`titulo-${parada.id}`}
@@ -97,4 +108,11 @@ const esFalta = (texto: string) => texto.startsWith('[FALTA');
         ))
     }
   </div>
+  {hitos[parada.id]?.map((hito, i) => (
+    <aside class="hito" data-hito data-lado-hito={i === 0 ? 'left' : 'right'}>
+      <span class="hito__etiqueta">{hito.etiqueta}</span>
+      <h3>{hito.titulo}</h3>
+      <p>{hito.texto}</p>
+    </aside>
+  ))}
 </section>

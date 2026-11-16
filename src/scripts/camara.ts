@@ -17,14 +17,11 @@ const AJUSTES = {
   pesoSendaMovil: 0.7,
   lugarEncuentroEscritorio: 0.28,
   altoPanelEscritorio: 0.84,
-  altoPanelMovil: 0.62,
+  altoPanelMovil: 0.72,
   margenSeguro: 16,
   arroyoValle: { x: 1430, y: 8150 }, // Referencia visible en la tira v3.
   respiracion: 0.27, // A mitad del viaje, 0.73× el zoom de las paradas que une.
   tramosRectos: ['02'], // Viajes que llegan a estas paradas van en línea recta: evitan las horquillas.
-  datoAparicion: 0.12, // Fracción del viaje en que el dato aparece en la senda.
-  datoAterrizaje: 0.35, // Fracción final del viaje en que el dato va hacia la captura.
-  datoCola: 0.3, // Pantallas de scroll, ya en la parada, en que el dato se funde en la captura.
   pausa: 1.2, // Pantallas de lectura, además del viaje de cada sección.
   viajeBase: 0.85,
   viajeMinimo: 0.7,
@@ -41,8 +38,8 @@ type Claro = (typeof datosMontana.claros)[number];
 type Parada = {
   seccion: HTMLElement; panel: HTMLElement; anclaje: HTMLElement; claro: Claro;
   inicio: number; llegada: number; fin: number; viaje: number; pausa: number;
-  entrada: number; salida: number; pose: Pose; enfoque: number; encuentro: Punto;
-  dato?: HTMLElement; destino: Punto; anchoDato: number;
+  entrada: number; salida: number; pose: Pose; enfoque: number; encuentro: Punto; panelPunto: Punto; panelReferencia: number; panelAncho: number; panelAlto: number;
+  hitos: { elemento: HTMLElement; ancho: number; alto: number; punto: Punto; referencia: number }[];
 };
 type Vista = { ancho: number; alto: number; anchoTira: number; altoTira: number; movil: boolean; margen: number };
 type Marcador = { digitos: HTMLElement[]; valor: number };
@@ -381,6 +378,8 @@ function prepararCamara() {
         if (fuente.sizes !== medida) fuente.sizes = medida;
       });
     });
+    // Medir dimensiones sin la escala proyectada del cuadro anterior.
+    paradas.forEach(p => { p.panel.style.transform = 'none'; });
     let inicio = 0;
     const primera = paradas[0].claro.cajaSegura, ultima = paradas[paradas.length - 1].claro.cajaSegura;
     const distanciaMedia = Math.max(1, (ultima.y + ultima.height / 2 - primera.y - primera.height / 2) / Math.max(1, paradas.length - 1));
@@ -396,34 +395,81 @@ function prepararCamara() {
       const distancia = Math.max(0, c.y + c.height / 2 - previo.y - previo.height / 2);
       // La distancia solo modula un viaje breve, independiente del zoom de la foto.
       parada.viaje = i ? altoVista * limitar(AJUSTES.viajeBase * Math.sqrt(distancia / distanciaMedia), AJUSTES.viajeMinimo, AJUSTES.viajeMaximo) : 0;
-      parada.pausa = altoVista * AJUSTES.pausa;
+      parada.pausa = i === paradas.length - 1 ? 0 : altoVista * AJUSTES.pausa;
       parada.inicio = inicio;
       parada.llegada = inicio + parada.viaje;
       parada.fin = parada.llegada + parada.pausa;
       parada.entrada = parada.viaje * AJUSTES.fundido;
       parada.pose = encuadre.pose;
-      parada.seccion.style.setProperty('--alto-parada', `${parada.viaje + parada.pausa}px`);
+      const factorPanel = escala * parada.pose.zoom;
+      const anchoPanel = parada.panel.getBoundingClientRect().width;
+      const izquierdaPanel = escritorio.matches
+        ? parada.claro.lado === 'right' ? anchoVista - anchoPanel - 96
+          : parada.claro.lado === 'left' ? 32 : (anchoVista - anchoPanel) / 2
+        : (anchoVista - anchoPanel) / 2;
+      parada.panelAncho = anchoPanel;
+      parada.panelAlto = alturaPanel;
+      parada.panelReferencia = factorPanel;
+      parada.panelPunto = {
+        x: parada.pose.x + (izquierdaPanel + anchoPanel / 2 - anchoVista / 2) / factorPanel,
+        y: parada.pose.y + (tope + alturaPanel / 2 - altoVista / 2) / factorPanel,
+      };
+      parada.seccion.style.setProperty('--alto-parada', `${parada.viaje + parada.pausa + (i === paradas.length - 1 ? altoVista : 0)}px`);
       parada.seccion.style.setProperty('--inicio-panel', `${parada.viaje - parada.entrada + tope}px`);
       parada.seccion.style.setProperty('--tope-panel', `${tope}px`);
-      // Donde el dato se apoya: su celda en la captura, con el panel ya clavado.
-      const captura = parada.panel.querySelector<HTMLElement>('.parada__captura img');
-      if (parada.dato && captura) {
-        const panel = parada.panel.getBoundingClientRect(), imagen = captura.getBoundingClientRect();
-        const fx = Number(parada.dato.dataset.aterrizaX ?? 0.5), fy = Number(parada.dato.dataset.aterrizaY ?? 0.5);
-        // El valor del chip cae sobre el mismo valor de la captura.
-        const valor = parada.dato.querySelector<HTMLElement>('.dato__valor');
-        parada.anchoDato = parada.dato.offsetWidth;        const corrimiento = valor ? valor.offsetLeft + valor.offsetWidth / 2 - parada.anchoDato / 2 : 0;
-        parada.destino = {
-          x: imagen.left + imagen.width * fx - corrimiento,
-          y: tope + (imagen.top - panel.top) + imagen.height * fy,
-        };
-      }
+      parada.hitos.forEach(hito => {
+        hito.ancho = hito.elemento.offsetWidth;
+        hito.alto = hito.elemento.offsetHeight;
+      });
       inicio = parada.fin;
     });
+    // Medimos una sola vez el punto del terreno donde está cada cartel.
+    // Al pintar solo proyectamos ese punto: nunca lo sujetamos a la ventana.
+    paradas.forEach(parada => parada.hitos.forEach((hito, i) => {
+      const t = i === 0 ? 0.34 : 0.66;
+      const pose = poseEn(parada.inicio + parada.viaje * t);
+      const factor = escala * pose.zoom;
+      const camino = anchoVista / 2 + (xSenda(pose.y) - pose.x) * factor;
+      const margen = escritorio.matches ? 48 : 20;
+      const x = escritorio.matches
+        ? i === 0
+          ? limitar(camino - hito.ancho / 2 - 64, margen + hito.ancho / 2, anchoVista / 2 - hito.ancho / 2 - 24)
+          : limitar(camino + hito.ancho / 2 + 64, anchoVista / 2 + hito.ancho / 2 + 24, anchoVista - hito.ancho / 2 - 96)
+        : i === 0 ? margen + hito.ancho / 2 : anchoVista - margen - hito.ancho / 2;
+      hito.punto = { x: pose.x + (x - anchoVista / 2) / factor, y: pose.y };
+      hito.referencia = factor;
+    }));
+    // En celular hay un solo hito por travesía. Se coloca físicamente entre
+    // las dos tarjetas para que nunca tape el contenido de las paradas.
+    if (!escritorio.matches) paradas.forEach((parada, i) => {
+      if (!i || !parada.hitos.length) return;
+      const anterior = paradas[i - 1];
+      const desde = anterior.panelPunto.y + anterior.panelAlto / (2 * anterior.panelReferencia);
+      const hasta = parada.panelPunto.y - parada.panelAlto / (2 * parada.panelReferencia);
+      const hito = parada.hitos[0];
+      const espacio = Math.max(120, hasta - desde - 80);
+      hito.referencia = Math.max(hito.referencia, hito.alto / espacio);
+      hito.punto.y = (desde + hasta) / 2;
+    });
+    if (escritorio.matches) {
+      const valle = paradas[paradas.length - 1];
+      const factor = escala * valle.pose.zoom;
+      valle.hitos.forEach((hito, i) => {
+        const x = i === 0 ? 32 + hito.ancho / 2 : anchoVista - 32 - hito.ancho / 2;
+        hito.punto.x = valle.pose.x + (x - anchoVista / 2) / factor;
+      });
+    }
+    recorrido!.style.setProperty('--pantalla-final', `${altoVista}px`);
     paradas.forEach((parada, i) => {
       parada.salida = (paradas[i + 1]?.viaje ?? altoVista) * AJUSTES.fundido;
       parada.seccion.style.setProperty('--cola-panel', `${altoVista + parada.salida}px`);
     });
+  }
+
+  // La lectura también avanza por el terreno. No hay scroll consumido en una pose fija.
+  function salidaDe(parada: Parada): Pose {
+    const recorridoLectura = parada === paradas[paradas.length - 1] ? 0.22 : 0.65;
+    return encuadrar({ ...parada.pose, y: parada.pose.y + altoVista * recorridoLectura / (escala * parada.pose.zoom) });
   }
 
   function poseEn(y: number): Pose {
@@ -433,22 +479,27 @@ function prepararCamara() {
         const anterior = paradas[i - 1];
         const t = limitar((y - parada.inicio) / parada.viaje);
         const avance = suavizar(t);
-        const centroY = mezclar(anterior.pose.y, parada.pose.y, avance);
+        const desde = salidaDe(anterior);
+        const centroY = mezclar(desde.y, parada.pose.y, avance);
         const salida = 1 - suavizar(t / AJUSTES.enlaceConSenda);
         const entrada = suavizar((t - 1 + AJUSTES.enlaceConSenda) / AJUSTES.enlaceConSenda);
         // Plano abierto: a mitad del viaje se ve la senda y el próximo claro.
         const zoom = mezclar(anterior.pose.zoom, parada.pose.zoom, avance)
           * (1 - AJUSTES.respiracion * Math.sin(Math.PI * t) ** 2);
         const x = AJUSTES.tramosRectos.includes(parada.claro.id)
-          ? mezclar(anterior.pose.x, parada.pose.x, avance)
+          ? mezclar(desde.x, parada.pose.x, avance)
           : xSenda(centroY)
-            + (anterior.pose.x - xSenda(anterior.pose.y)) * salida
+            + (desde.x - xSenda(desde.y)) * salida
             + (parada.pose.x - xSenda(parada.pose.y)) * entrada;
         return encuadrar({ x, y: centroY, zoom });
       }
-      if (y <= parada.fin) return parada.pose;
+      if (y <= parada.fin) {
+        const t = limitar((y - parada.llegada) / Math.max(1, parada.pausa));
+        const hasta = salidaDe(parada);
+        return encuadrar({ ...parada.pose, y: mezclar(parada.pose.y, hasta.y, t) });
+      }
     }
-    return paradas[paradas.length - 1].pose;
+    return salidaDe(paradas[paradas.length - 1]);
   }
 
   function solicitarTramos(pose: Pose) {
@@ -474,16 +525,18 @@ function prepararCamara() {
       const p = paradas[paradaActual];
       if (y < p.inicio + p.viaje / 2) paradaActual--;
     }
+    // Todas las tarjetas tienen un lugar en la montaña: entran y salen del encuadre
+    // por el desplazamiento de la cámara, sin fundidos por porcentaje de scroll.
     paradas.forEach(p => {
-      const enfoque = y < p.llegada ? suavizar((y - p.llegada + p.entrada) / (p.entrada || 1))
-        : y <= p.fin ? 1 : 1 - suavizar((y - p.fin) / (p.salida || 1));
-      if (enfoque !== p.enfoque) {
-        p.enfoque = enfoque;
-        p.seccion.style.setProperty('--enfoque', enfoque.toFixed(4));
-        p.seccion.classList.toggle('parada--enfocada', enfoque > 0.5);
-      }
+      const x = anchoVista / 2 + (p.panelPunto.x - pose.x) * factor;
+      const arriba = altoVista / 2 + (p.panelPunto.y - pose.y) * factor;
+      const tamano = factor / p.panelReferencia;
+      const visible = x + p.panelAncho * tamano / 2 > -48 && x - p.panelAncho * tamano / 2 < anchoVista + 48 && arriba + p.panelAlto * tamano / 2 > -48 && arriba - p.panelAlto * tamano / 2 < altoVista + 48;
+      p.panel.style.visibility = visible ? 'visible' : 'hidden';
+      p.panel.style.transform = `translate3d(${x.toFixed(1)}px, ${arriba.toFixed(1)}px, 0) translate(-50%, -50%) scale(${tamano.toFixed(4)})`;
+      p.seccion.classList.toggle('parada--enfocada', arriba + p.panelAlto * tamano / 2 > 0 && arriba - p.panelAlto * tamano / 2 < altoVista);
     });
-    paradas.forEach((p, i) => { if (p.dato && i) pintarDato(p, paradas[i - 1], y, pose); });
+    paradas.forEach(p => pintarHitos(p, y, pose));
     solicitarTramos(pose);
     pintarMinimapa(y);
     const valores = [y, Number(paradas[paradaActual].claro.id), pose.x, pose.y, pose.zoom * 100];
@@ -496,27 +549,20 @@ function prepararCamara() {
     });
   }
 
-  // El dato baja por la senda durante el viaje y se apoya en la captura al llegar.
-  function pintarDato(parada: Parada, anterior: Parada, y: number, pose: Pose) {
-    const dato = parada.dato!;
+  // Los mensajes se quedan a los lados de la senda; el centro sigue libre.
+  function pintarHitos(parada: Parada, y: number, pose: Pose) {
     const t = (y - parada.inicio) / Math.max(1, parada.viaje);
-    const cola = (y - parada.llegada) / Math.max(1, altoVista * AJUSTES.datoCola);
-    if (t <= 0 || cola >= 1) {
-      if (dato.style.opacity !== '0') dato.style.opacity = '0';
-      return;
-    }
+    const opacidad = 1;
     const factor = escala * pose.zoom;
-    const enSenda = mezclar(focoSenda(anterior), parada.encuentro.y, suavizar(t));
-    const aterrizaje = suavizar((t - 1 + AJUSTES.datoAterrizaje) / AJUSTES.datoAterrizaje);
-    // En la senda, el chip nunca se corta contra el borde de la ventana.
-    const mitad = parada.anchoDato / 2 + AJUSTES.margenSeguro;
-    const xEnSenda = limitar(anchoVista / 2 + (xSenda(enSenda) - pose.x) * factor, mitad, Math.max(mitad, anchoVista - mitad));
-    const x = mezclar(xEnSenda, parada.destino.x, aterrizaje);
-    const yPantalla = mezclar(altoVista / 2 + (enSenda - pose.y) * factor, parada.destino.y, aterrizaje);
-    const opacidad = suavizar(t / AJUSTES.datoAparicion) * (1 - suavizar(cola));
-    const tamano = 1 - 0.15 * suavizar(cola);
-    dato.style.opacity = opacidad.toFixed(3);
-    dato.style.transform = `translate3d(${x.toFixed(1)}px, ${yPantalla.toFixed(1)}px, 0) translate(-50%, -50%) scale(${tamano.toFixed(3)})`;
+    parada.hitos.forEach(hito => {
+      const x = anchoVista / 2 + (hito.punto.x - pose.x) * factor;
+      const arriba = altoVista / 2 + (hito.punto.y - pose.y) * factor;
+      hito.elemento.style.opacity = opacidad.toFixed(3);
+      const tamano = factor / hito.referencia;
+      const visible = x + hito.ancho * tamano / 2 > -48 && x - hito.ancho * tamano / 2 < anchoVista + 48 && arriba + hito.alto * tamano / 2 > -48 && arriba - hito.alto * tamano / 2 < altoVista + 48;
+      hito.elemento.style.visibility = visible ? 'visible' : 'hidden';
+      hito.elemento.style.transform = `translate3d(${x.toFixed(1)}px, ${arriba.toFixed(1)}px, 0) translate(-50%, -50%) scale(${(factor / hito.referencia).toFixed(4)})`;
+    });
   }
 
   function pedirCuadro() {
@@ -534,7 +580,7 @@ function prepararCamara() {
   }
 
   function irA(parada: Parada, enfocar: boolean) {
-    const destino = origen + parada.llegada + (parada === paradas[0] ? 0 : parada.pausa * 0.35);
+    const destino = origen + parada.llegada;
     solicitarTramos(parada.pose);
     window.scrollTo({ top: destino, behavior: 'instant' });
     // El foco queda visible aun si la pestaña no está ejecutando animaciones.
@@ -643,6 +689,7 @@ function prepararCamara() {
         return caja.top <= window.innerHeight / 2 && caja.bottom > window.innerHeight / 2;
       }) || secciones[secciones.length - 1] : undefined;
       guardar(montana!);
+      guardar(recorrido!);
       paradas = secciones.map(seccion => {
         const panel = seccion.querySelector<HTMLElement>('.parada__panel');
         const claro = datosMontana.claros.find(c => c.id === seccion.dataset.parada);
@@ -651,9 +698,8 @@ function prepararCamara() {
         guardar(panel);
         const anclaje = document.createElement('div');
         anclaje.className = 'parada__anclaje';
-        const dato = seccion.querySelector<HTMLElement>('[data-dato]') || undefined;
-        if (dato) guardar(dato);
-        return { seccion, panel, anclaje, claro, dato, destino: { x: 0, y: 0 }, anchoDato: 0, encuentro: buscarEncuentro(claro, puntos), inicio: 0, llegada: 0, fin: 0, viaje: 0, pausa: 0, entrada: 0, salida: 0, pose: { x: 0, y: 0, zoom: 1 }, enfoque: -1 };
+        const hitos = [...seccion.querySelectorAll<HTMLElement>('[data-hito]')].map(elemento => { guardar(elemento); return { elemento, ancho: 0, alto: 0, punto: { x: 0, y: 0 }, referencia: 1 }; });
+        return { seccion, panel, anclaje, claro, hitos, encuentro: buscarEncuentro(claro, puntos), inicio: 0, llegada: 0, fin: 0, viaje: 0, pausa: 0, entrada: 0, salida: 0, pose: { x: 0, y: 0, zoom: 1 }, panelPunto: { x: 0, y: 0 }, panelReferencia: 1, panelAncho: 0, panelAlto: 0, enfoque: -1 };
       });
       prepararMinimapa();
       medir();
