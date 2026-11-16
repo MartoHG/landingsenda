@@ -22,10 +22,12 @@ const AJUSTES = {
   arroyoValle: { x: 1430, y: 8150 }, // Referencia visible en la tira v3.
   respiracion: 0.12, // 0.88× a mitad del viaje: un plano 13.6% más abierto.
   pausa: 1.2, // Pantallas de lectura, además del viaje de cada sección.
-  viajeMinimo: 0.8,
+  viajeBase: 0.85,
+  viajeMinimo: 0.7,
+  viajeMaximo: 1,
   fundido: 0.15,
   enlaceConSenda: 0.3,
-  suavizadoSenda: 2, // Radio en muestras: reduce vibración sin borrar zigzags.
+  suavizadoSenda: 1, // Un vecino a cada lado: conserva las horquillas de la cumbre.
   bordeCumbre: 200, // Apertura con cielo y cumbre, en coordenadas de la tira.
 };
 
@@ -39,6 +41,12 @@ type Parada = {
 };
 type Vista = { ancho: number; alto: number; anchoTira: number; altoTira: number; movil: boolean; margen: number };
 type Marcador = { digitos: HTMLElement[]; valor: number };
+type Minimapa = {
+  nav: HTMLElement; marca: HTMLElement; enlaces: HTMLAnchorElement[];
+  creado: boolean; oculto: boolean; contenido: Node[];
+  ancho: number; alto: number; minX: number; maxX: number; minY: number; maxY: number;
+  activo: number;
+};
 const limitar = (n: number, min = 0, max = 1) => Math.max(min, Math.min(max, n));
 const mezclar = (a: number, b: number, t: number) => a + (b - a) * t;
 const suavizar = (t: number) => { const p = limitar(t); return p * p * (3 - 2 * p); };
@@ -145,6 +153,7 @@ function prepararCamara() {
   let activo = false, cuadro = 0, demora = 0;
   let anchoVista = 0, altoVista = 0, origen = 0, escala = 1, ultimaY = 0, paradaActual = 0;
   let lectura: HTMLElement | undefined, cajas: SVGSVGElement | undefined;
+  let minimapa: Minimapa | undefined;
   let marcadores: Marcador[] = [];
   let reenfocando = false;
   let activacionInicialTerminada = false;
@@ -197,6 +206,97 @@ function prepararCamara() {
     };
   }
 
+  function coordenadaMinimapa(y: number) {
+    let i = 0;
+    while (i < puntos.length - 2 && puntos[i + 1].y < y) i++;
+    const a = puntos[i], b = puntos[Math.min(i + 1, puntos.length - 1)];
+    return { x: mezclar(a.x, b.x, limitar((y - a.y) / Math.max(1, b.y - a.y))), y: limitar(y, puntos[0].y, puntos[puntos.length - 1].y) };
+  }
+
+  function focoSenda(parada: Parada) {
+    return parada === paradas[0] ? puntos[0].y : parada.encuentro.y;
+  }
+
+  function posicionSenda(y: number) {
+    for (let i = 0; i < paradas.length; i++) {
+      const parada = paradas[i];
+      if (i && y < parada.llegada) return mezclar(focoSenda(paradas[i - 1]), focoSenda(parada), suavizar((y - parada.inicio) / parada.viaje));
+      if (y <= parada.fin) return focoSenda(parada);
+    }
+    return focoSenda(paradas[paradas.length - 1]);
+  }
+
+  function prepararMinimapa() {
+    const existente = document.querySelector<HTMLElement>('[data-minimapa]');
+    const nav = existente || document.createElement('nav');
+    const marca = document.createElement('span');
+    minimapa = {
+      nav, marca, enlaces: [], creado: !existente, oculto: nav.hidden, contenido: [...nav.childNodes],
+      ancho: 0, alto: 0, minX: Math.min(...puntos.map(p => p.x)), maxX: Math.max(...puntos.map(p => p.x)),
+      minY: puntos[0].y, maxY: puntos[puntos.length - 1].y, activo: -1,
+    };
+    if (!existente) {
+      nav.className = 'minimapa';
+      nav.setAttribute('data-minimapa', '');
+      nav.setAttribute('aria-label', 'Recorrido de la senda');
+      nav.hidden = true;
+      document.body.append(nav);
+    }
+    nav.replaceChildren();
+    const ns = 'http://www.w3.org/2000/svg';
+    const dibujo = document.createElementNS(ns, 'svg');
+    dibujo.classList.add('minimapa__dibujo');
+    dibujo.setAttribute('viewBox', '0 0 100 100');
+    dibujo.setAttribute('preserveAspectRatio', 'none');
+    dibujo.setAttribute('aria-hidden', 'true');
+    dibujo.setAttribute('focusable', 'false');
+    const linea = document.createElementNS(ns, 'polyline');
+    linea.setAttribute('points', puntos.map(p => {
+      const n = normalizarMinimapa(p);
+      return `${n.x * 100},${n.y * 100}`;
+    }).join(' '));
+    dibujo.append(linea);
+    nav.append(dibujo);
+    paradas.forEach(parada => {
+      const enlace = document.createElement('a');
+      enlace.className = 'minimapa__enlace';
+      enlace.href = `#${parada.seccion.id}`;
+      enlace.setAttribute('data-minimapa-parada', parada.claro.id);
+      const titulo = parada.panel.querySelector('h1, h2')?.textContent?.replace(/\s+/g, ' ').trim() || `Parada ${parada.claro.id}`;
+      enlace.setAttribute('aria-label', `Ir a: ${titulo}`);
+      enlace.title = titulo;
+      const posicion = normalizarMinimapa(coordenadaMinimapa(focoSenda(parada)));
+      enlace.style.setProperty('--mapa-x', String(posicion.x));
+      enlace.style.setProperty('--mapa-y', String(posicion.y));
+      const punto = document.createElement('span');
+      punto.className = 'minimapa__punto';
+      enlace.append(punto);
+      nav.append(enlace);
+      minimapa!.enlaces.push(enlace);
+    });
+    marca.className = 'minimapa__posicion';
+    marca.setAttribute('aria-hidden', 'true');
+    nav.append(marca);
+  }
+
+  function normalizarMinimapa(punto: Punto) {
+    const mapa = minimapa!;
+    return {
+      x: limitar((punto.x - mapa.minX) / Math.max(1, mapa.maxX - mapa.minX)),
+      y: limitar((punto.y - mapa.minY) / Math.max(1, mapa.maxY - mapa.minY)),
+    };
+  }
+
+  function pintarMinimapa(y: number) {
+    if (!minimapa) return;
+    const posicion = normalizarMinimapa(coordenadaMinimapa(posicionSenda(y)));
+    minimapa.marca.style.transform = `translate3d(${posicion.x * minimapa.ancho}px, ${posicion.y * minimapa.alto}px, 0) translate(-50%, -50%)`;
+    if (minimapa.activo !== paradaActual) {
+      minimapa.enlaces.forEach((enlace, i) => enlace.style.setProperty('--activa', i === paradaActual ? '1' : '0'));
+      minimapa.activo = paradaActual;
+    }
+  }
+
   function crearDepuracion() {
     if (!new URLSearchParams(location.search).has('depuracion')) return;
     const ns = 'http://www.w3.org/2000/svg';
@@ -213,7 +313,8 @@ function prepararCamara() {
       });
     });
     const linea = document.createElementNS(ns, 'polyline');
-    linea.setAttribute('points', senda.map(p => `${p.x},${p.y}`).join(' '));
+    // La depuración muestra la extracción; la cámara interpola sin dibujar atajos.
+    linea.setAttribute('points', puntos.map(p => `${p.x},${p.y}`).join(' '));
     linea.classList.add('camara__senda');
     cajas.append(linea);
     montana!.append(cajas);
@@ -251,6 +352,10 @@ function prepararCamara() {
     regla.remove();
     origen = recorrido!.getBoundingClientRect().top + window.scrollY;
     escala = anchoVista * (escritorio.matches ? AJUSTES.anchoEscritorio : AJUSTES.anchoMovil) / ancho;
+    if (minimapa) {
+      minimapa.ancho = Math.max(0, minimapa.nav.clientWidth - 24);
+      minimapa.alto = Math.max(0, minimapa.nav.clientHeight - 24);
+    }
     montana!.style.setProperty('--ancho-montana', `${ancho * escala}px`);
     montana!.style.setProperty('--alto-montana', `${alto * escala}px`);
     tramos.forEach(t => {
@@ -270,6 +375,8 @@ function prepararCamara() {
       });
     });
     let inicio = 0;
+    const primera = paradas[0].claro.cajaSegura, ultima = paradas[paradas.length - 1].claro.cajaSegura;
+    const distanciaMedia = Math.max(1, (ultima.y + ultima.height / 2 - primera.y - primera.height / 2) / Math.max(1, paradas.length - 1));
     paradas.forEach((parada, i) => {
       const margen = parseFloat(getComputedStyle(parada.panel).marginRight) || 16;
       const encuadre = calcularEncuadre(parada.claro, parada.encuentro, {
@@ -279,7 +386,9 @@ function prepararCamara() {
       const alturaPanel = parada.panel.getBoundingClientRect().height;
       const tope = escritorio.matches ? limitar((altoVista - alturaPanel) / 2, encuadre.topeMin, encuadre.topeMax - alturaPanel) : Math.max(72, altoVista - alturaPanel - 16);
       const c = parada.claro.cajaSegura, previo = paradas[Math.max(0, i - 1)].claro.cajaSegura;
-      parada.viaje = i ? Math.max(altoVista * AJUSTES.viajeMinimo, (c.y + c.height / 2 - previo.y - previo.height / 2) * escala) : 0;
+      const distancia = Math.max(0, c.y + c.height / 2 - previo.y - previo.height / 2);
+      // La distancia solo modula un viaje breve, independiente del zoom de la foto.
+      parada.viaje = i ? altoVista * limitar(AJUSTES.viajeBase * Math.sqrt(distancia / distanciaMedia), AJUSTES.viajeMinimo, AJUSTES.viajeMaximo) : 0;
       parada.pausa = altoVista * AJUSTES.pausa;
       parada.inicio = inicio;
       parada.llegada = inicio + parada.viaje;
@@ -351,6 +460,7 @@ function prepararCamara() {
       }
     });
     solicitarTramos(pose);
+    pintarMinimapa(y);
     const valores = [y, Number(paradas[paradaActual].claro.id), pose.x, pose.y, pose.zoom * 100];
     marcadores.forEach((m, i) => {
       const valor = Math.round(valores[i]);
@@ -427,7 +537,8 @@ function prepararCamara() {
   }
 
   function desactivar() {
-    const foco = document.activeElement as HTMLElement | null;
+    let foco = document.activeElement as HTMLElement | null;
+    if (foco && minimapa?.nav.contains(foco)) foco = paradas[paradaActual]?.panel || null;
     const conservarFoco = foco && paradas.some(p => p.panel.contains(foco));
     const focoEnPanel = paradas.some(p => p.panel === foco);
     activo = false;
@@ -441,6 +552,14 @@ function prepararCamara() {
     cajas = undefined;
     lectura = undefined;
     marcadores = [];
+    if (minimapa) {
+      if (minimapa.creado) minimapa.nav.remove();
+      else {
+        minimapa.nav.replaceChildren(...minimapa.contenido);
+        minimapa.nav.hidden = minimapa.oculto;
+      }
+      minimapa = undefined;
+    }
     vistas = [];
     paradas.forEach(p => {
       p.seccion.classList.remove('parada--enfocada');
@@ -486,6 +605,7 @@ function prepararCamara() {
         anclaje.className = 'parada__anclaje';
         return { seccion, panel, anclaje, claro, encuentro: buscarEncuentro(claro, puntos), inicio: 0, llegada: 0, fin: 0, viaje: 0, pausa: 0, entrada: 0, salida: 0, pose: { x: 0, y: 0, zoom: 1 }, enfoque: -1 };
       });
+      prepararMinimapa();
       medir();
       vistas = preparadas;
       vistas.forEach((vista, i) => {
@@ -500,6 +620,7 @@ function prepararCamara() {
       activo = true;
       // Datos y geometría listos antes de publicar el modo mejorado.
       raiz.classList.add('con-camara');
+      minimapa!.nav.hidden = false;
       medir();
       pintar();
       activacionInicialTerminada = true;

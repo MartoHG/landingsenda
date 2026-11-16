@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import Montana from '../components/Montana.astro';
 import Parada from '../components/Parada.astro';
 import Contacto from '../components/Contacto.astro';
+import Minimapa from '../components/Minimapa.astro';
 import { paradas } from '../data/paradas';
 import logo from '../assets/marca/logo.svg';
 ---
@@ -16,6 +17,7 @@ import logo from '../assets/marca/logo.svg';
     </a>
     <a class="encabezado__enlace" href="#parada-06">Contacto</a>
   </header>
+  <Minimapa />
 
   <main class="recorrido" data-recorrido>
     <Montana />

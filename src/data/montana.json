@@ -1,6 +1,7 @@
 {
   "ancho": 1536,
   "alto": 8450,
+  "escalaFuente": 2.0,
   "tramos": [
     {
       "archivo": "tramo-1.jpg",

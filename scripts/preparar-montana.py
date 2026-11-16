@@ -16,6 +16,8 @@ from pathlib import Path
 
 from PIL import Image
 
+Image.MAX_IMAGE_PIXELS = None  # la tira ampliada supera el límite por defecto
+
 RAIZ = Path(__file__).resolve().parents[1]
 ORIGEN = RAIZ / "diseno" / "montana"
 DESTINO_IMG = RAIZ / "src" / "assets" / "montana"
