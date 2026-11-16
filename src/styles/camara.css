@@ -86,13 +86,18 @@ html.con-camara .parada__panel {
   position: sticky;
   top: var(--tope-panel);
   width: calc(100% - 2 * var(--margen-lateral));
-  max-height: 45vh;
-  max-height: 45svh;
+  max-height: 62vh;
+  max-height: 62svh;
   margin: 0 var(--margen-lateral);
   padding: var(--esp-5);
   gap: var(--esp-3);
   overflow: auto;
   font-size: var(--texto-s);
+  background: var(--vidrio-claro);
+  border-color: var(--vidrio-borde);
+  box-shadow: var(--vidrio-sombra);
+  -webkit-backdrop-filter: var(--vidrio-desenfoque);
+  backdrop-filter: var(--vidrio-desenfoque);
   opacity: var(--enfoque, 1);
   transform: translate3d(0, calc((1 - var(--enfoque, 1)) * 18px), 0);
   pointer-events: none;
@@ -109,16 +114,91 @@ html.con-camara h1.parada__titulo {
   font-size: var(--texto-xl);
 }
 
-html.con-camara .parada__captura {
-  max-height: 9rem;
-  overflow: hidden;
+html.con-camara .parada[data-parada='06'] .parada__panel {
+  background: var(--vidrio-oscuro);
+  border-color: var(--vidrio-borde);
 }
 
+/* Sin desenfoque, el vidrio sería solo transparencia: panel sólido. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html.con-camara .parada__panel {
+    background: var(--color-panel);
+  }
+
+  html.con-camara .parada[data-parada='06'] .parada__panel {
+    background: var(--color-verde-oscuro);
+  }
+}
+
+/* La captura es la protagonista: se ve entera y legible. */
 html.con-camara .parada__captura img {
   width: 100%;
-  max-height: 9rem;
+  max-height: 24rem;
   object-fit: contain;
-  object-position: top;
+  object-position: top left;
+  background: var(--color-panel);
+}
+
+/* La portada lleva botón: la captura cede alto para que el panel entre entero. */
+html.con-camara .parada[data-parada='01'] .parada__captura img {
+  max-height: min(16rem, 30svh);
+}
+
+/* El dato que baja: un chip de vidrio que la cámara lleva por la senda. */
+.dato {
+  display: none;
+}
+
+html.con-camara .dato {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 12;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  column-gap: var(--esp-3);
+  padding: var(--esp-2) var(--esp-3);
+  border: 1px solid var(--vidrio-borde);
+  border-radius: var(--radio);
+  background: var(--vidrio-claro);
+  box-shadow: var(--vidrio-sombra);
+  -webkit-backdrop-filter: var(--vidrio-desenfoque);
+  backdrop-filter: var(--vidrio-desenfoque);
+  color: var(--color-texto);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+html.con-camara .dato__etiqueta {
+  grid-column: 1;
+  font-size: var(--texto-xs);
+  font-weight: var(--peso-destacado);
+  color: var(--color-verde);
+}
+
+html.con-camara .dato__detalle {
+  grid-column: 1;
+  font-size: var(--texto-xs);
+  color: var(--color-texto-suave);
+  white-space: nowrap;
+}
+
+html.con-camara .dato__valor {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-family: var(--fuente-titulos);
+  font-size: var(--texto-xl);
+  font-weight: var(--peso-titulo);
+  line-height: 1;
+  color: var(--color-verde-oscuro);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html.con-camara .dato {
+    background: var(--color-panel);
+  }
 }
 
 html.con-camara .parada__captura--falta {
@@ -279,7 +359,9 @@ html.con-camara .minimapa__posicion {
   }
 
   html.con-camara .parada__panel {
-    width: min(calc(100% - 2 * var(--margen-lateral)), 23rem);
+    width: min(calc(100% - 2 * var(--margen-lateral) - 64px - var(--esp-5)), var(--ancho-panel-camara));
+    padding: var(--esp-6);
+    gap: var(--esp-4);
     max-height: min(calc(100vh - var(--esp-9)), var(--alto-panel-disponible));
     max-height: min(calc(100svh - var(--esp-9)), var(--alto-panel-disponible));
   }

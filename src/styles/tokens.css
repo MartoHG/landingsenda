@@ -57,6 +57,14 @@
   /* Medidas de lectura */
   --ancho-lectura: 38rem;
   --ancho-panel: 32rem;
+  --ancho-panel-camara: 40rem;
+
+  /* Vidrio: solo en el modo cámara, para seguir intuyendo la senda detrás */
+  --vidrio-claro: color-mix(in srgb, var(--color-panel) 76%, transparent);
+  --vidrio-oscuro: color-mix(in srgb, var(--color-verde-oscuro) 82%, transparent);
+  --vidrio-borde: color-mix(in srgb, var(--color-panel) 60%, transparent);
+  --vidrio-desenfoque: blur(16px) saturate(1.15);
+  --vidrio-sombra: 0 8px 32px color-mix(in srgb, var(--color-verde-oscuro) 22%, transparent);
   --margen-lateral: var(--esp-4);
 
   /* Movimiento: respuestas de interfaz */

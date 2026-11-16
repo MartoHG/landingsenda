@@ -11,8 +11,7 @@
  * Contrato con src/scripts/camara.ts:
  * - [data-parada]: id del claro en src/data/montana.json.
  * - [data-lado]: left, right, center o bottom.
- * - .parada__panel: el panel que se enfoca.
- */
+ * - .parada__panel: el panel que se enfoca. */
 import { Picture } from 'astro:assets';
 import type { Parada } from '../data/paradas';
 import montana from '../data/montana.json';
@@ -84,8 +83,8 @@ const esFalta = (texto: string) => texto.startsWith('[FALTA');
             <Picture
               src={imagenCaptura}
               formats={['avif', 'webp']}
-              widths={[480, 720, 960]}
-              sizes="(min-width: 48rem) 30rem, 92vw"
+              widths={[480, 720, 960, 1280]}
+              sizes="(min-width: 48rem) 36rem, 92vw"
               alt={captura.alt}
               loading={nivel === 1 ? 'eager' : 'lazy'}
               decoding="async"

@@ -22,6 +22,7 @@ el patrón no va.
 | Patrón del catálogo | Dónde aparece | Cómo sale del concepto |
 | ------------------- | ------------- | ---------------------- |
 | F4 Fondo decorativo (línea que recorre la página) | La senda que baja de la cumbre al pie, uniendo las paradas | Es la senda del isotipo, con su misma forma en S: muestra que lo cargado arriba baja solo. En celular pasa a una línea vertical simple |
+| K4 Vidrio esmerilado | Paneles de las paradas y chip del dato que baja, en el modo cámara | Los paneles flotan sobre la montaña y la senda se tiene que seguir intuyendo detrás para no perder la bajada. En el modo quieto y sin soporte de desenfoque, el panel es sólido |
 
 ## Registro
 
@@ -43,4 +44,8 @@ contenido, alcance, técnica, negocio.
 | 2026-11-15 | voz | La de SENDA: voseo bonaerense, capitalización tipo oración, «docente», «estudiante» y «personal»; títulos con hechos, sin cifras ni adjetivos de relleno | Es como habla el sistema que las escuelas van a usar |
 | 2026-11-15 | alcance | La parada 02 es el calificador del curso; el boletín no se menciona | El boletín no está implementado en SENDA (solo hay narrativas; `PENDIENTES.md` lo marca sin implementar). Lo eligió el usuario |
 | 2026-11-15 | movimiento | Travesías cortas entre paradas (0,7 a 1 pantalla de scroll) y minimapa de la senda con las seis paradas como enlaces; sin hitos de texto en las travesías por ahora | El usuario vio zonas muertas con las travesías largas; los hitos se suman solo si todavía se siente vacío |
+| 2026-11-16 | imágenes | Paneles más grandes con la captura como protagonista, legible y sin miniatura | Las capturas son la prueba de que SENDA funciona; en miniatura no se leían |
+| 2026-11-16 | movimiento | Entre la cumbre y la parada 02 la cámara baja en línea recta; en el resto sigue la senda | Las horquillas de la cumbre hacían zigzaguear la cámara y se veía mal a más velocidad. Lo pidió el usuario |
+| 2026-11-16 | movimiento | A mitad de cada viaje la cámara se abre un 27 % respecto de las paradas que une | Se ve la senda entera y el próximo claro, en vez de una pantalla de pasto: elimina las zonas muertas |
+| 2026-11-16 | movimiento | Sin chip que baje por la senda; en su lugar, datos a los lados del camino durante cada viaje (en curso) | El usuario vio el chip y no le gustó; los datos al costado llenan el pasto vacío de las travesías |
 | 2026-11-15 | técnica | Sitio estático sin panel ni formulario | El contenido casi no cambia y lo actualiza el equipo desde el repositorio; ver ADR-P-001 |
