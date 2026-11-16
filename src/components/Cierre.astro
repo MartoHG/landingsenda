@@ -1,0 +1,37 @@
+---
+/*
+ * Cierre del recorrido: la invitación a ver SENDA en la escuela, en un
+ * panel oscuro donde termina la senda.
+ *
+ * Contrato con src/scripts/senda.ts:
+ * - [data-parada] con [data-senda-fin]: la senda no dobla en esta sección,
+ *   llega en vertical y entra por el borde superior del panel.
+ */
+import isotipo from '../assets/marca/isotipo.svg';
+import Contacto from './Contacto.astro';
+import BotonIngreso from './BotonIngreso.astro';
+import { cierre } from '../data/secciones';
+---
+
+<section class="seccion cierre" id={cierre.id} data-parada={cierre.id} data-lado="right" aria-labelledby="titulo-contacto">
+  <div class="cierre__panel" data-revelar data-senda-fin>
+    <img class="cierre__marca" src={isotipo.src} alt="" width={isotipo.width} height={isotipo.height} aria-hidden="true" draggable="false" />
+
+    <div class="cierre__invitacion">
+      <p class="etiqueta etiqueta--oscura">{cierre.etiqueta}</p>
+      <h2 id="titulo-contacto">{cierre.titulo}</h2>
+      <p class="cierre__texto">{cierre.texto}</p>
+      <div class="cierre__acciones">
+        <Contacto />
+        <BotonIngreso variante="claro" />
+      </div>
+    </div>
+
+    <div class="cierre__incluye">
+      <h3>{cierre.incluye.titulo}</h3>
+      <ul>
+        {cierre.incluye.lista.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,29 @@
+---
+/*
+ * Portada: qué es SENDA a la izquierda y la pantalla de ingreso real a la
+ * derecha. La senda nace debajo y entra desde el costado.
+ */
+import { Image } from 'astro:assets';
+import logo from '../assets/marca/logo.svg';
+import Captura from './Captura.astro';
+import BotonIngreso from './BotonIngreso.astro';
+import { portada } from '../data/secciones';
+---
+
+<section class="hero" id="inicio" data-hero aria-labelledby="hero-titulo">
+  <div class="hero__texto">
+    <Image src={logo} alt="SENDA" class="hero__logo" loading="eager" />
+    <p class="hero__bajada etiqueta">{portada.bajada}</p>
+    <h1 id="hero-titulo" class="hero__titulo">{portada.titulo}</h1>
+    <p class="hero__parrafo">{portada.texto}</p>
+    <div class="hero__acciones">
+      <BotonIngreso variante="principal" />
+      <a class="boton boton--secundario" href="#que-hace">Conocé cómo funciona</a>
+    </div>
+  </div>
+
+  <figure class="hero__ingreso">
+    <Captura captura={portada.captura} sizes="(min-width: 48rem) 22rem, 92vw" prioridad />
+    <figcaption>{portada.nota}</figcaption>
+  </figure>
+</section>

@@ -1,0 +1,38 @@
+---
+/*
+ * Una sección del recorrido: encabezado a un costado y contenido debajo.
+ * La senda dobla por el costado contrario al encabezado.
+ *
+ * Contrato con src/scripts/senda.ts:
+ * - [data-parada]: marca la sección como vuelta de la senda.
+ * - [data-lado]: left o right, el costado por donde dobla la senda.
+ * - [data-parada-ancla]: el encabezado, a cuya altura dobla la senda.
+ */
+import type { Seccion } from '../data/secciones';
+
+interface Props {
+  seccion: Seccion;
+  /** Aclaración breve, en letra chica, debajo de la bajada. */
+  nota?: string;
+}
+
+const { seccion, nota } = Astro.props;
+---
+
+<section
+  class="seccion"
+  id={seccion.id}
+  data-parada={seccion.id}
+  data-lado={seccion.lado}
+  aria-labelledby={`titulo-${seccion.id}`}
+>
+  <header class="seccion__encabezado" data-parada-ancla data-revelar>
+    <p class="etiqueta">{seccion.etiqueta}</p>
+    <h2 id={`titulo-${seccion.id}`}>{seccion.titulo}</h2>
+    <p class="seccion__texto">{seccion.texto}</p>
+    {nota && <p class="seccion__nota">{nota}</p>}
+  </header>
+  <div class="seccion__contenido">
+    <slot />
+  </div>
+</section>

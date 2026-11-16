@@ -1,8 +1,6 @@
 /*
- * Estilos base y modo quieto de la landing.
- * El modo quieto es el que se ve sin JS o con menos movimiento: cada parada
- * con su recorte de la montaña y el panel clavado en el claro.
- * El modo cámara vive en camara.css, siempre bajo html.con-camara.
+ * Estilos base de la landing: barra fija, portada, la senda en S detrás y
+ * las paradas a sus costados.
  */
 
 *,
@@ -14,8 +12,16 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--alto-nav) + var(--esp-5));
   -webkit-user-select: none;
   user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* Evita la selección y el arrastre directos del contenido de la landing. */
@@ -37,6 +43,7 @@ body {
   font-size: var(--texto-m);
   font-weight: var(--peso-texto);
   line-height: var(--interlineado-texto);
+  overflow-x: clip;
 }
 
 img,
@@ -48,13 +55,16 @@ svg {
 
 h1,
 h2,
+h3,
 p,
-figure {
+figure,
+ul {
   margin: 0;
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-family: var(--fuente-titulos);
   font-weight: var(--peso-titulo);
   line-height: var(--interlineado-titulo);
@@ -76,6 +86,15 @@ a {
   outline-offset: 3px;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* Pendientes visibles: nunca se publican sin reemplazar */
 .falta {
   background: var(--color-falta-fondo);
@@ -90,10 +109,10 @@ a {
 
 /* Saltar al contenido */
 .saltar {
-  position: absolute;
+  position: fixed;
   left: var(--esp-4);
   top: var(--esp-4);
-  z-index: 30;
+  z-index: 40;
   padding: var(--esp-2) var(--esp-4);
   background: var(--color-panel);
   border-radius: var(--radio);
@@ -104,213 +123,845 @@ a {
   transform: none;
 }
 
-/* Encabezado */
-.encabezado {
-  position: absolute;
-  inset: 0 0 auto 0;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--esp-4);
-  padding: var(--esp-4) var(--margen-lateral);
-}
-
-.encabezado__marca {
-  background: var(--color-panel);
-  padding: var(--esp-2) var(--esp-3);
-  border-radius: var(--radio);
-}
-
-.encabezado__logo {
-  width: 6.5rem;
-  height: auto;
-}
-
-.encabezado__enlace {
-  font-weight: var(--peso-destacado);
-  font-size: var(--texto-s);
-  color: var(--color-verde-oscuro);
-  background: var(--color-panel);
-  padding: var(--esp-2) var(--esp-4);
-  border-radius: var(--radio);
-  text-decoration: none;
-}
-
-.encabezado__enlace:hover {
-  text-decoration: underline;
-}
-
-/* Botón */
+/* Botones */
 .boton {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
   padding: var(--esp-3) var(--esp-5);
+  border: 1px solid var(--color-verde);
   border-radius: var(--radio);
   background: var(--color-verde);
   color: #fff;
   font-weight: var(--peso-destacado);
   font-size: var(--texto-s);
   text-decoration: none;
-  transition: background-color var(--duracion-respuesta) var(--curva-salida);
+  white-space: nowrap;
+  transition: background-color var(--duracion-respuesta) var(--curva-salida),
+    border-color var(--duracion-respuesta) var(--curva-salida);
 }
 
 .boton:hover {
   background: var(--color-verde-hover);
+  border-color: var(--color-verde-hover);
 }
 
-.boton--claro {
+.boton:active {
+  transform: translateY(1px);
+}
+
+.boton--compacto {
+  min-height: 40px;
+  padding: var(--esp-2) var(--esp-4);
+  font-size: var(--texto-xs);
+}
+
+.boton--secundario {
+  background: var(--color-panel);
+  color: var(--color-verde-oscuro);
+  border-color: var(--color-borde);
+}
+
+.boton--secundario:hover {
+  background: var(--color-verde-claro);
+  border-color: var(--color-verde-claro);
+}
+
+/* Barra fija: blanca, con borde y sombra para despegarse del fondo blanco */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 30;
+  height: var(--alto-nav);
+  background: rgb(255 255 255 / 92%);
+  border-bottom: 1px solid var(--color-borde);
+  box-shadow: 0 1px 0 rgb(17 46 30 / 4%);
+  backdrop-filter: blur(12px) saturate(1.2);
+  transition: box-shadow var(--duracion-respuesta) var(--curva-salida);
+}
+
+.nav--despegada {
+  box-shadow: var(--sombra-nav);
+}
+
+.nav__contenido {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-6);
+  height: 100%;
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: 0 var(--margen-lateral);
+}
+
+.nav__marca {
+  display: block;
+  padding: var(--esp-1);
+  border-radius: var(--radio);
+}
+
+.nav__logo {
+  width: 7rem;
+  height: auto;
+}
+
+.nav nav {
+  margin-left: auto;
+}
+
+.nav__enlaces {
+  display: flex;
+  gap: var(--esp-1);
+  padding: 0;
+  list-style: none;
+}
+
+.nav__enlaces a {
+  display: block;
+  padding: var(--esp-2) var(--esp-3);
+  border-radius: var(--radio);
+  color: var(--color-texto);
+  font-size: var(--texto-xs);
+  font-weight: var(--peso-destacado);
+  text-decoration: none;
+  transition: background-color var(--duracion-respuesta) var(--curva-salida);
+}
+
+.nav__enlaces a:hover {
   background: var(--color-verde-claro);
   color: var(--color-verde-oscuro);
 }
 
-/* La montaña completa solo se ve en modo cámara */
-.camara {
-  display: none;
-}
-
-/* Parada en modo quieto */
-.parada {
+/* La senda: ocupa todo el recorrido, detrás de la portada y las paradas */
+.recorrido {
   position: relative;
   isolation: isolate;
+  padding-top: var(--alto-nav);
 }
 
-.parada__fondo {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-}
-
-.parada__fondo picture,
-.parada__fondo img {
+.senda {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   width: 100%;
   height: 100%;
+  max-width: none;
+  overflow: hidden;
+  pointer-events: none;
 }
 
-.parada__fondo img {
-  object-fit: cover;
+.senda__eje {
+  fill: none;
+  stroke: none;
 }
 
-.parada[data-lado='left'] .parada__fondo img {
-  object-position: 15% 50%;
+.senda__guia {
+  fill: var(--color-senda-guia);
 }
 
-.parada[data-lado='right'] .parada__fondo img {
-  object-position: 85% 50%;
+.senda__avance {
+  fill: var(--color-verde);
 }
 
-/* La cumbre muestra el cielo y la cima arriba */
-.parada[data-parada='01'] .parada__fondo img {
-  object-position: 60% 0;
+/* Etiqueta: rótulo corto sobre títulos de secciones y tarjetas */
+.etiqueta {
+  display: inline-block;
+  justify-self: start;
+  padding: var(--esp-1) var(--esp-3);
+  border-radius: 999px;
+  background: var(--color-verde-claro);
+  color: var(--color-verde-oscuro);
+  font-size: var(--texto-xs);
+  font-weight: var(--peso-destacado);
 }
 
-.parada__panel {
+/* Vidrio: superficie translúcida que deja intuir la senda detrás */
+.vidrio,
+.tarjeta {
+  /* Sobre el vidrio el gris suave se oscurece: la senda puede pasar detrás. */
+  --color-texto-suave: var(--color-texto-vidrio);
+
+  background: var(--vidrio-fondo);
+  border: 1px solid var(--vidrio-borde);
+  border-radius: var(--radio-tarjeta);
+  box-shadow: var(--vidrio-sombra);
+  -webkit-backdrop-filter: var(--vidrio-desenfoque);
+  backdrop-filter: var(--vidrio-desenfoque);
+}
+
+/* Sin soporte de desenfoque, la superficie es sólida. El vidrio no depende de
+   la preferencia de transparencia del sistema: se ve igual para todos y el
+   contraste del texto se verificó con la senda pasando detrás. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .vidrio,
+  .tarjeta {
+    background: var(--color-panel);
+  }
+}
+
+/* Portada: banda verde suave a todo el ancho que se funde en blanco */
+.hero {
   position: relative;
   display: grid;
-  gap: var(--esp-4);
-  margin: calc(-1 * var(--esp-8)) var(--margen-lateral) 0;
-  padding: var(--esp-5);
-  background: var(--color-panel);
-  border: 1px solid var(--color-borde);
-  border-radius: var(--radio);
+  gap: var(--esp-7);
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: var(--esp-8) var(--margen-lateral) var(--esp-9);
 }
 
-.parada__titulo {
-  font-size: var(--texto-xl);
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--alto-nav)) calc(50% - 50vw) 0;
+  z-index: -2;
+  background:
+    radial-gradient(60% 70% at 85% 30%, rgb(26 107 58 / 14%), transparent 70%),
+    radial-gradient(50% 60% at 10% 10%, rgb(213 241 214 / 90%), transparent 70%),
+    linear-gradient(180deg, var(--color-hero) 0%, var(--color-hero) 70%, var(--color-fondo) 100%);
 }
 
-h1.parada__titulo {
-  font-size: var(--texto-xl);
+.hero__logo {
+  width: min(70vw, 16rem);
+  height: auto;
 }
 
-.parada__texto {
+.hero__bajada {
+  margin-top: var(--esp-5);
+}
+
+.hero__titulo {
+  margin-top: var(--esp-4);
+  font-size: var(--texto-3xl);
+  max-width: 18ch;
+}
+
+.hero__parrafo {
+  margin-top: var(--esp-5);
   max-width: var(--ancho-lectura);
+  color: var(--color-texto-suave);
 }
 
-.parada__captura img {
+.hero__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-3);
+  margin-top: var(--esp-6);
+}
+
+/* La captura es solo la tarjeta del login, con fondo transparente: la sombra
+   sigue su forma redondeada en lugar de dibujar un marco alrededor. */
+.hero__ingreso img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 24px 40px rgb(17 46 30 / 16%)) drop-shadow(0 2px 6px rgb(17 46 30 / 8%));
+}
+
+.hero__ingreso figcaption {
+  margin-top: var(--esp-4);
+  padding-left: var(--esp-4);
+  border-left: 3px solid var(--color-verde);
+  color: var(--color-verde-oscuro);
+  font-size: var(--texto-s);
+  font-weight: var(--peso-destacado);
+}
+
+/* Sección: encabezado a un costado y contenido en grilla debajo */
+.seccion {
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: var(--esp-9) var(--margen-lateral);
+}
+
+.seccion__encabezado {
+  display: grid;
+  gap: var(--esp-3);
+  max-width: 44rem;
+  margin-bottom: var(--esp-7);
+}
+
+.seccion__encabezado h2 {
+  font-size: var(--texto-2xl);
+}
+
+.seccion__texto {
+  color: var(--color-texto-suave);
+  font-size: var(--texto-m);
+}
+
+/* Nota al pie de la bajada: letra chica y en gris, sin llamar la atención */
+.seccion__nota {
+  color: var(--color-texto-suave);
+  font-size: 0.8125rem;
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.seccion__contenido {
+  display: grid;
+  gap: var(--esp-5);
+}
+
+.grilla {
+  display: grid;
+  gap: var(--esp-5);
+}
+
+.puente {
+  justify-self: center;
+  padding: var(--esp-2) var(--esp-5);
+  border-radius: 999px;
+  background: var(--color-verde);
+  color: #fff;
+  font-size: var(--texto-s);
+  font-weight: var(--peso-destacado);
+}
+
+/* Tarjeta */
+.tarjeta {
+  display: grid;
+  align-content: start;
+  gap: var(--esp-5);
+  padding: var(--esp-5);
+}
+
+.tarjeta__texto {
+  display: grid;
+  gap: var(--esp-2);
+}
+
+.tarjeta h3 {
+  font-size: var(--texto-l);
+}
+
+.tarjeta__texto > p:last-child {
+  color: var(--color-texto-suave);
+  font-size: var(--texto-s);
+}
+
+.tarjeta__captura img {
   width: 100%;
   height: auto;
   border: 1px solid var(--color-borde);
   border-radius: var(--radio);
 }
 
-.parada__captura--falta {
+/* En las grillas, las tarjetas de una misma fila comparten filas (subgrid): el
+   texto de todas ocupa el alto del más largo y las capturas arrancan juntas.
+   Con la misma proporción, también terminan a la misma altura. */
+.grilla > .tarjeta:has(.tarjeta__captura) {
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+  align-content: stretch;
+}
+
+.grilla .tarjeta__captura {
+  align-self: end;
+}
+
+.grilla .tarjeta__captura img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top left;
+}
+
+.captura--falta {
   min-height: 8rem;
   display: grid;
   place-items: center;
   text-align: center;
 }
 
-.parada + .parada {
-  margin-top: var(--esp-8);
+/* Celular: tres pantallas reales con marco de teléfono */
+.telefonos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: var(--esp-4);
 }
 
-/* El pie de la montaña: contacto sobre verde oscuro */
-.parada[data-parada='06'] .parada__panel {
+.telefono {
+  padding: 6px;
+  border-radius: 28px;
   background: var(--color-verde-oscuro);
-  border-color: var(--color-verde-oscuro);
-  color: var(--color-texto-sobre-oscuro);
+  box-shadow: 0 18px 40px rgb(17 46 30 / 22%);
 }
 
-.parada[data-parada='06'] .parada__titulo {
-  color: var(--color-texto-sobre-oscuro);
+.telefono img {
+  width: 100%;
+  height: auto;
+  border-radius: 22px;
 }
 
-.pie {
-  padding: var(--esp-7) var(--margen-lateral);
-  font-size: var(--texto-xs);
+.telefono:nth-child(2) {
+  transform: translateY(calc(-1 * var(--esp-5)));
+}
+
+/* Comparación: hoy frente a SENDA */
+.comparacion-panel {
+  padding: var(--esp-3) var(--esp-5);
+}
+
+.comparacion {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--texto-s);
+}
+
+.comparacion th,
+.comparacion td {
+  padding: var(--esp-4) var(--esp-3);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.comparacion thead th {
   color: var(--color-texto-suave);
-  text-align: center;
+  font-size: var(--texto-xs);
+  font-weight: var(--peso-destacado);
 }
 
-/* Escritorio: el panel se clava en el claro, al costado que corresponde */
+.comparacion thead th:last-child {
+  color: var(--color-verde);
+}
+
+.comparacion tbody th {
+  font-family: var(--fuente-titulos);
+  color: var(--color-verde-oscuro);
+  white-space: nowrap;
+}
+
+.comparacion tbody td:nth-child(2) {
+  color: var(--color-texto-suave);
+}
+
+.comparacion tbody td:last-child {
+  color: var(--color-verde-oscuro);
+  font-weight: var(--peso-destacado);
+}
+
+.comparacion tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+/* Cierre: el panel oscuro donde termina la senda */
+.cierre {
+  padding-bottom: var(--esp-9);
+}
+
+.cierre__panel {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: var(--esp-7);
+  padding: var(--esp-7) var(--esp-6);
+  border-radius: calc(var(--radio-tarjeta) * 1.5);
+  background:
+    radial-gradient(70% 90% at 100% 0%, rgb(26 107 58 / 55%), transparent 70%),
+    var(--color-verde-oscuro);
+  color: var(--color-texto-sobre-oscuro);
+  box-shadow: 0 24px 60px rgb(17 46 30 / 28%);
+}
+
+/* El isotipo, grande y apenas visible, como marca de agua */
+.cierre__marca {
+  position: absolute;
+  right: -6%;
+  bottom: -18%;
+  width: min(48rem, 70%);
+  height: auto;
+  opacity: 0.07;
+  filter: brightness(0) invert(1);
+  pointer-events: none;
+}
+
+.cierre__invitacion,
+.cierre__incluye {
+  position: relative;
+}
+
+.cierre__invitacion {
+  display: grid;
+  gap: var(--esp-4);
+  align-content: start;
+}
+
+.cierre__invitacion h2 {
+  color: #fff;
+  font-size: var(--texto-3xl);
+}
+
+.cierre__texto {
+  max-width: 36rem;
+  color: var(--color-texto-sobre-oscuro-suave);
+  font-size: var(--texto-m);
+}
+
+.cierre__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--esp-3);
+  margin-top: var(--esp-3);
+}
+
+.cierre__acciones .falta {
+  font-size: var(--texto-xs);
+}
+
+.cierre__incluye {
+  align-self: center;
+  padding: var(--esp-6);
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: var(--radio-tarjeta);
+  background: rgb(255 255 255 / 6%);
+}
+
+.cierre__incluye h3 {
+  color: #fff;
+  font-size: var(--texto-l);
+}
+
+.cierre__incluye ul {
+  display: grid;
+  gap: var(--esp-3);
+  margin-top: var(--esp-4);
+  padding: 0;
+  list-style: none;
+}
+
+.cierre__incluye li {
+  display: flex;
+  gap: var(--esp-3);
+  align-items: baseline;
+}
+
+.cierre__incluye li::before {
+  content: '';
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-verde-claro);
+  transform: translateY(-1px);
+}
+
+.etiqueta--oscura {
+  background: rgb(255 255 255 / 12%);
+  color: var(--color-verde-claro);
+}
+
+.boton--sobre-oscuro {
+  background: var(--color-verde-claro);
+  border-color: var(--color-verde-claro);
+  color: var(--color-verde-oscuro);
+}
+
+.boton--sobre-oscuro:hover {
+  background: #fff;
+  border-color: #fff;
+}
+
+/* Pie: marca, secciones y acceso sobre verde oscuro */
+.pie {
+  background: var(--color-verde-oscuro);
+  color: var(--color-texto-sobre-oscuro-suave);
+  font-size: var(--texto-s);
+}
+
+.pie__contenido {
+  display: grid;
+  gap: var(--esp-7);
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: var(--esp-8) var(--margen-lateral) var(--esp-7);
+}
+
+.pie__marca img {
+  width: 9rem;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+.pie__marca p {
+  margin-top: var(--esp-4);
+  max-width: 22rem;
+}
+
+.pie h2 {
+  color: #fff;
+  font-size: var(--texto-s);
+  font-family: var(--fuente-texto);
+  font-weight: var(--peso-destacado);
+}
+
+.pie__secciones ul {
+  display: grid;
+  gap: var(--esp-2);
+  margin-top: var(--esp-4);
+  padding: 0;
+  list-style: none;
+}
+
+.pie a:not(.boton) {
+  color: var(--color-texto-sobre-oscuro-suave);
+  text-decoration: none;
+}
+
+.pie a:not(.boton):hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.pie__acceso p {
+  margin: var(--esp-2) 0 var(--esp-4);
+}
+
+.pie__base {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--esp-3);
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: var(--esp-5) var(--margen-lateral);
+  border-top: 1px solid rgb(255 255 255 / 12%);
+  font-size: var(--texto-xs);
+}
+
+/* Aparición sin scroll nativo: la activa src/scripts/revelar.ts */
+.con-revelado [data-revelar] {
+  opacity: 0;
+  transform: translateY(var(--esp-6)) scale(0.98);
+  transition: opacity 600ms var(--curva-salida), transform 600ms var(--curva-salida);
+}
+
+.con-revelado [data-revelar].revelado {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .con-revelado [data-revelar] {
+    transform: none;
+    transition-duration: 200ms;
+  }
+}
+
+/* Acercamiento guiado por el scroll: la tarjeta sube un poco y crece apenas
+   al entrar. Desplazamiento y escala chicos para no marear: sin rotación. */
+@keyframes acercarse {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-revelar] {
+      animation: acercarse ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+  }
+}
+
+/* Encabezados de sección: cada parte entra por su cuenta, escalonada.
+   La etiqueta llega del costado, el título se descubre de abajo hacia arriba,
+   un trazo verde se dibuja debajo y la bajada aparece al final. */
+/* Trazo verde bajo cada título: se dibuja de izquierda a derecha con el
+   scroll. Sin animación, se ve completo. */
+.seccion__encabezado h2::after {
+  content: '';
+  display: block;
+  width: 7rem;
+  height: 5px;
+  margin-top: var(--esp-4);
+  border-radius: 999px;
+  background: var(--color-verde);
+  transform-origin: left center;
+}
+
+@keyframes etiqueta-entra {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* El título se acerca despacio: sube, se endereza apenas y gana opacidad a
+   lo largo de un tramo largo del scroll. Inclinación y escala chicas para
+   que se sienta la llegada sin marear. */
+@keyframes titulo-entra {
+  0% {
+    opacity: 0;
+    transform: perspective(900px) translateY(72px) rotateX(6deg) scale(0.95);
+  }
+
+  60% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes trazo-crece {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes bajada-entra {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* El encabezado no se anima entero: se animan sus partes. */
+    .seccion__encabezado[data-revelar] {
+      animation: none;
+    }
+
+    .seccion__encabezado .etiqueta,
+    .seccion__encabezado h2,
+    .seccion__encabezado h2::after,
+    .seccion__encabezado .seccion__texto {
+      animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+      animation-fill-mode: both;
+      animation-timeline: view();
+    }
+
+    .seccion__encabezado .etiqueta {
+      animation-name: etiqueta-entra;
+      animation-range: entry 10% entry 70%;
+    }
+
+    /* Tramo largo: el título termina de llegar cerca del centro de la pantalla. */
+    .seccion__encabezado h2 {
+      transform-origin: 50% 100%;
+      animation-name: titulo-entra;
+      animation-timing-function: ease-out;
+      animation-range: entry 0% cover 45%;
+    }
+
+    .seccion__encabezado h2::after {
+      animation-name: trazo-crece;
+      animation-range: entry 60% cover 40%;
+    }
+
+    .seccion__encabezado .seccion__texto {
+      animation-name: bajada-entra;
+      animation-range: entry 50% cover 35%;
+    }
+  }
+}
+
+/* Escritorio: portada en dos columnas y secciones con grillas */
 @media (min-width: 48rem) {
-  .parada {
-    min-height: 100svh;
-    display: grid;
+  .hero {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
     align-items: center;
-    padding: var(--esp-9) var(--margen-lateral);
+    gap: var(--esp-9);
+    min-height: calc(100svh - var(--alto-nav));
+    padding-block: var(--esp-8) var(--esp-9);
   }
 
-  .parada + .parada {
-    margin-top: 0;
-  }
-
-  .parada__fondo {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    aspect-ratio: auto;
-  }
-
-  .parada__panel {
-    width: min(100%, var(--ancho-panel));
-    margin: 0;
-    padding: var(--esp-6);
-  }
-
-  .parada[data-lado='right'] .parada__panel {
-    justify-self: end;
-  }
-
-  .parada[data-lado='left'] .parada__panel {
-    justify-self: start;
-  }
-
-  .parada[data-lado='center'] .parada__panel,
-  .parada[data-lado='bottom'] .parada__panel {
+  .hero__ingreso {
+    max-width: 22rem;
     justify-self: center;
   }
 
-  .parada__titulo {
+  .seccion {
+    padding-block: var(--esp-9) var(--esp-8);
+  }
+
+  .seccion[data-lado='left'] .seccion__encabezado {
+    margin-left: auto;
+  }
+
+  .seccion__encabezado h2 {
+    font-size: var(--texto-3xl);
+  }
+
+  .grilla--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grilla--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grilla--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .tarjeta {
+    padding: var(--esp-6);
+  }
+
+  .tarjeta--destacada {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: var(--esp-7);
+  }
+
+  .tarjeta--destacada h3 {
     font-size: var(--texto-xl);
   }
 
-  h1.parada__titulo {
-    font-size: var(--texto-2xl);
+  /* Invertida: la captura a la izquierda, para alternar con la anterior */
+  .tarjeta--invertida {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
   }
 
-  /* La cumbre es la portada: panel más ancho para que el título entre en tres renglones */
-  .parada[data-parada='01'] .parada__panel {
-    width: min(100%, 36rem);
+  .tarjeta--invertida .tarjeta__captura {
+    order: -1;
+  }
+
+  .cierre__panel {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: var(--esp-8);
+    padding: var(--esp-8);
+  }
+
+  .pie__contenido {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .tarjeta--destacada .tarjeta__texto > p:last-child {
+    font-size: var(--texto-m);
+  }
+}
+
+@media (max-width: 60rem) {
+  .nav__enlaces {
+    display: none;
   }
 }

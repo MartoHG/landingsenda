@@ -9,8 +9,10 @@ Relevado con el usuario el 2026-11-15. Lo que no se dijo queda como
   secundarias. El docente carga una sola vez la asistencia, el libro de temas
   y las calificaciones, y con eso se completa solo todo lo demás: RITE,
   calificador, intensificación o recursado y plan de acompañamiento. El
-  boletín no está implementado al 2026-11-15 y no va en la landing. Cubre la
-  mayor parte de las tareas administrativas de un docente. *(Usuario; código
+  equipo confirmó el 2026-11-16 el boletín y las alertas de asistencia a las
+  familias; en la landing van sin captura porque no están en el código de
+  SENDA revisado. Cubre la mayor parte de las tareas administrativas de un
+  docente. *(Usuario; código
   en `/home/marto/proyectos/senda`.)*
 - **Dónde:** Olavarría, Provincia de Buenos Aires. Sigue el régimen académico
   bonaerense (Res. N.° 1650/24). Apunta a cualquier escuela secundaria desde
@@ -25,14 +27,16 @@ Relevado con el usuario el 2026-11-15. Lo que no se dijo queda como
   invita a inspectores.
 - **Qué no hace:** no es para primarias ni terciarios, no cobra cuotas, no
   gestiona sueldos ni licencias del personal y las familias no entran al
-  sistema. Las notificaciones son internas, para el personal.
+  sistema. Las notificaciones del sistema son para el personal; las familias
+  solo reciben las alertas de asistencia que confirmó el equipo.
 - **Marca:** SENDA. La landing no lleva marca, links ni textos de Respawn.
 
 ## El visitante
 
 - **Quién entra a la web:** personal directivo o de secretaría de escuelas
   secundarias de Olavarría, e inspectores, que llegan desde el link del mail y
-  no conocen al equipo. Quién decide la adopción en cada escuela:
+  no conocen al equipo. También escuelas de otros lugares que quieran
+  contratarlo, y el personal que ya usa SENDA y busca el acceso. Quién decide la adopción en cada escuela:
   [FALTA: se averigua en la presentación]. Dispositivo sin confirmar: se
   diseña para celular y computadora.
 - **Qué quiere saber:**
@@ -50,7 +54,9 @@ Relevado con el usuario el 2026-11-15. Lo que no se dijo queda como
 ## La acción objetivo
 
 - **Qué tiene que hacer el visitante:** escribirle al equipo para ver SENDA en
-  su escuela. Es la única acción principal. La landing no lleva la fecha de la
+  su escuela. Es la única acción principal. Como acción secundaria, quien ya
+  usa SENDA tiene «Ingresar a SENDA», que lleva al login
+  (`https://senda.pp32026.com.ar/login`). La landing no lleva la fecha de la
   presentación porque queda publicada después; los datos de la presentación
   van en el mail.
 - **Canal:** [FALTA: canal de contacto: WhatsApp o mail, número o casilla y
@@ -64,7 +70,7 @@ Relevado con el usuario el 2026-11-15. Lo que no se dijo queda como
 | Fotos propias        | No  | Se usan capturas reales de SENDA levantado en local con los datos de los seeders. Las saca el agente en la etapa de diseño. Sin fotos de banco |
 | Textos               | No  | Los escribe el agente con este relevamiento y el equipo los revisa sección por sección. Tono de SENDA: voseo, capitalización tipo oración, «estudiante» y «personal», nunca «alumno» ni «usuario» |
 | Productos o servicios | Sí | Asistencia, libro de temas y calificaciones; a partir de ellos, RITE, boletín, intensificación o recursado y plan de acompañamiento. Sin precios |
-| Redes y reseñas reales | No | Ninguna escuela lo usa todavía. No se nombra a la E.E.S.T. N.º 2 ni hay testimonios |
+| Redes y reseñas reales | No | Sin testimonios ni cifras. La E.E.S.T. N.º 2 de Olavarría se nombra como escuela «en implementación» |
 
 Lo que falta se anota en `.ai/pendientes-cliente.md`.
 
@@ -86,8 +92,8 @@ El equipo de SENDA, desde el repositorio. Sin panel: es un sitio estático.
   cambia el trabajo frente al papel y las planillas, dónde quedan los datos,
   soporte y capacitación, y contacto. Capturas reales del sistema.
 - **No incluye:** precios, fecha de la presentación, importador de Excel,
-  permisos o inspección, el nombre de la E.E.S.T. N.º 2, testimonios o cifras,
-  formulario que guarde o envíe datos, panel y cualquier mención a Respawn.
+  permisos o inspección, testimonios o cifras, formulario que guarde o envíe
+  datos, panel y cualquier mención a Respawn.
 - **Dominio y hosting:** dominio `sendaedu.com.ar`, a nombre del usuario,
   delegado a Cloudflare el 2026-11-15. Hosting: Cloudflare Pages, en la cuenta
   de Cloudflare del usuario.

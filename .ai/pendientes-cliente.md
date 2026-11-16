@@ -6,5 +6,7 @@ real lo reemplaza.
 
 | Falta        | Dónde va                       | Pedido al cliente       |
 | ------------ | ------------------------------ | ----------------------- |
-| Canal de contacto: WhatsApp o mail, número o casilla y quién responde. Frena la publicación | `.ai/brief.md`, La acción objetivo; botón de contacto de la landing | 2026-11-15 |
+| Canal de contacto: WhatsApp o mail, número o casilla y quién responde. Frena la publicación | `.ai/brief.md`, La acción objetivo; `contacto` en `src/data/secciones.ts`, botón del cierre | 2026-11-15 |
 | Quién decide en cada escuela si se adopta SENDA | `.ai/brief.md`, El visitante | No: se averigua en la presentación |
+| Confirmar que el boletín y las alertas de asistencia a las familias funcionen antes de la presentación; recién ahí pueden llevar captura | `modulos.sinCaptura` en `src/data/secciones.ts` | 2026-11-16 |
+| Revisión de los textos de cada sección por el equipo | `src/data/secciones.ts` | 2026-11-16 |

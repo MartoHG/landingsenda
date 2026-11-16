@@ -1,0 +1,32 @@
+---
+/*
+ * Barra fija de navegación, separada del contenido con borde y sombra.
+ * La sombra se marca más cuando la página ya scrolleó (src/scripts/nav.ts).
+ */
+import { Image } from 'astro:assets';
+import logo from '../assets/marca/logo.svg';
+import BotonIngreso from './BotonIngreso.astro';
+
+const enlaces = [
+  { href: '#que-hace', rotulo: 'Qué hace' },
+  { href: '#por-que', rotulo: '¿Por qué SENDA?' },
+  { href: '#para-quien', rotulo: 'Para quién' },
+  { href: '#contacto', rotulo: 'Contacto' },
+];
+---
+
+<header class="nav" data-nav>
+  <div class="nav__contenido">
+    <a class="nav__marca" href="#inicio" aria-label="SENDA, inicio">
+      <Image src={logo} alt="" class="nav__logo" />
+    </a>
+    <nav aria-label="Secciones">
+      <ul class="nav__enlaces">
+        {enlaces.map((enlace) => (
+          <li><a href={enlace.href}>{enlace.rotulo}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <BotonIngreso variante="compacto" />
+  </div>
+</header>

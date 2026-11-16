@@ -1,0 +1,32 @@
+---
+/*
+ * Tarjeta de vidrio: deja intuir la senda detrás sin perder la lectura.
+ * La variante destacada pone la captura al costado del texto.
+ */
+import type { Tarjeta } from '../data/secciones';
+import Captura from './Captura.astro';
+
+interface Props {
+  tarjeta: Tarjeta;
+  variante?: 'normal' | 'destacada' | 'destacada-invertida';
+  sizes?: string;
+}
+
+const { tarjeta, variante = 'normal', sizes = '(min-width: 48rem) 40rem, 92vw' } = Astro.props;
+---
+
+<article
+  class:list={['tarjeta', variante !== 'normal' && 'tarjeta--destacada', variante === 'destacada-invertida' && 'tarjeta--invertida']}
+  data-revelar
+>
+  <div class="tarjeta__texto">
+    <p class="etiqueta">{tarjeta.etiqueta}</p>
+    <h3>{tarjeta.titulo}</h3>
+    <p>{tarjeta.texto}</p>
+  </div>
+  {tarjeta.captura && (
+    <figure class="tarjeta__captura">
+      <Captura captura={tarjeta.captura} sizes={sizes} />
+    </figure>
+  )}
+</article>

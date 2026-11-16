@@ -1,0 +1,23 @@
+---
+/*
+ * Acceso al login de SENDA. Mientras falte la URL de producción el botón
+ * se ve igual, pero lleva al contacto y avisa el pendiente en el título.
+ */
+import { ingreso, contacto } from '../data/secciones';
+
+interface Props {
+  variante: 'compacto' | 'principal' | 'claro';
+}
+
+const { variante } = Astro.props;
+const href = ingreso.href ?? contacto.href;
+const pendiente = ingreso.href === null ? `[FALTA: ${ingreso.falta}]` : undefined;
+---
+
+<a
+  class:list={['boton', { 'boton--compacto': variante === 'compacto', 'boton--sobre-oscuro': variante === 'claro' }]}
+  href={href}
+  title={pendiente}
+>
+  {ingreso.rotulo}
+</a>

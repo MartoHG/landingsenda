@@ -1,0 +1,41 @@
+---
+/*
+ * Captura real de SENDA, o el pendiente visible mientras falte.
+ */
+import { Picture } from 'astro:assets';
+import type { Captura } from '../data/secciones';
+
+interface Props {
+  captura: Captura;
+  sizes: string;
+  prioridad?: boolean;
+}
+
+const { captura, sizes, prioridad = false } = Astro.props;
+
+const capturas = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/capturas/*.{png,jpg,jpeg,webp}',
+  { eager: true },
+);
+const imagen = captura.archivo
+  ? capturas[`../assets/capturas/${captura.archivo}`]?.default
+  : undefined;
+---
+
+{
+  imagen ? (
+    <Picture
+      src={imagen}
+      formats={['avif', 'webp']}
+      widths={[480, 720, 960, 1280, 1600]}
+      sizes={sizes}
+      alt={captura.alt}
+      class="captura"
+      loading={prioridad ? 'eager' : 'lazy'}
+      fetchpriority={prioridad ? 'high' : 'auto'}
+      decoding="async"
+    />
+  ) : (
+    <p class="captura captura--falta falta">[FALTA: {captura.falta}]</p>
+  )
+}

@@ -6,8 +6,18 @@
 
 :root {
   /* Paleta: tokens de SENDA y verde del isotipo */
-  --color-fondo: #f6f7f5;
-  --color-panel: #f6f7f5;
+  --color-fondo: #ffffff;
+  --color-panel: #ffffff;
+  --color-senda-guia: #edf3ee;
+  --color-hero: #eef7ef;
+
+  /* Vidrio: tarjetas translúcidas que dejan ver la senda detrás. El blanco no
+     baja del 55 % para que el texto conserve contraste sobre el verde. */
+  --vidrio-fondo: linear-gradient(135deg, rgb(255 255 255 / 70%), rgb(244 250 245 / 55%));
+  --vidrio-borde: rgb(255 255 255 / 75%);
+  --vidrio-desenfoque: blur(20px) saturate(1.6);
+  --vidrio-sombra: inset 0 1px 0 rgb(255 255 255 / 95%), inset 0 -1px 0 rgb(26 107 58 / 8%), 0 0 0 1px rgb(26 107 58 / 10%), 0 18px 44px rgb(17 46 30 / 10%);
+  --color-texto-vidrio: #2f3d35;
   --color-verde: #1a6b3a;
   --color-verde-hover: #155a30;
   --color-verde-oscuro: #1a3d2b;
@@ -51,22 +61,19 @@
   --esp-8: 64px;
   --esp-9: 96px;
 
-  /* Radio único */
+  /* Radios: controles e imágenes internas, y tarjetas */
   --radio: 8px;
-  --radio-cristal: 28px;
+  --radio-tarjeta: 16px;
 
-  /* Medidas de lectura */
+  /* Medidas */
   --ancho-lectura: 38rem;
-  --ancho-panel: 32rem;
-  --ancho-panel-camara: 40rem;
-
-  /* Vidrio: solo en el modo cámara, para seguir intuyendo la senda detrás */
-  --vidrio-claro: linear-gradient(135deg, rgb(255 255 255 / 58%), rgb(246 255 249 / 28%) 55%, rgb(255 255 255 / 42%));
-  --vidrio-oscuro: linear-gradient(135deg, rgb(26 61 43 / 68%), rgb(26 61 43 / 38%));
-  --vidrio-borde: rgb(255 255 255 / 78%);
-  --vidrio-desenfoque: blur(24px) saturate(1.25);
-  --vidrio-sombra: inset 0 1px 0 rgb(255 255 255 / 85%), inset 1px 0 0 rgb(255 255 255 / 35%), 0 16px 48px rgb(17 46 30 / 16%);
+  --ancho-panel: 34rem;
+  --ancho-maximo: 88rem;
+  --alto-nav: 72px;
   --margen-lateral: var(--esp-4);
+
+  /* Sombras */
+  --sombra-nav: 0 6px 24px rgb(17 46 30 / 10%);
 
   /* Movimiento: respuestas de interfaz */
   --duracion-respuesta: 150ms;

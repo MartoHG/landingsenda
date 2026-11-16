@@ -1,41 +1,110 @@
 ---
-import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import Montana from '../components/Montana.astro';
-import Parada from '../components/Parada.astro';
-import Contacto from '../components/Contacto.astro';
-import Minimapa from '../components/Minimapa.astro';
-import { paradas } from '../data/paradas';
-import logo from '../assets/marca/logo.svg';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Senda from '../components/Senda.astro';
+import Seccion from '../components/Seccion.astro';
+import Tarjeta from '../components/Tarjeta.astro';
+import Captura from '../components/Captura.astro';
+import Cierre from '../components/Cierre.astro';
+import Pie from '../components/Pie.astro';
+import { queHace, edte, porQue, modulos, perfiles, avisos } from '../data/secciones';
 ---
 
 <Base>
-  <a class="saltar" href="#parada-01">Saltar al contenido</a>
-  <header class="encabezado">
-    <a class="encabezado__marca" href="#parada-01" aria-label="SENDA, inicio">
-      <Image src={logo} alt="" class="encabezado__logo" />
-    </a>
-    <a class="encabezado__enlace" href="#parada-06">Contacto</a>
-  </header>
-  <Minimapa />
+  <a class="saltar" href="#inicio">Saltar al contenido</a>
+  <Nav />
 
   <main class="recorrido" data-recorrido>
-    <Montana />
-    {
-      paradas.map((parada, i) => (
-        <Parada parada={parada} nivel={i === 0 ? 1 : 2}>
-          {parada.id === '01' && <Contacto variante="principal" />}
-          {parada.id === '06' && <Contacto variante="pie" />}
-        </Parada>
-      ))
-    }
+    <Senda />
+    <Hero />
+
+    <Seccion seccion={queHace.seccion} nota={avisos.capturas}>
+      <div class="grilla grilla--2">
+        {queHace.carga.map((tarjeta) => <Tarjeta tarjeta={tarjeta} />)}
+      </div>
+      <p class="puente" data-revelar>Con esa carga, SENDA arma solo</p>
+      <div class="grilla grilla--2">
+        {queHace.resultado.map((tarjeta) => <Tarjeta tarjeta={tarjeta} />)}
+      </div>
+    </Seccion>
+
+    <Seccion seccion={edte.seccion} nota={avisos.edte}>
+      {edte.modos.map((tarjeta, i) => (
+        <Tarjeta
+          tarjeta={tarjeta}
+          variante={i % 2 === 0 ? 'destacada' : 'destacada-invertida'}
+          sizes="(min-width: 48rem) 52rem, 92vw"
+        />
+      ))}
+    </Seccion>
+
+    <Seccion seccion={porQue.seccion}>
+      <div class="grilla grilla--3">
+        {porQue.pilares.map((tarjeta) => <Tarjeta tarjeta={tarjeta} />)}
+      </div>
+      <article class="tarjeta tarjeta--destacada" data-revelar>
+        <div class="tarjeta__texto">
+          <p class="etiqueta">{porQue.celular.etiqueta}</p>
+          <h3>{porQue.celular.titulo}</h3>
+          <p>{porQue.celular.texto}</p>
+        </div>
+        <div class="telefonos">
+          {porQue.celular.capturas.map((captura) => (
+            <figure class="telefono">
+              <Captura captura={captura} sizes="(min-width: 48rem) 14rem, 30vw" />
+            </figure>
+          ))}
+        </div>
+      </article>
+      <div class="vidrio comparacion-panel" data-revelar>
+        <table class="comparacion">
+          <caption class="sr-only">Cómo cambia cada tarea con SENDA</caption>
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr-only">Tarea</span></th>
+              <th scope="col">Hoy</th>
+              <th scope="col">Con SENDA</th>
+            </tr>
+          </thead>
+          <tbody>
+            {porQue.filas.map((fila) => (
+              <tr>
+                <th scope="row">{fila.tema}</th>
+                <td>{fila.hoy}</td>
+                <td>{fila.senda}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Seccion>
+
+    <Seccion seccion={modulos.seccion}>
+      <Tarjeta tarjeta={modulos.destacado} variante="destacada" sizes="(min-width: 48rem) 52rem, 92vw" />
+      <div class="grilla grilla--2">
+        {modulos.lista.map((tarjeta) => <Tarjeta tarjeta={tarjeta} />)}
+      </div>
+      <Tarjeta tarjeta={modulos.horarios} variante="destacada-invertida" sizes="(min-width: 48rem) 52rem, 92vw" />
+      <div class="grilla grilla--2">
+        {modulos.sinCaptura.map((tarjeta) => <Tarjeta tarjeta={tarjeta} />)}
+      </div>
+    </Seccion>
+
+    <Seccion seccion={perfiles.seccion}>
+      <div class="grilla grilla--4">
+        {perfiles.lista.map((tarjeta) => <Tarjeta tarjeta={tarjeta} />)}
+      </div>
+    </Seccion>
+
+    <Cierre />
   </main>
 
-  <footer class="pie">
-    <p>SENDA · Olavarría, Provincia de Buenos Aires</p>
-  </footer>
+  <Pie />
 </Base>
 
 <script>
-  import '../scripts/camara';
+  import '../scripts/senda';
+  import '../scripts/revelar';
+  import '../scripts/nav';
 </script>

@@ -15,7 +15,9 @@ reciben la invitación a su presentación pública.
   `.ai/adrs/ADR-P-001-stack.md`
 - **Acción objetivo:** escribirle al equipo para ver SENDA en su escuela
   (canal pendiente)
-- **Concepto:** {una línea; el detalle está en `.ai/decisiones.md`}
+- **Concepto:** la senda en S del isotipo recorre el fondo blanco y se pinta
+  con el scroll, pasando por secciones con capturas reales; el detalle está en
+  `.ai/decisiones.md`
 
 ## Skills que aplican
 
@@ -65,5 +67,8 @@ Las skills de `.claude/skills/` son una copia de la casa: no se editan acá.
 
 ## Comandos
 
-{Se completan al crear el proyecto Astro: instalar, levantar en local,
-compilar y publicar.}
+- Instalar: `npm ci`
+- Levantar en local: `npm run dev` (http://localhost:4321)
+- Compilar: `npm run build`
+- Revisar la versión final: `npm run preview`
+- Publicar: push a `main`; Cloudflare Pages compila y publica solo

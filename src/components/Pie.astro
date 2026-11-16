@@ -1,0 +1,37 @@
+---
+/*
+ * Pie de la landing: marca, secciones y acceso, sobre verde oscuro.
+ */
+import logo from '../assets/marca/logo.svg';
+import BotonIngreso from './BotonIngreso.astro';
+import { pie, avisos } from '../data/secciones';
+
+const anio = new Date().getFullYear();
+---
+
+<footer class="pie">
+  <div class="pie__contenido">
+    <div class="pie__marca">
+      <img src={logo.src} alt="SENDA" width={logo.width} height={logo.height} draggable="false" />
+      <p>{pie.descripcion}</p>
+    </div>
+
+    <nav class="pie__secciones" aria-label="Secciones del pie">
+      <h2>Secciones</h2>
+      <ul>
+        {pie.secciones.map((enlace) => <li><a href={enlace.href}>{enlace.rotulo}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="pie__acceso">
+      <h2>¿Ya usás SENDA?</h2>
+      <p>Entrá con tu cuenta del personal.</p>
+      <BotonIngreso variante="claro" />
+    </div>
+  </div>
+
+  <div class="pie__base">
+    <p>© {anio} SENDA · {pie.lugar}</p>
+    <p>{avisos.pie}</p>
+  </div>
+</footer>
