@@ -1,9 +1,9 @@
 # Estado · landingsenda
 
-- **Etapa:** Diseño de escritorio casi cerrado, en la rama `rediseno-senda-s` (2026-11-16).
+- **Etapa:** Diseño de escritorio y celular, en la rama `rediseno-senda-s` (2026-11-17).
 - **Concepto:** La senda del isotipo. Fondo blanco, senda en S que nace fina y se ensancha con el scroll, y secciones con capturas reales de SENDA.
 - **Hecho:** barra fija, portada con la pantalla de ingreso, secciones qué hace, EDTE, por qué SENDA, módulos y para quién, cierre de contacto y pie. Capturas reales a 2x y PDF del calificador y el RITE. Tarjetas de vidrio, animaciones suaves atadas al scroll e imagen para compartir.
-- **Próximo paso:** versión de celular; después, auditoría de entrega (accesibilidad y rendimiento).
+- **Próximo paso:** que el usuario confirme el diseño; después, auditoría de entrega con las skills de frontend y Lighthouse.
 
 ## Bloqueos
 

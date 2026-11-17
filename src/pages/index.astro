@@ -71,8 +71,8 @@ import { queHace, edte, porQue, modulos, perfiles, avisos } from '../data/seccio
             {porQue.filas.map((fila) => (
               <tr>
                 <th scope="row">{fila.tema}</th>
-                <td>{fila.hoy}</td>
-                <td>{fila.senda}</td>
+                <td data-etiqueta="Hoy">{fila.hoy}</td>
+                <td data-etiqueta="Con SENDA">{fila.senda}</td>
               </tr>
             ))}
           </tbody>

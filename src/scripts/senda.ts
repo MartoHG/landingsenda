@@ -51,6 +51,7 @@ function posicion(elemento: HTMLElement, contenedor: HTMLElement): { x: number; 
 
 /** Proporción del ancho por donde pasa la vuelta de la senda en cada costado. */
 const COSTADO = { left: 0.1, right: 0.9 } as const;
+const COSTADO_CELULAR = { left: -0.01, right: 1.01 } as const;
 
 function puntosDelCamino(contenedor: HTMLElement): Punto[] {
   const ancho = contenedor.clientWidth;
@@ -67,7 +68,10 @@ function puntosDelCamino(contenedor: HTMLElement): Punto[] {
     const ancla = parada.querySelector<HTMLElement>('[data-parada-ancla]') ?? parada;
     const caja = posicion(ancla, contenedor);
     const lado = parada.dataset.lado === 'left' ? 'left' : 'right';
-    puntos.push({ x: ancho * COSTADO[lado], y: caja.y + caja.alto / 2 });
+    // En el celular el encabezado ocupa todo el ancho: la vuelta va contra el
+    // borde de la pantalla para no pasar por detrás del texto.
+    const costado = ancho < 768 ? COSTADO_CELULAR : COSTADO;
+    puntos.push({ x: ancho * costado[lado], y: caja.y + caja.alto / 2 });
   });
 
   // La senda termina entrando en vertical por el borde superior del panel de
@@ -149,7 +153,8 @@ function medir(): void {
   recorte.setAttribute('width', `${ancho}`);
 
   eje.setAttribute('d', trazadoDelEje(puntosDelCamino(recorrido)));
-  const maximo = Math.min(140, Math.max(70, ancho * 0.085));
+  // En el celular la senda es más angosta para no tapar el contenido.
+  const maximo = ancho < 768 ? 36 : Math.min(140, Math.max(70, ancho * 0.085));
   const cinta = trazadoDeLaCinta(eje, maximo);
   guia.setAttribute('d', cinta);
   avance.setAttribute('d', cinta);
