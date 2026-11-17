@@ -17,8 +17,12 @@ const recorte = document.querySelector<SVGRectElement>('[data-senda-recorte]');
 
 /** Altura de la pantalla, en proporción, hasta la que llega la senda verde. */
 const ALTURA_PUNTA = 0.62;
-/** Distancia en píxeles entre muestras del eje al armar la cinta. */
-const PASO = 6;
+/**
+ * Distancia en píxeles entre muestras del eje al armar la cinta. Con 24 px
+ * la diferencia contra la curva es menor a un píxel y el trazado pesa un
+ * cuarto que con 6.
+ */
+const PASO = 24;
 /** Ancho en píxeles con el que nace la senda. */
 const ANCHO_INICIAL = 8;
 
