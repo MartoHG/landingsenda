@@ -11,7 +11,7 @@ entra desde el costado izquierdo y baja en S, ensanchándose de forma pareja,
 hasta meterse en el panel de contacto del final. Una guía clara muestra el
 camino completo y el verde lo recorre a medida que el visitante baja. En cada
 vuelta de la senda hay una sección con su encabezado y sus tarjetas: lo que se
-carga una vez en el aula, lo que SENDA arma solo, el EDTE, por qué SENDA, los
+carga una vez en el aula, lo que SENDA completa automáticamente, el EDTE, por qué SENDA, los
 módulos y para quién es. Sale de la forma del isotipo (una montaña cruzada por
 una senda en S que se abre hacia abajo) y del hecho que distingue a SENDA: se
 carga una vez y el resto baja solo.
@@ -47,7 +47,7 @@ contenido, alcance, técnica, negocio.
 | 2026-11-16 | negocio | Se nombra a la E.E.S.T. N.º 2 de Olavarría como «En implementación» | Es la primera escuela de SENDA; el usuario lo pidió y rechazó «Nació en» |
 | 2026-11-17 | estilo | Botones y resaltado del nav con 12 px de radio | Es el redondeo de los botones de SENDA; lo pidió el usuario |
 | 2026-11-16 | acción | La acción principal sigue siendo escribirle al equipo; se suma «Ingresar a SENDA» hacia `https://senda.pp32026.com.ar/login` para quien ya usa el sistema | El usuario pidió el acceso al login desde la portada |
-| 2026-11-16 | contenido | Secciones: qué hace (carga una vez y sale solo), EDTE (modo automático y paso a paso), por qué SENDA (pilares, celular y comparación con el papel), módulos y para quién (docente, preceptor, equipo directivo y EDTE) | Cada función nombrada se verificó contra las rutas, los permisos y las pantallas de SENDA |
+| 2026-11-16 | contenido | Secciones: qué hace (se carga una vez y se completa automáticamente), EDTE (modo automático y paso a paso), por qué SENDA (pilares, celular y comparación con el papel), módulos y para quién (docente, preceptor, equipo directivo y EDTE) | Cada función nombrada se verificó contra las rutas, los permisos y las pantallas de SENDA |
 | 2026-11-16 | contenido | El boletín y las alertas de asistencia a las familias van como tarjetas sin captura | El equipo los confirmó, pero no están en el código de SENDA revisado; sin captura no se muestra una pantalla que no existe |
 | 2026-11-16 | contenido | Nota en letra chica bajo las secciones con capturas: SENDA está en desarrollo y usa datos de prueba | Las pantallas pueden cambiar; el usuario pidió la aclaración y rechazó el recuadro por llamativo |
 | 2026-11-16 | imágenes | Capturas a 2x recortadas en 16:9 al ancho del contenido; el calificador y el RITE salen de los PDF reales a 3x; tres pantallas de celular de una docente | Las capturas originales a 1x se veían borrosas y mostraban poca información |

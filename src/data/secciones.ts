@@ -105,7 +105,7 @@ export const queHace = {
   ] satisfies Tarjeta[],
   resultado: [
     {
-      etiqueta: 'Sale solo',
+      etiqueta: 'Se completa automáticamente',
       titulo: 'Calificador del curso',
       texto: 'SENDA calcula la calificación anual y exporta el calificador, listo para imprimir y archivar.',
       captura: {
@@ -115,7 +115,7 @@ export const queHace = {
       },
     },
     {
-      etiqueta: 'Sale solo',
+      etiqueta: 'Se completa automáticamente',
       titulo: 'RITE de cada estudiante',
       texto: 'Toma las notas y la asistencia del año. Se revisa en pantalla y se exporta en PDF, por estudiante o por curso.',
       captura: {
@@ -125,7 +125,7 @@ export const queHace = {
       },
     },
     {
-      etiqueta: 'Sale solo',
+      etiqueta: 'Se completa automáticamente',
       titulo: 'Intensificación',
       texto: 'Cada materia sin aprobar pasa a intensificación con su período, su modelo y la calificación de cada instancia.',
       captura: {
@@ -135,7 +135,7 @@ export const queHace = {
       },
     },
     {
-      etiqueta: 'Sale solo',
+      etiqueta: 'Se completa automáticamente',
       titulo: 'Plan de acompañamiento',
       texto: 'Si un estudiante supera el tope de materias pendientes, el EDTE recibe el caso con la trayectoria a la vista y genera el acta en PDF.',
       captura: {

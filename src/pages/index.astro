@@ -23,7 +23,7 @@ import { queHace, edte, porQue, modulos, perfiles, avisos } from '../data/seccio
       <div class="grilla grilla--2">
         {queHace.carga.map((tarjeta) => <Tarjeta tarjeta={tarjeta} />)}
       </div>
-      <p class="puente" data-revelar>Con esa carga, SENDA arma solo</p>
+      <p class="puente" data-revelar>Con esa carga, SENDA completa el resto automáticamente</p>
       <div class="grilla grilla--2">
         {queHace.resultado.map((tarjeta) => <Tarjeta tarjeta={tarjeta} />)}
       </div>
