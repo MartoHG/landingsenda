@@ -35,6 +35,14 @@ img, picture, svg, a {
   -webkit-touch-callout: none;
 }
 
+/* El bloque de contacto se puede seleccionar y copiar */
+[data-copiable],
+[data-copiable] * {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
 body {
   margin: 0;
   background: var(--color-fondo);
