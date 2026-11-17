@@ -9,9 +9,10 @@ Relevado con el usuario el 2026-11-15. Lo que no se dijo queda como
   secundarias. El docente carga una sola vez la asistencia, el libro de temas
   y las calificaciones, y con eso se completa solo todo lo demás: RITE,
   calificador, intensificación o recursado y plan de acompañamiento. El
-  equipo confirmó el 2026-11-16 el boletín y las alertas de asistencia a las
-  familias; en la landing van sin captura porque no están en el código de
-  SENDA revisado. Cubre la mayor parte de las tareas administrativas de un
+  equipo confirmó el 2026-11-16 el boletín, que va sin captura porque no está
+  en el código de SENDA revisado. Para las familias, SENDA genera la planilla
+  de valoración preliminar y la notificación al adulto responsable del plan de
+  acompañamiento. Cubre la mayor parte de las tareas administrativas de un
   docente. *(Usuario; código
   en `/home/marto/proyectos/senda`.)*
 - **Dónde:** Olavarría, Provincia de Buenos Aires. Sigue el régimen académico
@@ -27,8 +28,9 @@ Relevado con el usuario el 2026-11-15. Lo que no se dijo queda como
   invita a inspectores.
 - **Qué no hace:** no es para primarias ni terciarios, no cobra cuotas, no
   gestiona sueldos ni licencias del personal y las familias no entran al
-  sistema. Las notificaciones del sistema son para el personal; las familias
-  solo reciben las alertas de asistencia que confirmó el equipo.
+  sistema. Las notificaciones del sistema son para el personal; a las familias
+  les llegan documentos en papel: la valoración preliminar y la notificación
+  del plan de acompañamiento.
 - **Marca:** SENDA. La landing no lleva marca, links ni textos de Respawn.
 
 ## El visitante

@@ -331,7 +331,10 @@ export const modulos = {
       falta: 'captura de una plantilla horaria',
     },
   } satisfies Tarjeta,
-  /** Confirmados por el equipo; todavía no están en el código de SENDA, por eso van sin captura. */
+  /**
+   * Sin captura: el boletín lo confirmó el equipo pero todavía no está en el
+   * código de SENDA; los documentos para la familia sí existen como PDF.
+   */
   sinCaptura: [
     {
       etiqueta: 'Boletín',
@@ -340,8 +343,8 @@ export const modulos = {
     },
     {
       etiqueta: 'Familias',
-      titulo: 'Alertas de asistencia a las familias',
-      texto: 'Los tutores de cada estudiante reciben un aviso cuando se registran inasistencias.',
+      titulo: 'Documentos para cada familia',
+      texto: 'SENDA genera la planilla de valoración preliminar de cada estudiante y la notificación al adulto responsable del plan de acompañamiento, con las materias, los horarios y el espacio para firmar.',
     },
   ] satisfies Tarjeta[],
 };
