@@ -11,7 +11,6 @@
 
 const recorrido = document.querySelector<HTMLElement>('[data-recorrido]');
 const svg = document.querySelector<SVGSVGElement>('[data-senda]');
-const eje = document.querySelector<SVGPathElement>('[data-senda-eje]');
 const guia = document.querySelector<SVGPathElement>('[data-senda-guia]');
 const avance = document.querySelector<SVGPathElement>('[data-senda-avance]');
 const recorte = document.querySelector<SVGRectElement>('[data-senda-recorte]');
@@ -31,6 +30,9 @@ interface Punto {
   x: number;
   y: number;
 }
+
+/** Curva de Bézier cúbica: inicio, dos puntos de control y final. */
+type Tramo = [Punto, Punto, Punto, Punto];
 
 /**
  * Posición de un elemento dentro del recorrido. Se mide con offsetTop y no
@@ -91,23 +93,56 @@ function puntosDelCamino(contenedor: HTMLElement): Punto[] {
  * Une los puntos en S: cada vuelta sale y llega en vertical, como las del
  * isotipo. El primer tramo entra de costado, casi horizontal.
  */
-function trazadoDelEje(puntos: Punto[]): string {
+function tramosDelEje(puntos: Punto[]): Tramo[] {
   const [inicio, ...resto] = puntos;
-  let d = `M ${inicio.x} ${inicio.y}`;
   let previo = inicio;
-  resto.forEach((punto, i) => {
+  return resto.map((punto, i) => {
     const caida = punto.y - previo.y;
     const avance = Math.abs(punto.x - previo.x);
     // En los tramos más anchos que altos, tiradores largos: la vuelta se
     // abre en un arco amplio en lugar de doblar en codo.
     const tirador = caida < avance ? 0.85 : 0.5;
-    const salida = i === 0
-      ? `${previo.x + (punto.x - previo.x) * 0.4} ${previo.y}`
-      : `${previo.x} ${previo.y + caida * tirador}`;
-    d += ` C ${salida} ${punto.x} ${punto.y - caida * tirador} ${punto.x} ${punto.y}`;
+    const tramo: Tramo = [
+      previo,
+      i === 0
+        ? { x: previo.x + (punto.x - previo.x) * 0.4, y: previo.y }
+        : { x: previo.x, y: previo.y + caida * tirador },
+      { x: punto.x, y: punto.y - caida * tirador },
+      punto,
+    ];
     previo = punto;
+    return tramo;
   });
-  return d;
+}
+
+/** Punto de una curva de Bézier cúbica en t (0 a 1). */
+function puntoEn([a, b, c, d]: Tramo, t: number): Punto {
+  const u = 1 - t;
+  return {
+    x: u * u * u * a.x + 3 * u * u * t * b.x + 3 * u * t * t * c.x + t * t * t * d.x,
+    y: u * u * u * a.y + 3 * u * u * t * b.y + 3 * u * t * t * c.y + t * t * t * d.y,
+  };
+}
+
+/** Dirección de la curva en t: la derivada de la Bézier. */
+function direccionEn([a, b, c, d]: Tramo, t: number): Punto {
+  const u = 1 - t;
+  return {
+    x: 3 * u * u * (b.x - a.x) + 6 * u * t * (c.x - b.x) + 3 * t * t * (d.x - c.x),
+    y: 3 * u * u * (b.y - a.y) + 6 * u * t * (c.y - b.y) + 3 * t * t * (d.y - c.y),
+  };
+}
+
+/** Largo aproximado de un tramo, sumando cuerdas cortas. */
+function largoDe(tramo: Tramo): number {
+  let largo = 0;
+  let previo = tramo[0];
+  for (let i = 1; i <= 24; i++) {
+    const punto = puntoEn(tramo, i / 24);
+    largo += Math.hypot(punto.x - previo.x, punto.y - previo.y);
+    previo = punto;
+  }
+  return largo;
 }
 
 /**
@@ -119,43 +154,48 @@ function anchoEn(distancia: number, largoTotal: number, maximo: number): number 
   return ANCHO_INICIAL + (maximo - ANCHO_INICIAL) * Math.pow(avance, 0.8);
 }
 
-/** Arma la cinta: un borde de ida y el otro de vuelta, separados del eje por el ancho. */
-function trazadoDeLaCinta(camino: SVGPathElement, maximo: number): string {
-  const largoTotal = camino.getTotalLength();
-  const cantidad = Math.min(2000, Math.ceil(largoTotal / PASO));
+/**
+ * Arma la cinta: un borde de ida y el otro de vuelta, separados del eje por el
+ * ancho. Los puntos y la dirección salen de la fórmula de cada tramo, sin
+ * consultar al navegador, para no bloquear el hilo principal en el celular.
+ */
+function trazadoDeLaCinta(tramos: Tramo[], maximo: number): string {
+  const largos = tramos.map(largoDe);
+  const largoTotal = largos.reduce((suma, largo) => suma + largo, 0);
   const ida: string[] = [];
   const vuelta: string[] = [];
+  let recorrido = 0;
 
-  for (let i = 0; i <= cantidad; i++) {
-    const distancia = (largoTotal * i) / cantidad;
-    const punto = camino.getPointAtLength(distancia);
-    const antes = camino.getPointAtLength(Math.max(0, distancia - 1));
-    const despues = camino.getPointAtLength(Math.min(largoTotal, distancia + 1));
-    const dx = despues.x - antes.x;
-    const dy = despues.y - antes.y;
-    const largo = Math.hypot(dx, dy) || 1;
-    const mitad = anchoEn(distancia, largoTotal, maximo) / 2;
-    const nx = (-dy / largo) * mitad;
-    const ny = (dx / largo) * mitad;
-    ida.push(`${(punto.x + nx).toFixed(1)} ${(punto.y + ny).toFixed(1)}`);
-    vuelta.push(`${(punto.x - nx).toFixed(1)} ${(punto.y - ny).toFixed(1)}`);
-  }
+  tramos.forEach((tramo, n) => {
+    const pasos = Math.max(2, Math.ceil(largos[n] / PASO));
+    for (let i = n === 0 ? 0 : 1; i <= pasos; i++) {
+      const t = i / pasos;
+      const punto = puntoEn(tramo, t);
+      const direccion = direccionEn(tramo, t);
+      const largo = Math.hypot(direccion.x, direccion.y) || 1;
+      const mitad = anchoEn(recorrido + largos[n] * t, largoTotal, maximo) / 2;
+      const nx = (-direccion.y / largo) * mitad;
+      const ny = (direccion.x / largo) * mitad;
+      ida.push(`${(punto.x + nx).toFixed(1)} ${(punto.y + ny).toFixed(1)}`);
+      vuelta.push(`${(punto.x - nx).toFixed(1)} ${(punto.y - ny).toFixed(1)}`);
+    }
+    recorrido += largos[n];
+  });
 
   return `M ${ida.join(' L ')} L ${vuelta.reverse().join(' L ')} Z`;
 }
 
 function medir(): void {
-  if (!recorrido || !svg || !eje || !guia || !avance || !recorte) return;
+  if (!recorrido || !svg || !guia || !avance || !recorte) return;
 
   const ancho = recorrido.clientWidth;
   const alto = recorrido.scrollHeight;
   svg.setAttribute('viewBox', `0 0 ${ancho} ${alto}`);
   recorte.setAttribute('width', `${ancho}`);
 
-  eje.setAttribute('d', trazadoDelEje(puntosDelCamino(recorrido)));
   // En el celular la senda es más angosta para no tapar el contenido.
   const maximo = ancho < 768 ? 36 : Math.min(140, Math.max(70, ancho * 0.085));
-  const cinta = trazadoDeLaCinta(eje, maximo);
+  const cinta = trazadoDeLaCinta(tramosDelEje(puntosDelCamino(recorrido)), maximo);
   guia.setAttribute('d', cinta);
   avance.setAttribute('d', cinta);
 

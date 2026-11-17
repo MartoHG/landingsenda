@@ -253,11 +253,6 @@ a {
   pointer-events: none;
 }
 
-.senda__eje {
-  fill: none;
-  stroke: none;
-}
-
 .senda__guia {
   fill: var(--color-senda-guia);
 }

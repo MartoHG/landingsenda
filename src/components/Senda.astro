@@ -7,7 +7,6 @@
  *
  * Contrato con src/scripts/senda.ts:
  * - [data-senda]: el SVG, ocupa todo el alto de [data-recorrido].
- * - [data-senda-eje]: línea central invisible que se usa para medir.
  * - [data-senda-guia]: la senda completa, en tono claro.
  * - [data-senda-avance]: la senda verde, recortada por [data-senda-recorte].
  */
@@ -20,7 +19,6 @@
       <rect data-senda-recorte x="0" y="0" width="0" height="0"></rect>
     </clipPath>
   </defs>
-  <path class="senda__eje" data-senda-eje d=""></path>
   <path class="senda__guia" data-senda-guia d=""></path>
   <path class="senda__avance" data-senda-avance d="" clip-path="url(#senda-recorte)"></path>
 </svg>
