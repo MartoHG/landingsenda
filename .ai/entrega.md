@@ -47,5 +47,8 @@ claves ni tokens: solo dónde está cada cosa y a nombre de quién.
 
 ## Auditoría
 
-- **Informe:** {ruta del informe de `review-respawn`}
-- **Resultado:** {sin bloqueantes, o qué quedó}
+- **Cómo se hizo (2026-11-17):** auditor estático y checklist de `frontend-dls`, criterios de `frontend-dls-investigacion` y Lighthouse 12.6.1 sobre la versión compilada (`astro preview`), en celular y escritorio.
+- **Resultado:** sin bloqueantes. Lighthouse en celular: rendimiento 86, accesibilidad 100, buenas prácticas 82 y SEO 100; en escritorio: 99, 100, 81 y 100. Total Blocking Time 0 ms y CLS 0 en los dos.
+- **Corregido en la auditoría:** el trazado de la senda bloqueaba el hilo principal (5 s de JS en celular, ahora 36 ms); el foco no se veía sobre los fondos oscuros (1,84:1, ahora 9,95:1; WCAG 1.4.11); el logo de la barra cargaba diferido estando a la vista.
+- **Solo del entorno local:** «No usa HTTPS» y la falta de compresión los resuelve Cloudflare Pages; el LCP de 3,5 s en celular se debe a un script que inyecta el antivirus de la computadora de prueba (1,8 s de bloqueo), que no forma parte de la página.
+- **Tensiones resueltas:** el bloqueo de copia exime al bloque de contacto, y los colores sin token quedan así porque no va a haber modo oscuro.
