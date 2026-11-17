@@ -64,6 +64,8 @@
   /* Radios: controles e imágenes internas, y tarjetas */
   --radio: 8px;
   --radio-tarjeta: 16px;
+  /* El mismo redondeo que los botones de SENDA */
+  --radio-boton: 12px;
 
   /* Medidas */
   --ancho-lectura: 38rem;

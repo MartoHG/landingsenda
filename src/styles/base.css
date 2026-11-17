@@ -131,7 +131,7 @@ a {
   min-height: 48px;
   padding: var(--esp-3) var(--esp-5);
   border: 1px solid var(--color-verde);
-  border-radius: var(--radio);
+  border-radius: var(--radio-boton);
   background: var(--color-verde);
   color: #fff;
   font-weight: var(--peso-destacado);
@@ -198,7 +198,7 @@ a {
 .nav__marca {
   display: block;
   padding: var(--esp-1);
-  border-radius: var(--radio);
+  border-radius: var(--radio-boton);
 }
 
 .nav__logo {
@@ -220,7 +220,7 @@ a {
 .nav__enlaces a {
   display: block;
   padding: var(--esp-2) var(--esp-3);
-  border-radius: var(--radio);
+  border-radius: var(--radio-boton);
   color: var(--color-texto);
   font-size: var(--texto-xs);
   font-weight: var(--peso-destacado);
