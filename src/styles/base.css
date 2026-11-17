@@ -86,6 +86,13 @@ a {
   outline-offset: 3px;
 }
 
+/* Sobre los fondos verde oscuro el contorno verde no se distingue (1,84:1):
+   se usa el verde claro para superar el 3:1 de WCAG 1.4.11. */
+.cierre__panel :focus-visible,
+.pie :focus-visible {
+  outline-color: var(--color-verde-claro);
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
