@@ -19,7 +19,7 @@ if (!scrollNativo && elementos.length > 0 && 'IntersectionObserver' in window) {
         observador.unobserve(entrada.target);
       }
     },
-    { rootMargin: '0px 0px -12% 0px', threshold: 0.12 },
+    { threshold: 0.01 },
   );
 
   elementos.forEach((elemento) => observador.observe(elemento));

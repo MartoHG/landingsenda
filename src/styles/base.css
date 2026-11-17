@@ -454,7 +454,10 @@ a {
   font-size: var(--texto-s);
 }
 
+/* Mientras la captura baja y se decodifica, se ve un fondo del mismo tamaño
+   en lugar de un hueco blanco. */
 .tarjeta__captura img {
+  background: var(--color-hero);
   width: 100%;
   height: auto;
   border: 1px solid var(--color-borde);
@@ -790,7 +793,7 @@ a {
     [data-revelar] {
       animation: acercarse ease-out both;
       animation-timeline: view();
-      animation-range: entry 0% entry 70%;
+      animation-range: entry 0% entry 35%;
     }
   }
 }
