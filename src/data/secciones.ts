@@ -51,7 +51,7 @@ export const portada = {
     alt: 'Pantalla de ingreso a SENDA con correo electrónico y contraseña',
     falta: 'captura de la pantalla de ingreso de SENDA',
   } satisfies Captura,
-  nota: 'Cada integrante del personal entra con su cuenta y ve solo lo que le corresponde.',
+  nota: 'El personal entra con su cuenta y ve lo que le corresponde según su rol.',
 };
 
 /** Acceso al sistema para quien ya usa SENDA. */
@@ -75,16 +75,16 @@ export const queHace = {
     id: 'que-hace',
     lado: 'right',
     etiqueta: 'Qué hace SENDA',
-    titulo: 'Lo que se carga en el aula se completa solo',
+    titulo: 'De la carga diaria a los documentos del curso',
     texto:
-      'El docente registra el día a día una sola vez. Con esa carga, SENDA arma la documentación del curso, de cada estudiante y de su trayectoria.',
+      'El docente registra el día a día una sola vez. Con eso, SENDA arma la documentación del curso y de cada estudiante.',
   } satisfies Seccion,
   carga: [
     {
       etiqueta: 'Se carga una vez',
       titulo: 'Gestión diaria del curso',
       texto:
-        'Cada docente entra a sus cursos y desde ahí completa el libro de temas, la asistencia y las calificaciones de sus materias.',
+        'El docente entra a sus cursos y desde ahí completa el libro de temas, la asistencia y las calificaciones de sus materias.',
       captura: {
         archivo: '11-gestion-diaria.png',
         alt: 'Gestión diaria de SENDA con las tarjetas de los cursos del ciclo lectivo',
@@ -127,7 +127,7 @@ export const queHace = {
     {
       etiqueta: 'Se completa automáticamente',
       titulo: 'Intensificación',
-      texto: 'Cada materia sin aprobar pasa a intensificación con su período, su modelo y la calificación de cada instancia.',
+      texto: 'Las materias sin aprobar pasan a intensificación con su período, su modelo y la calificación de cada instancia.',
       captura: {
         archivo: '04-intensificacion-amplia.png',
         alt: 'Listado de intensificaciones de SENDA',
@@ -187,18 +187,18 @@ export const porQue = {
     id: 'por-que',
     lado: 'right',
     etiqueta: '¿Por qué SENDA?',
-    titulo: 'Pensado desde el aula y la preceptoría',
-    texto: 'Lo que hoy se copia de un papel a una planilla y de una planilla a otra, en SENDA se carga una vez.',
+    titulo: 'Qué cambia frente al papel y las planillas',
+    texto: 'Hoy la misma información se copia del papel a una planilla y de una planilla a otra. En SENDA se carga una vez.',
   } satisfies Seccion,
   pilares: [
     {
       etiqueta: '01',
       titulo: 'Una sola carga',
-      texto: 'Lo que el docente registra en el aula llega al calificador, al RITE y a la trayectoria sin volver a escribirlo.',
+      texto: 'Lo que el docente registra en el aula llega solo al calificador, al RITE y a la trayectoria.',
     },
     {
       etiqueta: '02',
-      titulo: 'Cada rol ve lo suyo',
+      titulo: 'Acceso según el rol',
       texto: 'Docentes, preceptores y equipo directivo acceden según su rol. La escuela puede crear roles propios, como el EDTE.',
     },
     {
@@ -209,9 +209,9 @@ export const porQue = {
   ] satisfies Tarjeta[],
   celular: {
     etiqueta: 'Desde el celular',
-    titulo: 'El aula no espera a la computadora',
+    titulo: 'También desde el celular',
     texto:
-      'SENDA se adapta al celular. Docentes y preceptores pasan asistencia, completan el libro de temas y cargan notas desde el aula, sin depender de una computadora de la escuela.',
+      'Docentes y preceptores pasan asistencia, completan el libro de temas y cargan notas desde el aula, con el celular.',
     capturas: [
       {
         archivo: '13-celular-curso.png',
@@ -249,7 +249,7 @@ export const porQue = {
     {
       tema: 'Intensificación',
       hoy: 'Se sigue en planillas aparte que hay que mantener al día.',
-      senda: 'Cada materia sin aprobar pasa sola a intensificación.',
+      senda: 'Las materias sin aprobar pasan solas a intensificación.',
     },
     {
       tema: 'Los datos',
@@ -265,13 +265,13 @@ export const modulos = {
     lado: 'left',
     etiqueta: 'Módulos',
     titulo: 'Toda la escuela conectada en un mismo recorrido',
-    texto: 'Cada área trabaja sobre los mismos datos, actualizados en el momento en que alguien los carga.',
+    texto: 'Todas las áreas trabajan sobre los mismos datos, actualizados en el momento en que alguien los carga.',
   } satisfies Seccion,
   destacado: {
-    etiqueta: 'Panel de inicio',
-    titulo: 'La escuela de un vistazo',
+    etiqueta: 'Inicio',
+    titulo: 'Panel de inicio',
     texto:
-      'Al entrar, cada cuenta ve los accesos que usa, lo que requiere atención y el avance del ciclo lectivo, con las fechas de inicio, cierre y el período en curso.',
+      'Al entrar, el personal ve sus accesos, lo que requiere atención y el avance del ciclo lectivo.',
     captura: {
       archivo: '06-panel.png',
       alt: 'Panel de inicio de SENDA con accesos rápidos, alertas y el avance del ciclo lectivo',
@@ -302,7 +302,7 @@ export const modulos = {
     {
       etiqueta: 'Libro matriz',
       titulo: 'Libros y folios digitales',
-      texto: 'Cada estudiante queda asociado a su libro y folio. Se busca por número o por estudiante.',
+      texto: 'Los estudiantes quedan asociados a su libro y folio. Se busca por número o por estudiante.',
       captura: {
         archivo: '10-libro-matriz-amplia.png',
         alt: 'Libro matriz de SENDA con los libros, sus folios y la búsqueda por estudiante',
@@ -324,7 +324,7 @@ export const modulos = {
     etiqueta: 'Horarios',
     titulo: 'Plantillas horarias para todos los turnos',
     texto:
-      'Se arman una vez los módulos de cada día, con sus turnos y recreos, y se asignan a los cursos. Cuando una plantilla la usan cursos de un ciclo cerrado queda en solo lectura, para no alterar esos horarios: se duplica y se ajusta.',
+      'Se arman una vez los módulos de cada día, con sus turnos y recreos, y se asignan a los cursos. Si una plantilla la usan cursos de un ciclo cerrado, queda en solo lectura: para cambiarla se duplica.',
     captura: {
       archivo: '18-plantilla-horaria.png',
       alt: 'Plantilla horaria de doble turno en SENDA con los módulos y recreos de cada día y los cursos asignados',
@@ -339,12 +339,12 @@ export const modulos = {
     {
       etiqueta: 'Boletín',
       titulo: 'El boletín de cada estudiante',
-      texto: 'Las calificaciones cargadas durante el año arman el boletín, listo para entregar a cada familia.',
+      texto: 'Las calificaciones cargadas durante el año arman el boletín, listo para entregar a las familias.',
     },
     {
       etiqueta: 'Familias',
       titulo: 'Documentos para cada familia',
-      texto: 'SENDA genera la planilla de valoración preliminar de cada estudiante y la notificación al adulto responsable del plan de acompañamiento, con las materias, los horarios y el espacio para firmar.',
+      texto: 'SENDA genera la planilla de valoración preliminar de cada estudiante y la notificación del plan de acompañamiento para el adulto responsable, lista para firmar.',
     },
   ] satisfies Tarjeta[],
 };
@@ -354,15 +354,15 @@ export const perfiles = {
     id: 'para-quien',
     lado: 'right',
     etiqueta: 'Para quién',
-    titulo: 'Le sirve a cada integrante de la escuela',
-    texto: 'Cada cuenta ve lo que necesita según su rol, sobre los mismos datos.',
+    titulo: 'Qué hace cada rol',
+    texto: 'Todo el personal trabaja sobre los mismos datos, con los permisos de su rol.',
   } satisfies Seccion,
   lista: [
     {
       etiqueta: 'Docente',
       titulo: 'Carga en el aula',
       texto:
-        'Pasa asistencia, completa el libro de temas y carga las notas de sus materias. Califica las intensificaciones sin planillas aparte.',
+        'Pasa asistencia, completa el libro de temas y carga las notas de sus materias, también las de intensificación.',
     },
     {
       etiqueta: 'Preceptor',
@@ -374,7 +374,7 @@ export const perfiles = {
       etiqueta: 'Equipo directivo',
       titulo: 'Ve toda la escuela',
       texto:
-        'Cursos, asistencia, calificaciones y trayectorias en un solo lugar, sin pedir planillas a nadie.',
+        'Ve en un solo lugar los cursos, la asistencia, las calificaciones y las trayectorias de toda la escuela.',
     },
     {
       etiqueta: 'EDTE',
